@@ -68,7 +68,7 @@ public class debts {
 	private void initialize() {
 		Color maroon=Color.decode("#800000");
 		frmAidatlar = new JFrame();
-		frmAidatlar.setTitle("Borçlar");
+		frmAidatlar.setTitle("Borclar");
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frmAidatlar.setBounds(0, 0,screen.width-150,screen.height -150);
 		frmAidatlar.setMinimumSize(new Dimension(720, 600));
@@ -133,15 +133,15 @@ public class debts {
 		
 		JScrollPane bottom = new JScrollPane();
 		
-		JLabel lblBorToplam = new JLabel("Borç toplam");
+		JLabel lblBorToplam = new JLabel("Borc toplam");
 		lblBorToplam.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblBorToplam.setForeground(Color.WHITE);
 		
-		JLabel lblBorluKiiSays = new JLabel("Borçlu kişi sayısı");
+		JLabel lblBorluKiiSays = new JLabel("Borclu kisi sayisi");
 		lblBorluKiiSays.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblBorluKiiSays.setForeground(Color.WHITE);
 		
-		JLabel lblSearch = new JLabel("Search");
+		JLabel lblSearch = new JLabel("Arama");
 		lblSearch.setForeground(Color.WHITE);
 		lblSearch.setFont(new Font("Arial", Font.BOLD, 15));
 		
