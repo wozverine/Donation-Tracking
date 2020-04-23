@@ -35,7 +35,7 @@ public class personal extends JFrame{
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 170, 561);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\serra\\Desktop\\backt.jpeg"));
+		lblNewLabel.setIcon(new ImageIcon("image.jpeg"));
 		panel.add(lblNewLabel);
 		
 		JLabel lbluyeBilgileri = new JLabel("\u00DCye Bilgileri");
