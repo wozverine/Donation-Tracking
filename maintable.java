@@ -1,10 +1,12 @@
 
-public class main extends javax.swing.JFrame {
+public class maintable extends javax.swing.JFrame {
 
     /**
-     * Creates new form main
+     * Creates new form 
+     
+     
      */
-    public main() {
+    public maintable() {
         initComponents();
     }
 
