@@ -21,6 +21,13 @@ import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/*Main method
+personal p = new personal();
+		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		p.setSize(700, 600);
+		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    p.setVisible(true);	*/
+
 public class personal extends JFrame{
 	
 	JLayeredPane layeredPane;
@@ -58,7 +65,7 @@ public class personal extends JFrame{
 		lblyeNo.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblyeNo);
 		
-		JLabel uye_no = new JLabel("01");  //Üye no database'den çekilecek
+		JLabel uye_no = new JLabel("01");  //Ãœye no database'den Ã§ekilecek
 		uye_no.setBounds(125, 7, 48, 17);
 		uye_no.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uye_no);
@@ -68,7 +75,7 @@ public class personal extends JFrame{
 		lblTcKimlikNo.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(lblTcKimlikNo);
 		
-		JLabel tc_no = new JLabel("11111111111");  //Tc no database'den çekilecek
+		JLabel tc_no = new JLabel("11111111111");  //Tc no database'den Ã§ekilecek
 		tc_no.setBounds(361, 7, 109, 17);
 		tc_no.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(tc_no);
@@ -79,7 +86,7 @@ public class personal extends JFrame{
 		lblNewLabel_1.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblNewLabel_1);
 		
-		JLabel ad_soyad = new JLabel("A B"); //ad soyad database'den çekilecek
+		JLabel ad_soyad = new JLabel("A B"); //ad soyad database'den Ã§ekilecek
 		ad_soyad.setBounds(125, 37, 345, 17);
 		ad_soyad.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(ad_soyad);
@@ -90,7 +97,7 @@ public class personal extends JFrame{
 		lblCinsiyet.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblCinsiyet);
 		
-		JLabel cinsiyet = new JLabel("Bayan"); //cinsiyet database'den çekilecek
+		JLabel cinsiyet = new JLabel("Bayan"); //cinsiyet database'den Ã§ekilecek
 		cinsiyet.setBounds(125, 67, 86, 17);
 		cinsiyet.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(cinsiyet);
@@ -101,7 +108,7 @@ public class personal extends JFrame{
 		lblBlm.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblBlm);
 		
-		JLabel bolum = new JLabel("\u0130\u015Fletme"); //bölümü database'den çekilecek
+		JLabel bolum = new JLabel("\u0130\u015Fletme"); //bÃ¶lÃ¼mÃ¼ database'den Ã§ekilecek
 		bolum.setBounds(125, 97, 345, 17);
 		bolum.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(bolum);
@@ -112,10 +119,10 @@ public class personal extends JFrame{
 		lblaltYer.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblaltYer);
 		
-		JLabel calýsma_yer = new JLabel("XYZ"); //çalýþtýðý yer database'den çekilecek
-		calýsma_yer.setBounds(125, 127, 345, 17);
-		calýsma_yer.setFont(new Font("Calibri", Font.PLAIN, 16));
-		panel_in.add(calýsma_yer);
+		JLabel calÃ½sma_yer = new JLabel("XYZ"); //Ã§alÃ½Ã¾tÃ½Ã°Ã½ yer database'den Ã§ekilecek
+		calÃ½sma_yer.setBounds(125, 127, 345, 17);
+		calÃ½sma_yer.setFont(new Font("Calibri", Font.PLAIN, 16));
+		panel_in.add(calÃ½sma_yer);
 		
 		JLabel lblMail = new JLabel("Mail:");
 		lblMail.setForeground(new java.awt.Color(128, 0, 0));
@@ -123,7 +130,7 @@ public class personal extends JFrame{
 		lblMail.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblMail);
 		
-		JLabel mail_adr = new JLabel("ab@gmail.com"); //mail adresi database'den çekilecek
+		JLabel mail_adr = new JLabel("ab@gmail.com"); //mail adresi database'den Ã§ekilecek
 		mail_adr.setBounds(125, 157, 345, 17);
 		mail_adr.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(mail_adr);
@@ -134,7 +141,7 @@ public class personal extends JFrame{
 		lblTelefon.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblTelefon);
 		
-		JLabel tel_no = new JLabel("05555555555"); //Tel no database'den çekilecek
+		JLabel tel_no = new JLabel("05555555555"); //Tel no database'den Ã§ekilecek
 		tel_no.setBounds(125, 187, 251, 17);
 		tel_no.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(tel_no);
@@ -159,7 +166,7 @@ public class personal extends JFrame{
 		lblIl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblIl);
 		
-		JLabel il = new JLabel("Ankara"); //il database'den çekilecek
+		JLabel il = new JLabel("Ankara"); //il database'den Ã§ekilecek
 		il.setBounds(125, 267, 167, 17);
 		il.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(il);
@@ -170,7 +177,7 @@ public class personal extends JFrame{
 		lblMezuniyetTarihi.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblMezuniyetTarihi);
 		
-		JLabel mez_tarih = new JLabel("01.01.2018"); //mezuniyet tarihi database'den çekilecek
+		JLabel mez_tarih = new JLabel("01.01.2018"); //mezuniyet tarihi database'den Ã§ekilecek
 		mez_tarih.setBounds(135, 297, 167, 17);
 		mez_tarih.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(mez_tarih);
@@ -181,7 +188,7 @@ public class personal extends JFrame{
 		lblyeGiriTarihi.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblyeGiriTarihi);
 		
-		JLabel uye_tarih = new JLabel("01.01.2018"); //Üye giriþ tarihi database'den çekilecek
+		JLabel uye_tarih = new JLabel("01.01.2018"); //Ãœye giriÃ¾ tarihi database'den Ã§ekilecek
 		uye_tarih.setBounds(125, 327, 140, 17);
 		uye_tarih.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uye_tarih);
@@ -192,7 +199,7 @@ public class personal extends JFrame{
 		lblyelikDurumu.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblyelikDurumu);
 		
-		JLabel uye_durum = new JLabel("Aktif \u00DCye"); //üyelik durumu database'den çekilecek
+		JLabel uye_durum = new JLabel("Aktif \u00DCye"); //Ã¼yelik durumu database'den Ã§ekilecek
 		uye_durum.setBounds(125, 357, 140, 17);
 		uye_durum.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uye_durum);
