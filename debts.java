@@ -30,34 +30,18 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class debts {
 
-	private JFrame frmAidatlar;
+	JFrame frmAidatlar;
 	private JTable main;
 	private JTable toplam;
 	private JTable kisi;
 	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					debts window = new debts();
-					window.frmAidatlar.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public debts() {
 		initialize();
 	}
@@ -115,6 +99,34 @@ public class debts {
 		btnNewButton.setBackground(maroon);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				frmAidatlar.setVisible(false);
+				
+				try {
+			            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+			                if ("Windows".equals(info.getName())) {
+			                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+			                    break;
+			                }
+			            }
+			        } catch (ClassNotFoundException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        } catch (InstantiationException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        } catch (IllegalAccessException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        }
+			        //</editor-fold>
+			        //</editor-fold>
+
+			        /* Create and display the form */
+			        java.awt.EventQueue.invokeLater(new Runnable() {
+			            public void run() {
+			                new aidatlar().setVisible(true);
+			            }
+			        });
 			}
 		});
 		
@@ -124,6 +136,11 @@ public class debts {
 		btnNewButton_1.setBackground(maroon);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frmAidatlar.setVisible(false);
+				main m = new main();
+				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				m.setVisible(true);
+				
 			}
 		});
 		
@@ -220,6 +237,18 @@ public class debts {
 		left.setViewportView(toplam);
 		
 		main = new JTable(names,rows);
+		main.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmAidatlar.setVisible(false);
+        		personal p = new personal();
+        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        		p.setSize(700, 600);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
+        		
+			}
+		});
 		main.setEnabled(false);
 		top.setViewportView(main);
 		frmAidatlar.getContentPane().setLayout(groupLayout);
