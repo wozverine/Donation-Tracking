@@ -1,10 +1,15 @@
 
-package Aidatlar;
 
+
+import javax.swing.JFrame;
 import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+
+import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class aidatlar extends javax.swing.JFrame {
 
@@ -30,11 +35,23 @@ public class aidatlar extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTable1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		setVisible(false);
+        		personal p = new personal();
+        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        		p.setSize(700, 600);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
+        		
+        	}
+        });
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        Borçlar = new javax.swing.JButton();
+        Borclar = new javax.swing.JButton();
         Geri = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -44,7 +61,7 @@ public class aidatlar extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -63,9 +80,10 @@ public class aidatlar extends javax.swing.JFrame {
         jTable1.setPreferredSize(new java.awt.Dimension(1000, 500));
         jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 250));
-
+        
+        jScrollPane1.setBounds(0, 110, 1000, 250);
+        getContentPane().add(jScrollPane1);
+        
         jPanel1.setBackground(new java.awt.Color(68, 137, 246));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 100));
 
@@ -88,7 +106,7 @@ public class aidatlar extends javax.swing.JFrame {
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(68, 137, 246));
         jTextField3.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
-        jTextField3.setText("AİDATLAR");
+        jTextField3.setText("AIDATLAR");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,16 +135,18 @@ public class aidatlar extends javax.swing.JFrame {
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))))
         );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 100));
-
-        Borçlar.setText("Borç");
-        Borçlar.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBounds(0, 0, 1000, 100);
+        getContentPane().add(jPanel1);
+        
+        Borclar.setText("Borc");
+        Borclar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BorçlarActionPerformed(evt);
+                BorclarActionPerformed(evt);
             }
         });
-        getContentPane().add(Borçlar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 100, 40));
+        Borclar.setBounds(10, 550, 100, 40);
+        getContentPane().add(Borclar);
+        
 
         Geri.setText("Geri");
         Geri.addActionListener(new java.awt.event.ActionListener() {
@@ -134,15 +154,17 @@ public class aidatlar extends javax.swing.JFrame {
                 GeriActionPerformed(evt);
             }
         });
-        getContentPane().add(Geri, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 550, 100, 40));
+        getContentPane().add(Geri);
+        Geri.setBounds(890, 550, 100, 40);
 
-        jButton3.setText("Ödenen Toplam Aidat");
+        jButton3.setText("Odeenen Toplam Aidat");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 150, 60));
+        getContentPane().add(jButton3);
+        jButton3.setBounds(180, 360, 150, 60);
 
         jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 70));
 
@@ -153,16 +175,18 @@ public class aidatlar extends javax.swing.JFrame {
         jTextArea1.setPreferredSize(new java.awt.Dimension(200, 70));
         jScrollPane2.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 270, 100));
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(120, 430, 270, 100);
 
-        jButton4.setText("Ödeyen Kişi Sayısı");
+        jButton4.setText("Odeyen Kisi Sayısı");
         jButton4.setPreferredSize(new java.awt.Dimension(135, 23));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 150, 60));
+        getContentPane().add(jButton4);
+        jButton4.setBounds(670, 360, 150, 60);
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
@@ -170,7 +194,8 @@ public class aidatlar extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane3.setViewportView(jTextArea2);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, 300, 100));
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(600, 430, 300, 100);
 
         setSize(new java.awt.Dimension(1016, 639));
         setLocationRelativeTo(null);
@@ -178,6 +203,13 @@ public class aidatlar extends javax.swing.JFrame {
 
     private void GeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeriActionPerformed
         // TODO add your handling code here:
+    	
+    	setVisible(false);
+		main m = new main();
+		m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		m.setVisible(true);
+		
+    	
     }//GEN-LAST:event_GeriActionPerformed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
@@ -189,6 +221,12 @@ public class aidatlar extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
+    	setVisible(false);
+		personal p = new personal();
+		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		p.setSize(700, 600);
+		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    p.setVisible(true);
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -223,60 +261,38 @@ public class aidatlar extends javax.swing.JFrame {
             K2012++;}
         }
         toplam = K2010+K2011+K2012;
-        jTextArea2.setText(jTable1.getColumnName(2)+": "+K2010+" kişi\n"
-                +jTable1.getColumnName(3)+": "+K2011+" kişi\n"
-                +jTable1.getColumnName(4)+": "+K2012+" kişi\n"
-                + "\nTOPLAM: "+toplam+" kişi ödeme yapmıştır.");
+        jTextArea2.setText(jTable1.getColumnName(2)+": "+K2010+" kisi\n"
+                +jTable1.getColumnName(3)+": "+K2011+" kisi\n"
+                +jTable1.getColumnName(4)+": "+K2012+" kisi\n"
+                + "\nTOPLAM: "+toplam+" kisi odeme yapmayacaktir.");
                                         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void BorçlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorçlarActionPerformed
+    private void BorclarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorÃ§larActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BorçlarActionPerformed
+    	setVisible(false);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					debts window = new debts();
+					window.frmAidatlar.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+    }//GEN-LAST:event_BorÃ§larActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new aidatlar().setVisible(true);
-            }
-        });
-    }
-    
     
     
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Borçlar;
+    private javax.swing.JButton Borclar;
     private javax.swing.JButton Geri;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
