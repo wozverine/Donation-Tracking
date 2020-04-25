@@ -20,14 +20,15 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-/*Main method
-personal p = new personal();
+
+/*personal p = new personal();
 		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		p.setSize(700, 600);
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    p.setVisible(true);	*/
-
 public class personal extends JFrame{
 	
 	JLayeredPane layeredPane;
@@ -119,10 +120,10 @@ public class personal extends JFrame{
 		lblaltYer.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblaltYer);
 		
-		JLabel calýsma_yer = new JLabel("XYZ"); //çalýþtýðý yer database'den çekilecek
-		calýsma_yer.setBounds(125, 127, 345, 17);
-		calýsma_yer.setFont(new Font("Calibri", Font.PLAIN, 16));
-		panel_in.add(calýsma_yer);
+		JLabel calısma_yer = new JLabel("XYZ"); //çalıştığı yer database'den çekilecek
+		calısma_yer.setBounds(125, 127, 345, 17);
+		calısma_yer.setFont(new Font("Calibri", Font.PLAIN, 16));
+		panel_in.add(calısma_yer);
 		
 		JLabel lblMail = new JLabel("Mail:");
 		lblMail.setForeground(new java.awt.Color(128, 0, 0));
@@ -153,9 +154,10 @@ public class personal extends JFrame{
 		panel_in.add(lblAdres);
 		
 		JTextPane adres = new JTextPane();
+		adres.setEditable(false);
 		adres.setFont(new Font("Calibri", Font.PLAIN, 16));
 		adres.setBackground(new java.awt.Color(211, 211, 211));
-		adres.setBounds(120, 210, 350, 59);
+		adres.setBounds(120, 210, 350, 53);
 		panel_in.add(adres);
 		adres.setText("S\u00F6\u011F\u00FCt\u00F6z\u00FC, S\u00F6\u011F\u00FCt\u00F6z\u00FC Cd. No:43, 06510 \u00C7ankaya/Ankara");
 	
@@ -188,7 +190,7 @@ public class personal extends JFrame{
 		lblyeGiriTarihi.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(lblyeGiriTarihi);
 		
-		JLabel uye_tarih = new JLabel("01.01.2018"); //Üye giriþ tarihi database'den çekilecek
+		JLabel uye_tarih = new JLabel("01.01.2018"); //Üye giriş tarihi database'den çekilecek
 		uye_tarih.setBounds(125, 327, 140, 17);
 		uye_tarih.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uye_tarih);
@@ -216,6 +218,7 @@ public class personal extends JFrame{
 		panel_in.add(update);
 		
 		JTextPane borc = new JTextPane();
+		borc.setEditable(false);
 		borc.setBounds(313, 461, 334, 46);
 		panel.add(borc);
 		borc.setBackground(new java.awt.Color(211, 211, 211));
@@ -245,6 +248,20 @@ public class personal extends JFrame{
 		toplam_borc.setText("Toplam Bor\u00E7: 160 TL");
 		toplam_borc.setBounds(125, 59, 331, 26);
 		panel_1.add(toplam_borc);
+		
+		JButton btnGeri = new JButton("Geri");
+		btnGeri.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				setVisible(false);
+				main m = new main();
+				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				m.setVisible(true);
+			}
+		});
+		btnGeri.setBounds(612, 11, 62, 23);
+		panel.add(btnGeri);
 		
 		}
 }
