@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package loginexcel_htc;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -53,18 +52,20 @@ public class Login_Form extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Giriş bilgilerini kaydet");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, -1, -1));
+        jLabel7.setText("Giris bilgilerini kaydet");
+        jPanel1.setBounds(480, 400, -1, -1);
+        jPanel1.add(jLabel7);
 
         jCheckBox1.setBorder(null);
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
+        jCheckBox1.setBounds(460, 400, -1, -1);
+        jPanel1.add(jCheckBox1);
 
         jPasswordField.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         jPasswordField.setForeground(new java.awt.Color(204, 204, 204));
@@ -76,19 +77,22 @@ public class Login_Form extends javax.swing.JFrame {
                 jPasswordFieldFocusGained(evt);
             }
         });
-        jPanel1.add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 330, 40));
+        jPasswordField.setBounds(460, 320, 330, 40);
+        jPanel1.add(jPasswordField);
 
         jSeparator2.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 320, 10));
+        jSeparator2.setBounds(460, 360, 320, 10);
+        jPanel1.add(jSeparator2);
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, 320, 10));
+        jSeparator1.setBounds(460, 220, 320, 10);
+        jPanel1.add(jSeparator1);
 
         jTextField_username.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         jTextField_username.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField_username.setText("Kullanıcı adını giriniz");
+        jTextField_username.setText("Kullanici adinizi giriniz");
         jTextField_username.setBorder(null);
         jTextField_username.setOpaque(false);
         jTextField_username.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -96,34 +100,43 @@ public class Login_Form extends javax.swing.JFrame {
                 jTextField_usernameFocusGained(evt);
             }
         });
-        jPanel1.add(jTextField_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 330, 40));
+        jTextField_username.setBounds(460, 180, 330, 40);
+        jPanel1.add(jTextField_username);
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Şifre");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
+        jLabel6.setText("Sifre");
+        jLabel6.setBounds(460, 280, -1, -1);
+        jPanel1.add(jLabel6);
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Kullanıcı Adı");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
+        jLabel4.setText("Kullanici Adi");
+        jLabel4.setBounds(460, 140, -1, -1);
+        jPanel1.add(jLabel4);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginexcel_htc/login_button.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
+        jLabel3.setBounds(560, 440, -1, -1);
+        jPanel1.add(jLabel3);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginexcel_htc/login_right.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_right.png"))); // NOI18N
+        jLabel1.setBounds(420, 0, -1, -1);
+        jPanel1.add(jLabel1);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginexcel_htc/login_left.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_left.png"))); // NOI18N
+        jLabel2.setBounds(30, 0, -1, -1);
+        jPanel1.add(jLabel2);
+        
 
         jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 500));
+        jLabel5.setBounds(500, 400, -1, -1);
+        jPanel1.add(jLabel5);
+        
+        jPanel1.setBounds(0, 0, 980, 500);
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
