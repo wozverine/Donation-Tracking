@@ -1,12 +1,17 @@
+import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class maintable extends javax.swing.JFrame {
+import javax.swing.JFrame;
+
+public class main extends javax.swing.JFrame {
 
     /**
      * Creates new form 
      
      
      */
-    public maintable() {
+    public main() {
         initComponents();
     }
 
@@ -23,8 +28,72 @@ public class maintable extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTable1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		setVisible(false);
+        		personal p = new personal();
+        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        		p.setSize(700, 600);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
+        		
+        	}
+        });
         jButton2 = new javax.swing.JButton();
+        
+        jButton2.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	
+        		setVisible(false);
+        		EventQueue.invokeLater(new Runnable() {
+        			public void run() {
+        				try {
+        					debts window = new debts();
+        					window.frmAidatlar.setVisible(true);
+        				} catch (Exception e) {
+        					e.printStackTrace();
+        				}
+        			}
+        		});
+        		
+        	}
+        });
         jButton3 = new javax.swing.JButton();
+        jButton3.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		  
+        		setVisible(false);
+        		
+        		try {
+        	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        	                if ("Windows".equals(info.getName())) {
+        	                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+        	                    break;
+        	                }
+        	            }
+        	        } catch (ClassNotFoundException ex) {
+        	            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        	        } catch (InstantiationException ex) {
+        	            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        	        } catch (IllegalAccessException ex) {
+        	            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        	        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        	            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        	        }
+        	        //</editor-fold>
+        	        //</editor-fold>
+
+        	        /* Create and display the form */
+        	        java.awt.EventQueue.invokeLater(new Runnable() {
+        	            public void run() {
+        	                new aidatlar().setVisible(true);
+        	            }
+        	        });
+        	}
+        });
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -45,7 +114,7 @@ public class maintable extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 500));
         setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION))));
         jTable1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -146,62 +215,70 @@ public class maintable extends javax.swing.JFrame {
         jTable1.setSelectionBackground(new java.awt.Color(255, 255, 102));
         jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 71, 773, 245));
+        jScrollPane1.setBounds(10, 71, 773, 245);
+        getContentPane().add(jScrollPane1);
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton2.setText("Borcu olanları görüntüle");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jButton2.setPreferredSize(new java.awt.Dimension(161, 23));
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 347, -1, -1));
+        jButton2.setBounds(10, 347, 161, 23);
+        getContentPane().add(jButton2);
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton3.setText("Ödenen aidatları görüntüle");
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 348, 160, 21));
+        jButton3.setBounds(215, 348, 160, 21);
+        getContentPane().add(jButton3);
 
         jButton4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton4.setText("Dosya ekle");
         jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jButton4.setMinimumSize(new java.awt.Dimension(161, 23));
         jButton4.setPreferredSize(new java.awt.Dimension(161, 23));
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(453, 347, 128, -1));
+        jButton4.setBounds(453, 347, 161, 23);
+        getContentPane().add(jButton4);
 
         jButton5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton5.setText("Çıkış ");
         jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jButton5.setMinimumSize(new java.awt.Dimension(161, 23));
         jButton5.setPreferredSize(new java.awt.Dimension(161, 23));
+        jButton5.setBounds(659, 347, 100, 23);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(659, 347, 107, -1));
+        getContentPane().add(jButton5);
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField1.setText("T.C Kimlik No ");
+        jTextField1.setBounds(480, 30, 220, 25);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 213, -1));
+        getContentPane().add(jTextField1);
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel2.setText("Kişiler");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 24, 145, 29));
+        jLabel2.setBounds(41, 24, 145, 29);
+        getContentPane().add(jLabel2);
 
         jButton6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton6.setText("Ara");
         jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, 35, -1));
+        jButton6.setBounds(710, 30, 35, 25);
+        getContentPane().add(jButton6);
 
         pack();
     }// </editor-fold>                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+    	
     }                                        
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -211,36 +288,32 @@ public class maintable extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    public static void main(String args[]) {  
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new main().setVisible(true);
-            }
-        });
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new main().setVisible(true);
+        }
+    });
+    
     }
 
     // Variables declaration - do not modify                     
