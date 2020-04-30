@@ -95,6 +95,14 @@ public class main extends javax.swing.JFrame {
         	}
         });
         jButton4 = new javax.swing.JButton();
+        jButton4.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		setVisible(false);
+        		Excel_Form exc = new Excel_Form();
+        		exc.setVisible(true);
+        	}
+        });
         jButton5 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -276,7 +284,8 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {    
+    	setVisible(false);
         // TODO add your handling code here:
     	
     }                                        
@@ -288,34 +297,7 @@ public class main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {  
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
-            }
-        }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
-
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new main().setVisible(true);
-        }
-    });
-    
-    }
-
+  
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
