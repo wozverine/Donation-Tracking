@@ -12,14 +12,14 @@ import java.awt.event.MouseEvent;
 
 public class Login  extends javax.swing.JFrame{
 	
-	JPasswordField jPasswordField = new JPasswordField();  
-	JTextField jTextField_username = new JTextField();
-	JLabel jLabel6 = new JLabel();
-	JLabel jLabel4 = new JLabel();
-	JLabel jLabel1 = new JLabel();
-	JLabel jLabel2 = new JLabel();
-	JLabel jLabel5 = new JLabel();
-	JButton jButton1 = new JButton();
+	JPasswordField password_pf = new JPasswordField();  
+	JTextField username_txtf = new JTextField();
+	JLabel sifre_btn = new JLabel();
+	JLabel username_lbl = new JLabel();
+	//JLabel jLabel1 = new JLabel();
+	//JLabel jLabel2 = new JLabel();
+	//JLabel jLabel5 = new JLabel();
+	JButton login_btn = new JButton();
 
 	public Login() {
 		
@@ -31,35 +31,35 @@ public class Login  extends javax.swing.JFrame{
 		getContentPane().add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(null);
 		
-		JLabel jLabel7 = new JLabel();
+		JLabel hatırla_lbl = new JLabel();
 		
-		jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-		jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-		jLabel7.setHorizontalAlignment(SwingConstants.LEFT);
-		jLabel7.setText("Giriş bilgilerini kaydet");
-		jLabel7.setBounds(482, 395, 206, 30);
-		layeredPane.add(jLabel7);
-		JCheckBox jCheckBox1 = new JCheckBox();
+		hatırla_lbl.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+		hatırla_lbl.setForeground(new java.awt.Color(255, 255, 255));
+		hatırla_lbl.setHorizontalAlignment(SwingConstants.LEFT);
+		hatırla_lbl.setText("Giriş bilgilerini kaydet");
+		hatırla_lbl.setBounds(482, 395, 206, 30);
+		layeredPane.add(hatırla_lbl);
+		JCheckBox hatırla_cb = new JCheckBox();
 		
-		        jCheckBox1.setBorder(null);
-		        jCheckBox1.setBounds(460, 400, 20, 20);
-		        layeredPane.add(jCheckBox1);
-		        jPasswordField.addMouseListener(new MouseAdapter() {
+		        hatırla_cb.setBorder(null);
+		        hatırla_cb.setBounds(460, 400, 20, 20);
+		        layeredPane.add(hatırla_cb);
+		        password_pf.addMouseListener(new MouseAdapter() {
 		        	@Override
 		        	public void mouseClicked(MouseEvent e) {
-		        		jPasswordField.setText("");
+		        		password_pf.setText("");
 		        	}
 		        });
 		        
-		        jPasswordField.setEchoChar('*');
-		        jPasswordField.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		        jPasswordField.setForeground(new java.awt.Color(204, 204, 204));
-		        jPasswordField.setText("Password");
-		        jPasswordField.setBorder(null);
-		        jPasswordField.setOpaque(false);
-		        jPasswordField.setBounds(460, 320, 308, 40);
-		        layeredPane.add(jPasswordField);
-		        jButton1.addMouseListener(new MouseAdapter() {
+		        password_pf.setEchoChar('*');
+		        password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+		        password_pf.setForeground(new java.awt.Color(204, 204, 204));
+		        password_pf.setText("Password");
+		        password_pf.setBorder(null);
+		        password_pf.setOpaque(false);
+		        password_pf.setBounds(460, 320, 308, 40);
+		        layeredPane.add(password_pf);
+		        login_btn.addMouseListener(new MouseAdapter() {
 		        	@Override
 		        	public void mouseClicked(MouseEvent e) {
 		        		 try {
@@ -84,66 +84,67 @@ public class Login  extends javax.swing.JFrame{
 		        		    java.awt.EventQueue.invokeLater(new Runnable() {
 		        		        public void run() {
 		        		            setVisible(false);
-		        		        	new main().setVisible(true);
+		        		            main x=new main();
+		        		            x.setVisible(true);
+		        		            centreWindow(x);
+		        		        	//new main().setVisible(true);
 		        		        }
 		        		    });
 		        	}
 		        });
 		        
-		        jButton1.setIcon(new ImageIcon("C:\\Users\\serra\\Desktop\\ui tobb\\login_button.png")); // NOI18N
-		        jButton1.setBorder(null);
-		        jButton1.setBorderPainted(false);
-		        jButton1.setContentAreaFilled(false);
-		        jButton1.setBounds(492, 431, 232, 46);
-		        layeredPane.add(jButton1);
-		        jTextField_username.addMouseListener(new MouseAdapter() {
+		        login_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
+		        login_btn.setBorder(null);
+		        login_btn.setBorderPainted(false);
+		        login_btn.setContentAreaFilled(false);
+		        login_btn.setBounds(492, 431, 232, 46);
+		        layeredPane.add(login_btn);
+		        username_txtf.addMouseListener(new MouseAdapter() {
 		        	@Override
 		        	public void mouseClicked(MouseEvent e) {
-		        		jTextField_username.setText("");
+		        		username_txtf.setText("");
 		        	}
 		        });
 
-		        jTextField_username.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		        jTextField_username.setForeground(new java.awt.Color(204, 204, 204));
-		        jTextField_username.setText("Kullanıcı adını giriniz");
-		        jTextField_username.setBorder(null);
-		        jTextField_username.setOpaque(false);
-		        jTextField_username.setBounds(460, 180, 308, 40);
-		        layeredPane.add(jTextField_username);
+		        username_txtf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+		        username_txtf.setForeground(new java.awt.Color(204, 204, 204));
+		        username_txtf.setText("Kullanıcı adını giriniz");
+		        username_txtf.setBorder(null);
+		        username_txtf.setOpaque(false);
+		        username_txtf.setBounds(460, 180, 308, 40);
+		        layeredPane.add(username_txtf);
 		        
-		        jLabel6.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-		        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-		        jLabel6.setHorizontalAlignment(SwingConstants.LEFT);
-		        jLabel6.setText("Şifre");
-		        jLabel6.setBounds(460, 280, 330, 30);
-		        layeredPane.add(jLabel6);
+		        sifre_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+		        sifre_btn.setForeground(new java.awt.Color(255, 255, 255));
+		        sifre_btn.setHorizontalAlignment(SwingConstants.LEFT);
+		        sifre_btn.setText("Şifre");
+		        sifre_btn.setBounds(460, 280, 330, 30);
+		        layeredPane.add(sifre_btn);
 
-		        jLabel4.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-		        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-		        jLabel4.setHorizontalAlignment(SwingConstants.LEFT);
-		        jLabel4.setText("Kullanıcı Adı");
-		        jLabel4.setBounds(460, 140, 264, 30);
-		        layeredPane.add(jLabel4);
+		        username_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+		        username_lbl.setForeground(new java.awt.Color(255, 255, 255));
+		        username_lbl.setHorizontalAlignment(SwingConstants.LEFT);
+		        username_lbl.setText("Kullanıcı Adı");
+		        username_lbl.setBounds(460, 140, 264, 30);
+		        layeredPane.add(username_lbl);
 		        
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\serra\\Desktop\\ui tobb\\login_left.png"));
-		label.setBounds(0, 0, 400, 500);
-		layeredPane.add(label);
+		JLabel loginLeft_lbl = new JLabel("");
+		loginLeft_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_left.png")));
+		loginLeft_lbl.setBounds(0, 0, 400, 500);
+		layeredPane.add(loginLeft_lbl);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\serra\\Desktop\\ui tobb\\login_right.png"));
-		label_1.setBounds(395, 0, 400, 500);
-		layeredPane.add(label_1);
-		
-		
-  
-        
-		
-		
-		
+		JLabel loginRight_lbl = new JLabel("");
+		loginRight_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_right.png")));
+		loginRight_lbl.setBounds(395, 0, 400, 500);
+		layeredPane.add(loginRight_lbl);	
 	}
 	
-
+	public static void centreWindow(JFrame frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
+	}
 	public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -174,6 +175,7 @@ public class Login  extends javax.swing.JFrame{
                 Login l = new Login();
                 l.setSize(812,540);
                 l.setVisible(true);
+                centreWindow(l);
             }
         });
     }

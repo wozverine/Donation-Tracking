@@ -1,4 +1,6 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,8 +26,8 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        //jLabel1 = new javax.swing.JLabel();
+        kisiler_btn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTable1.addMouseListener(new MouseAdapter() {
@@ -37,12 +39,12 @@ public class main extends javax.swing.JFrame {
         		p.setSize(700, 600);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
-        		
+        		centreWindow(p);
         	}
         });
-        jButton2 = new javax.swing.JButton();
+        borc_btn = new javax.swing.JButton();
         
-        jButton2.addMouseListener(new MouseAdapter() {
+        borc_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         	
@@ -52,6 +54,7 @@ public class main extends javax.swing.JFrame {
         				try {
         					debts window = new debts();
         					window.frmAidatlar.setVisible(true);
+        					centreWindow(window.frmAidatlar);
         				} catch (Exception e) {
         					e.printStackTrace();
         				}
@@ -60,8 +63,8 @@ public class main extends javax.swing.JFrame {
         		
         	}
         });
-        jButton3 = new javax.swing.JButton();
-        jButton3.addMouseListener(new MouseAdapter() {
+        aidat_btn = new javax.swing.JButton();
+        aidat_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		  
@@ -94,26 +97,27 @@ public class main extends javax.swing.JFrame {
         	        });
         	}
         });
-        jButton4 = new javax.swing.JButton();
-        jButton4.addMouseListener(new MouseAdapter() {
+        dosya_btn = new javax.swing.JButton();
+        dosya_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		setVisible(false);
         		Excel_Form exc = new Excel_Form();
         		exc.setVisible(true);
+        		centreWindow(exc);
         	}
         });
-        jButton5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        exit_btn = new javax.swing.JButton();
+        kimlik_txtf = new javax.swing.JTextField();
+        kisiler_lbl = new javax.swing.JLabel();
+        ara_btn = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
+        //jLabel1.setText("jLabel1");
 
-        jButton1.setBackground(javax.swing.UIManager.getDefaults().getColor("EditorPane.foreground"));
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 255));
-        jButton1.setText("Kişiler");
+        kisiler_btn.setBackground(javax.swing.UIManager.getDefaults().getColor("EditorPane.foreground"));
+        kisiler_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        kisiler_btn.setForeground(new java.awt.Color(0, 0, 255));
+        kisiler_btn.setText("Kişiler");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBox.foreground"));
@@ -226,89 +230,95 @@ public class main extends javax.swing.JFrame {
         jScrollPane1.setBounds(10, 71, 773, 245);
         getContentPane().add(jScrollPane1);
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton2.setText("Borcu olanları görüntüle");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton2.setPreferredSize(new java.awt.Dimension(161, 23));
-        jButton2.setBounds(10, 347, 161, 23);
-        getContentPane().add(jButton2);
+        borc_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        borc_btn.setText("Borcu olanları görüntüle");
+        borc_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        borc_btn.setPreferredSize(new java.awt.Dimension(161, 23));
+        borc_btn.setBounds(10, 347, 161, 23);
+        getContentPane().add(borc_btn);
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton3.setText("Ödenen aidatları görüntüle");
-        jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton3.setBounds(215, 348, 160, 21);
-        getContentPane().add(jButton3);
+        aidat_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        aidat_btn.setText("Ödenen aidatları görüntüle");
+        aidat_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        aidat_btn.setBounds(215, 348, 160, 21);
+        getContentPane().add(aidat_btn);
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton4.setText("Dosya ekle");
-        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton4.setMinimumSize(new java.awt.Dimension(161, 23));
-        jButton4.setPreferredSize(new java.awt.Dimension(161, 23));
-        jButton4.setBounds(453, 347, 161, 23);
-        getContentPane().add(jButton4);
+        dosya_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        dosya_btn.setText("Dosya ekle");
+        dosya_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        dosya_btn.setMinimumSize(new java.awt.Dimension(161, 23));
+        dosya_btn.setPreferredSize(new java.awt.Dimension(161, 23));
+        dosya_btn.setBounds(453, 347, 161, 23);
+        getContentPane().add(dosya_btn);
 
-        jButton5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton5.setText("Çıkış ");
-        jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton5.setMinimumSize(new java.awt.Dimension(161, 23));
-        jButton5.setPreferredSize(new java.awt.Dimension(161, 23));
-        jButton5.setBounds(659, 347, 100, 23);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        exit_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        exit_btn.setText("Çıkış ");
+        exit_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        exit_btn.setMinimumSize(new java.awt.Dimension(161, 23));
+        exit_btn.setPreferredSize(new java.awt.Dimension(161, 23));
+        exit_btn.setBounds(659, 347, 100, 23);
+        exit_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
+        getContentPane().add(exit_btn);
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField1.setText("T.C Kimlik No ");
-        jTextField1.setBounds(480, 30, 220, 25);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        kimlik_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        kimlik_txtf.setText("T.C Kimlik No ");
+        kimlik_txtf.setBounds(480, 30, 220, 25);
+        kimlik_txtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                kimlikActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
+        getContentPane().add(kimlik_txtf);
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jLabel2.setText("Kişiler");
-        jLabel2.setBounds(41, 24, 145, 29);
-        getContentPane().add(jLabel2);
+        kisiler_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        kisiler_lbl.setText("Kişiler");
+        kisiler_lbl.setBounds(41, 24, 145, 29);
+        getContentPane().add(kisiler_lbl);
 
-        jButton6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton6.setText("Ara");
-        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton6.setBounds(710, 30, 35, 25);
-        getContentPane().add(jButton6);
+        ara_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        ara_btn.setText("Ara");
+        ara_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        ara_btn.setBounds(710, 30, 35, 25);
+        getContentPane().add(ara_btn);
 
         pack();
     }// </editor-fold>                        
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {    
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {    
     	setVisible(false);
         // TODO add your handling code here:
     	
     }                                        
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void kimlikActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           
-
+    public static void centreWindow(JFrame frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
+	}
+    
     /**
      * @param args the command line arguments
      */
   
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton kisiler_btn;
+    private javax.swing.JButton borc_btn;
+    private javax.swing.JButton aidat_btn;
+    private javax.swing.JButton dosya_btn;
+    private javax.swing.JButton exit_btn;
+    private javax.swing.JButton ara_btn;
+    //private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel kisiler_lbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField kimlik_txtf;
     // End of variables declaration                   
 }

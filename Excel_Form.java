@@ -39,12 +39,12 @@ public class Excel_Form extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        ekle_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jButton1.setText("DOSYA EKLE");
+        ekle_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        ekle_btn.setText("DOSYA EKLE");
         
         JButton btnGeri = new JButton("Geri");
         btnGeri.addMouseListener(new MouseAdapter() {
@@ -55,7 +55,7 @@ public class Excel_Form extends javax.swing.JFrame {
 				main m = new main();
 				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				m.setVisible(true);
-        		
+        		centreWindow(m);
         	}
         });
 
@@ -64,7 +64,7 @@ public class Excel_Form extends javax.swing.JFrame {
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
         			.addGap(23)
-        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(ekle_btn, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(198, Short.MAX_VALUE))
         		.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
         			.addContainerGap(284, Short.MAX_VALUE)
@@ -75,7 +75,7 @@ public class Excel_Form extends javax.swing.JFrame {
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
         			.addGap(25)
-        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(ekle_btn, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
         			.addComponent(btnGeri)
         			.addContainerGap())
@@ -101,12 +101,17 @@ public class Excel_Form extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public static void centreWindow(JFrame frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
+	}
     /**
      * @param args the command line arguments
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ekle_btn;
     private javax.swing.JPanel jPanel1;
 }
