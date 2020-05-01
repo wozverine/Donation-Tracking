@@ -1,14 +1,13 @@
-
-
 import java.awt.BorderLayout;
 import javax.swing.*;
-
+import javax.swing.border.AbstractBorder;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 
 public class Login  extends javax.swing.JFrame{
 	
@@ -16,15 +15,13 @@ public class Login  extends javax.swing.JFrame{
 	JTextField username_txtf = new JTextField();
 	JLabel sifre_btn = new JLabel();
 	JLabel username_lbl = new JLabel();
-	//JLabel jLabel1 = new JLabel();
-	//JLabel jLabel2 = new JLabel();
-	//JLabel jLabel5 = new JLabel();
 	JButton login_btn = new JButton();
+	JButton exit_btn = new JButton();
 
 	public Login() {
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		
+        		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBackground(Color.LIGHT_GRAY);
 		layeredPane.setBounds(0, 0, 500, 500);
@@ -97,8 +94,46 @@ public class Login  extends javax.swing.JFrame{
 		        login_btn.setBorder(null);
 		        login_btn.setBorderPainted(false);
 		        login_btn.setContentAreaFilled(false);
-		        login_btn.setBounds(492, 431, 232, 46);
+		        login_btn.setBounds(392, 431, 232, 46);
 		        layeredPane.add(login_btn);
+		        
+		        exit_btn.addMouseListener(new MouseAdapter() {
+		        	@Override
+		        	public void mouseClicked(MouseEvent e) {
+		        		 try {
+		        		        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+		        		            if ("Nimbus".equals(info.getName())) {
+		        		                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		        		                break;
+		        		            }
+		        		        }
+		        		    } catch (ClassNotFoundException ex) {
+		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        		    } catch (InstantiationException ex) {
+		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        		    } catch (IllegalAccessException ex) {
+		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        		    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		        		    }
+		        		    //</editor-fold>
+
+		        		    /* Create and display the form */
+		        		    java.awt.EventQueue.invokeLater(new Runnable() {
+		        		        public void run() {
+		        		            setVisible(false);
+		        		        }
+		        		    });
+		        	}
+		        });
+		        
+		        exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
+		        exit_btn.setBorder(null);
+		        exit_btn.setBorderPainted(false);
+		        exit_btn.setContentAreaFilled(false);
+		        exit_btn.setBounds(600, 431, 232, 46);
+		        layeredPane.add(exit_btn);
+		        
 		        username_txtf.addMouseListener(new MouseAdapter() {
 		        	@Override
 		        	public void mouseClicked(MouseEvent e) {
@@ -173,9 +208,11 @@ public class Login  extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Login l = new Login();
-                l.setSize(812,540);
-                l.setVisible(true);
+                l.setSize(795,500);
+                l.setUndecorated(true);
+                l.setShape(new RoundRectangle2D.Double(0, 0, l.getWidth(), l.getHeight(), 20, 20));
                 centreWindow(l);
+                l.setVisible(true);
             }
         });
     }
