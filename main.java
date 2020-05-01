@@ -52,9 +52,9 @@ public class main extends javax.swing.JFrame {
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					debts window = new debts();
-        					window.frmAidatlar.setVisible(true);
-        					centreWindow(window.frmAidatlar);
+        					borclar window = new borclar();
+        					window.setVisible(true);
+        					centreWindow(window);
         				} catch (Exception e) {
         					e.printStackTrace();
         				}
