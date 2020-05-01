@@ -127,7 +127,7 @@ public class Login  extends javax.swing.JFrame{
 		        	}
 		        });
 		        
-		        exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
+		        exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_exit.png"))); // NOI18N
 		        exit_btn.setBorder(null);
 		        exit_btn.setBorderPainted(false);
 		        exit_btn.setContentAreaFilled(false);

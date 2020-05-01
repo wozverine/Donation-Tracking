@@ -8,8 +8,12 @@ import javax.swing.JPanel;
 import javafx.scene.paint.Color;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
 import javax.swing.JSeparator;
@@ -258,10 +262,17 @@ public class personal extends JFrame{
 				main m = new main();
 				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				m.setVisible(true);
+				centreWindow(m);
 			}
 		});
 		geri_btn.setBounds(612, 11, 62, 23);
 		panel.add(geri_btn);	
+	}
+	public static void centreWindow(JFrame frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 }
 
