@@ -36,9 +36,9 @@ import java.awt.event.MouseEvent;
 public class debts {
 
 	JFrame frmAidatlar;
-	private JTable main;
-	private JTable toplam;
-	private JTable kisi;
+	private JTable main_t;
+	private JTable toplam_t;
+	private JTable kisi_t;
 	private JTextField textField;
 
 	
@@ -52,21 +52,21 @@ public class debts {
 	private void initialize() {
 		Color maroon=Color.decode("#800000");
 		frmAidatlar = new JFrame();
-		frmAidatlar.setTitle("Borclar");
+		frmAidatlar.setTitle("Borçlar");
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frmAidatlar.setBounds(0, 0,screen.width-150,screen.height -150);
 		frmAidatlar.setMinimumSize(new Dimension(720, 600));
 		//frmAidatlar.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblBorla = new JLabel("Borclar");
+		JLabel lblBorla = new JLabel("Borçlar");
 		lblBorla.setForeground(Color.WHITE);
 		lblBorla.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBorla.setFont(new Font("Arial", Font.BOLD, 20));
 		
-		String [] rows= {"ID","Isimler","2012","2013","2014","2015","2016"};
-		Object [][] names= {{"1","Ayse","50","25","25","20","8"},{"2","Mehmet","50","25","25","5","0"},
-				{"3","Mahmut","30","0","0","0","20"},{"4","Seval","16","8","0","20","6"},{"5","Ayse","50","25","25","20","8"},
+		String [] rows= {"ID","İsimler","2012","2013","2014","2015","2016"};
+		Object [][] names= {{"1","Ayşe","50","25","25","20","8"},{"2","Mehmet","50","25","25","5","0"},
+				{"3","Mahmut","30","0","0","0","20"},{"4","Seval","16","8","0","20","6"},{"5","Ayşe","50","25","25","20","8"},
 				{"6","Mehmet","50","25","25","5","0"},{"7","Mahmut","30","0","0","0","20"},{"8","Seval","16","8","0","20","6"}};
 		
 		String [] years= Arrays.copyOfRange(rows, 2, rows.length);
@@ -84,7 +84,6 @@ public class debts {
 			        intarray[count]=Integer.parseInt(str);
 			        count++;
 			    }
-				System.out.println(intarray[x-2]);
 				if(intarray[x-2]!=0) {
 					debt_count+=1;
 				}
@@ -93,11 +92,11 @@ public class debts {
 			money[0][x-2]=sum;
 			debt[0][x-2]=debt_count;
 		}
-		JButton btnNewButton = new JButton("Aidatlar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(maroon);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton aidatlar_b = new JButton("Aidatlar");
+		aidatlar_b.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		aidatlar_b.setForeground(Color.WHITE);
+		aidatlar_b.setBackground(maroon);
+		aidatlar_b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				frmAidatlar.setVisible(false);
@@ -130,17 +129,17 @@ public class debts {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Geri");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setBackground(maroon);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton geri_b = new JButton("Geri");
+		geri_b.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		geri_b.setForeground(Color.WHITE);
+		geri_b.setBackground(maroon);
+		geri_b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmAidatlar.setVisible(false);
 				main m = new main();
 				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				m.setVisible(true);
-				
+				centreWindow(m);
 			}
 		});
 		
@@ -177,9 +176,9 @@ public class debts {
 					.addGap(24))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(247)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addComponent(aidatlar_b, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+					.addComponent(geri_b, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
 					.addGap(246))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
@@ -223,21 +222,21 @@ public class debts {
 					.addComponent(bottom, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+						.addComponent(geri_b, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(aidatlar_b, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
 					.addGap(20))
 		);
 		
-		kisi = new JTable(debt,years);
-		kisi.setEnabled(false);
-		bottom.setViewportView(kisi);
+		kisi_t = new JTable(debt,years);
+		kisi_t.setEnabled(false);
+		bottom.setViewportView(kisi_t);
 		
-		toplam = new JTable(money,years);
-		toplam.setEnabled(false);
-		left.setViewportView(toplam);
+		toplam_t = new JTable(money,years);
+		toplam_t.setEnabled(false);
+		left.setViewportView(toplam_t);
 		
-		main = new JTable(names,rows);
-		main.addMouseListener(new MouseAdapter() {
+		main_t = new JTable(names,rows);
+		main_t.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frmAidatlar.setVisible(false);
@@ -246,14 +245,20 @@ public class debts {
         		p.setSize(700, 600);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
+        	    centreWindow(p);
         		
 			}
 		});
-		main.setEnabled(false);
-		top.setViewportView(main);
+		main_t.setEnabled(false);
+		top.setViewportView(main_t);
 		frmAidatlar.getContentPane().setLayout(groupLayout);
-		frmAidatlar.getContentPane().setBackground(Color.GRAY);
-		
+		frmAidatlar.getContentPane().setBackground(Color.GRAY);		
+	}
+	public static void centreWindow(JFrame frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 }
 
