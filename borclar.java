@@ -1,106 +1,148 @@
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
+import java.awt.event.ActionEvent;
 
-
-
-import javax.swing.JFrame;
-import javax.swing.RowFilter;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.*;
+import javax.swing.GroupLayout.*;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
+import java.awt.*;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class borclar extends javax.swing.JFrame {
+	ArrayList<person> pArr = new ArrayList<person>();
+	Date date = new Date();
+	LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	int year  = localDate.getYear();
+	private javax.swing.JButton aidatlar_btn;
+    private javax.swing.JButton geri_btn;
+    private javax.swing.JButton borc_btn;
+    private javax.swing.JButton kisiler_btn;
+    /*private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;*/
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea borclar_txta;
+    private javax.swing.JTextArea kisiler_txta;
+    private javax.swing.JTextField row_txtf;
+    private javax.swing.JTextField ara_txtf;
+    private javax.swing.JTextField borclar_txtf;
+    
+	JFrame frmAidatlar;
 
-    public borclar() {
-        
-        try{
-            
-            for(UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
-                if("Windows".equals(info.getName())){
-                    UIManager.setLookAndFeel(info.getClassName());
-                }
-            }
-        }
-        catch(Exception ex){
-            ex.getMessage();
-        }
-        
-        initComponents();
-    }
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-    	Color maroon=Color.decode("#800000");
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTable1.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		setVisible(false);
-        		personal p = new personal();
-        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        		p.setSize(700, 600);
-        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        	    p.setVisible(true);
-        		centreWindow(p);
+	
+	public borclar(ArrayList<person> list) {
+		initialize(list);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize(ArrayList<person> list) {
+		pArr=list;
+		Color maroon=Color.decode("#800000");
+		frmAidatlar = new JFrame();
+		frmAidatlar.setTitle("Borclar");
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		frmAidatlar.setBounds(0, 0,screen.width,screen.height);
+		frmAidatlar.setExtendedState(Frame.MAXIMIZED_BOTH);
+		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		borclar_txtf = new JTextField("Borclar");
+		borclar_txtf.setEditable(false);
+	    borclar_txtf.setBackground(Color.GRAY);
+		borclar_txtf.setHorizontalAlignment(SwingConstants.LEFT);
+		borclar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
+        borclar_txtf.setText("BORÇLAR");
+		
+        Object[][] o=new Object[list.size()][year-2012+3];
+        Object[][] o0=new Object[list.size()][year-2012+3];
+        for (Object[] row: o) {Arrays.fill(row, "-1");}
+        for (Object[] row: o0) {Arrays.fill(row, 0);}
+
+        for (int count=0;count<list.size();count++) {
+        	o[count][0]=list.get(count).kimlikNo_lbl;
+        	o0[count][0]=list.get(count).kimlikNo_lbl;
+        	o[count][1]=list.get(count).ad_lbl;
+        	o0[count][1]=list.get(count).ad_lbl;
+        	int start=Integer.parseInt(list.get(count).getGirisTarihi_lbl());
+        	int b=0;
+        	for(int d=start;d<year+1;d++) {
+        		o[count][d-2010]=list.get(count).getBorcarray()[b];
+        		o0[count][d-2010]=list.get(count).getBorcarray()[b];
+        		b=b+1;
         	}
+        }
+        String [] rows= {"ID","İsimler","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
+        
+		aidatlar_btn = new JButton("Aidatlar");
+		aidatlar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		aidatlar_btn.setForeground(Color.BLACK);
+		aidatlar_btn.setBackground(maroon);
+		aidatlar_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				frmAidatlar.setVisible(false);
+				
+				try {
+			            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+			                if ("Windows".equals(info.getName())) {
+			                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+			                    break;
+			                }
+			            }
+			        } catch (ClassNotFoundException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        } catch (InstantiationException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        } catch (IllegalAccessException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			        }
+			        //</editor-fold>
+			        //</editor-fold>
+
+			        /* Create and display the form */
+			        java.awt.EventQueue.invokeLater(new Runnable() {
+			            public void run() {
+			            	aidatlar window = new aidatlar(list);
+							window.frmAidatlar.setVisible(true);
+			            }
+			        });
+			}
+		});
+		
+		geri_btn = new JButton("Geri");
+		geri_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		geri_btn.setForeground(Color.BLACK);
+		geri_btn.setBackground(maroon);
+		geri_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GeriActionPerformed(evt);
+            }
         });
-        jPanel1 = new javax.swing.JPanel();
-        row_txtf = new javax.swing.JTextField();
-        ara_txtf = new javax.swing.JTextField();
-        borclar_txtf = new javax.swing.JTextField();
-        aidatlar_btn = new javax.swing.JButton();
-        aidatlar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        aidatlar_btn.setBackground(new Color(128, 0, 0));
-        geri_btn = new javax.swing.JButton();
-        borc_btn = new javax.swing.JButton();
-        borc_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        borc_btn.setBackground(new Color(128, 0, 0));
-        jScrollPane2 = new javax.swing.JScrollPane();
-        borclar_txta = new javax.swing.JTextArea();
-        kisiler_btn = new javax.swing.JButton();
-        kisiler_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        kisiler_btn.setBackground(new Color(128, 0, 0));
-        jScrollPane3 = new javax.swing.JScrollPane();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        getContentPane().setBounds(0, 0,screen.width-150,screen.height -150);
-        getContentPane().setMinimumSize(new Dimension(720, 600));
-        
-        String [] rows= {"ID","İsimler","2012","2013","2014","2015","2016"};
-		Object [][] names= {{"1","Ayşe","50","25","25","20","8"},{"2","Mehmet","50","25","25","5","0"},
-				{"3","Mahmut","30","0","0","0","20"},{"4","Seval","16","8","0","20","6"},{"5","Ayşe","50","25","25","20","8"},
-				{"6","Mehmet","50","25","25","5","0"},{"7","Mahmut","30","0","0","0","20"},{"8","Seval","16","8","0","20","6"}};
-        
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-        		names,rows
-        ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setGridColor(new java.awt.Color(68, 137, 246));
-        jTable1.setPreferredSize(new java.awt.Dimension(1000, 500));
-        jTable1.setRowHeight(25);
-        jScrollPane1.setViewportView(jTable1);
-        
-        jScrollPane1.setBounds(0, 82, 1000, 255);
-        getContentPane().add(jScrollPane1);
-        getContentPane().setBackground(Color.GRAY);
-        
-        jPanel1.setBackground(Color.GRAY);
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 100));
-
-        row_txtf.addActionListener(new java.awt.event.ActionListener() {
+		
+		JScrollPane top = new JScrollPane();
+		
+		ara_txtf = new JTextField("ARA");
+		ara_txtf.setHorizontalAlignment(SwingConstants.CENTER);
+		ara_txtf.setEnabled(false);
+		ara_txtf.setEditable(false);
+		ara_txtf.setForeground(Color.BLACK);
+		ara_txtf.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		
+		row_txtf = new JTextField();
+		row_txtf.setColumns(10);
+		row_txtf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 personalActionPerformed(evt);
             }
@@ -111,123 +153,126 @@ public class borclar extends javax.swing.JFrame {
             }
         });
 
-        ara_txtf.setEditable(false);
-        ara_txtf.setBackground(Color.GRAY);
-        ara_txtf.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        ara_txtf.setText("ARA");
-
-        borclar_txtf.setEditable(false);
-        borclar_txtf.setBackground(Color.GRAY);
-        borclar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
-        borclar_txtf.setText("BORÇLAR");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(49)
-        			.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
-        			.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap(22, Short.MAX_VALUE)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(27))
-        );
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1.setBounds(0, 0, 1000, 82);
-        getContentPane().add(jPanel1);
-        
-        aidatlar_btn.setText("Aidatlar");
-        aidatlar_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BorclarActionPerformed(evt);
-            }
-        });
-        aidatlar_btn.setBounds(10, 550, 100, 40);
-        getContentPane().add(aidatlar_btn);
-        
-
-        geri_btn.setText("Geri");
-        geri_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        geri_btn.setForeground(Color.BLACK);
-		geri_btn.setBackground(new Color(128, 0, 0));
-        geri_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GeriActionPerformed(evt);
-            }
-        });
-        getContentPane().add(geri_btn);
-        geri_btn.setBounds(890, 550, 100, 40);
-
-        borc_btn.setText("Borç toplam");
+		
+		borc_btn = new JButton("Borç toplam");
         borc_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aidatlarActionPerformed(evt);
             }
         });
-        getContentPane().add(borc_btn);
-        borc_btn.setBounds(193, 348, 132, 45);
-
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(200, 70));
-
-        borclar_txta.setEditable(false);
-        borclar_txta.setColumns(20);
-        borclar_txta.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
-        borclar_txta.setRows(6);
-        borclar_txta.setPreferredSize(new java.awt.Dimension(200, 70));
-        jScrollPane2.setViewportView(borclar_txta);
-
-        getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(121, 404, 280, 138);
-
-        kisiler_btn.setText("Borçlu Sayısı");
-        kisiler_btn.setPreferredSize(new java.awt.Dimension(135, 23));
+        
+        kisiler_btn = new JButton("Borçlu Sayısı");
         kisiler_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kisilerActionPerformed(evt);
             }
         });
-        getContentPane().add(kisiler_btn);
-        kisiler_btn.setBounds(686, 348, 132, 42);
-
-        getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(600, 404, 299, 135);
-        kisiler_txta = new javax.swing.JTextArea();
-        kisiler_txta.setBounds(600, 405, 299, 134);
-        getContentPane().add(kisiler_txta);
-        
-                kisiler_txta.setEditable(false);
-                kisiler_txta.setColumns(20);
-                kisiler_txta.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
-                kisiler_txta.setRows(6);
-
-        setSize(new java.awt.Dimension(1016, 639));
-        setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void GeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeriActionPerformed
+		
+        borclar_txta = new JTextArea();
+        borclar_txta.setEditable(false);
+		
+        kisiler_txta = new JTextArea();
+        kisiler_txta.setEditable(false);
+        kisiler_txta.setColumns(10);
+		GroupLayout groupLayout = new GroupLayout(frmAidatlar.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(21)
+					.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 655, Short.MAX_VALUE)
+					.addComponent(ara_txtf, 44, 44, 44)
+					.addGap(18)
+					.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+					.addGap(24))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(top, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(252)
+					.addComponent(borc_btn)
+					.addPreferredGap(ComponentPlacement.RELATED, 673, Short.MAX_VALUE)
+					.addComponent(kisiler_btn)
+					.addGap(245))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(42)
+							.addComponent(aidatlar_btn, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(148)
+							.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+							.addGap(65))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+							.addGap(127))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(top, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(borc_btn)
+						.addComponent(kisiler_btn))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+						.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+						.addComponent(aidatlar_btn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addGap(46))
+		);
+		
+		jTable1 = new JTable();
+		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(o,rows));
+		jTable1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmAidatlar.setVisible(false);
+        		personal p = new personal(list);
+        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        		p.setSize(700, 600);
+        		centreWindow(p);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
+        		
+			}
+		});
+		jTable1.setEnabled(false);
+		top.setViewportView(jTable1);
+		frmAidatlar.getContentPane().setLayout(groupLayout);
+		frmAidatlar.getContentPane().setBackground(Color.GRAY);
+		
+	}
+	
+	private void GeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeriActionPerformed
         // TODO add your handling code here:
     	
-    	setVisible(false);
-		main m = new main();
+    	frmAidatlar.setVisible(false);
+		main m = new main(pArr);
 		m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m.setVisible(true);
 		centreWindow(m);
     	
     }//GEN-LAST:event_GeriActionPerformed
-
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+	
+	private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
         jTable1.setRowSorter(tr);
@@ -236,110 +281,66 @@ public class borclar extends javax.swing.JFrame {
 
     private void personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-    	setVisible(false);
-		personal p = new personal();
+    	frmAidatlar.setVisible(false);
+		personal p = new personal(pArr);
 		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		p.setSize(700, 600);
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		centreWindow(p);
 	    p.setVisible(true);
-	    centreWindow(p);
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void aidatlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int Y2012=0;
-        int Y2013=0;
-        int Y2014=0;
-        int Y2015=0;
-        int Y2016=0;
+	
+	private void aidatlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    	int[] dates=new int[year-2012+1];
+    	Arrays.fill(dates, 0);
         int toplam=0;
         
         for(int y=0; y<jTable1.getRowCount(); y++){
-        	Y2012+=Integer.parseInt(jTable1.getValueAt(y, 2).toString());
-        	Y2013+=Integer.parseInt(jTable1.getValueAt(y, 3).toString());
-            Y2014+=Integer.parseInt(jTable1.getValueAt(y, 4).toString());
-            Y2015+=Integer.parseInt(jTable1.getValueAt(y, 5).toString());
-            Y2016+=Integer.parseInt(jTable1.getValueAt(y, 6).toString());
+        	for(int c=0;c<dates.length;c++) {
+        		int value=Integer.parseInt(jTable1.getValueAt(y, c+2).toString());
+        		if(value!=-1) {
+        			dates[c]+=value;
+        		}
+        	}
         }
-        toplam = Y2012+Y2013+Y2014+Y2015+Y2016;
-        borclar_txta.setText(jTable1.getColumnName(2)+": "+Y2012+".00 TL\n"
-                +jTable1.getColumnName(3)+": "+Y2013+".00 TL\n"
-                +jTable1.getColumnName(4)+": "+Y2014+".00 TL\n"
-                +jTable1.getColumnName(5)+": "+Y2015+".00 TL\n"
-                +jTable1.getColumnName(6)+": "+Y2016+".00 TL\n"
-                + "\nGENEL TOPLAM: "+toplam+".00 TL");
+  
+        for(int i=0; i<dates.length; i++){
+            toplam = toplam+ dates[i];
+        }
+        String write="";
+        for(int c=0;c<dates.length;c++) {
+    		write+=jTable1.getColumnName(c+2)+": "+dates[c]+".00 TL\n";
+    	}
+        borclar_txta.setText(write+ "\nGENEL TOPLAM: "+toplam+".00 TL borç bulunmaktadır");
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void kisilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    	int K2012=0;
-    	int K2013=0;
-    	int K2014=0;
-    	int K2015=0;
-        int K2016=0;
+	
+	private void kisilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    	int[] dates=new int[year-2012+1];
+    	Arrays.fill(dates, 0);
         int toplam=0;
         for(int y=0; y<jTable1.getRowCount(); y++){
-        	if(Integer.parseInt(jTable1.getValueAt(y, 2).toString()) !=0 ){K2012++;}
-        	if(Integer.parseInt(jTable1.getValueAt(y, 3).toString()) !=0 ){K2013++;}
-        	if(Integer.parseInt(jTable1.getValueAt(y, 4).toString()) !=0 ){K2014++;}
-        	if(Integer.parseInt(jTable1.getValueAt(y, 5).toString()) !=0 ){K2015++;}
-            if(Integer.parseInt(jTable1.getValueAt(y, 6).toString()) !=0 ){K2016++;}
+        	for(int c=0;c<dates.length;c++) {
+        		int value=Integer.parseInt(jTable1.getValueAt(y, c+2).toString());
+        		if(value>0) {
+        			dates[c]+=1;
+        		}
+        	}
         }
-        toplam = K2012+K2013+K2014+K2015+K2016;
-        kisiler_txta.setText(jTable1.getColumnName(2)+": "+K2012+" kişi\n"
-                +jTable1.getColumnName(3)+": "+K2013+" kişi\n"
-                +jTable1.getColumnName(4)+": "+K2014+" kişi\n"
-                +jTable1.getColumnName(5)+": "+K2015+" kişi\n"
-                +jTable1.getColumnName(6)+": "+K2016+" kişi\n"
-                + "\nTOPLAM: "+toplam+" kişi ödeme yapmamıştır.");
-                                        
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void BorclarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorÃ§larActionPerformed
-        // TODO add your handling code here:
-    	setVisible(false);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					aidatlar window = new aidatlar();
-					window.setVisible(true);
-					centreWindow(window);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-    }//GEN-LAST:event_BorÃ§larActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void centreWindow(JFrame frame) {
+        for(int i=0; i<dates.length; i++){
+            toplam = toplam+ dates[i];
+        }
+        String write="";
+        for(int c=0;c<dates.length;c++) {
+    		write+=jTable1.getColumnName(c+2)+": "+dates[c]+" kişi\n";
+    	}
+        kisiler_txta.setText(write+ "\nTOPLAM: "+toplam+" kişi ödeme yapmamıştır.");
+        
+    }//GEN-LAST:event_BorÃ§larActionPerformed*/
+	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 	    frame.setLocation(x, y);
 	}
-    
-    
-    
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aidatlar_btn;
-    private javax.swing.JButton geri_btn;
-    private javax.swing.JButton borc_btn;
-    private javax.swing.JButton kisiler_btn;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea borclar_txta;
-    private javax.swing.JTextArea kisiler_txta;
-    private javax.swing.JTextField row_txtf;
-    private javax.swing.JTextField ara_txtf;
-    private javax.swing.JTextField borclar_txtf;
-    // End of variables declaration//GEN-END:variables
-
-
-
-
 }
+

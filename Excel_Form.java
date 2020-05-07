@@ -14,6 +14,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,8 +25,8 @@ public class Excel_Form extends javax.swing.JFrame {
     /**
      * Creates new form Excel_Form
      */
-    public Excel_Form() {
-        initComponents();
+    public Excel_Form(ArrayList<person>list) {
+        initComponents(list);
        
     }
 
@@ -36,7 +37,7 @@ public class Excel_Form extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(ArrayList<person>list) {
 
         jPanel1 = new javax.swing.JPanel();
         ekle_btn = new javax.swing.JButton();
@@ -52,7 +53,7 @@ public class Excel_Form extends javax.swing.JFrame {
         	public void mouseClicked(MouseEvent e) {
         		
         		setVisible(false);
-				main m = new main();
+				main m = new main(list);
 				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				m.setVisible(true);
         		centreWindow(m);

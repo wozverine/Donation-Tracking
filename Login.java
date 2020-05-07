@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
 
 public class Login  extends javax.swing.JFrame{
 	
@@ -19,7 +20,7 @@ public class Login  extends javax.swing.JFrame{
 	JButton exit_btn = new JButton();
 
 	public Login() {
-		
+		ArrayList<person> pArr=fillArraylist();
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         		
 		JLayeredPane layeredPane = new JLayeredPane();
@@ -47,7 +48,7 @@ public class Login  extends javax.swing.JFrame{
 		        		password_pf.setText("");
 		        	}
 		        });
-		        
+		     
 		        password_pf.setEchoChar('*');
 		        password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
 		        password_pf.setForeground(new java.awt.Color(204, 204, 204));
@@ -81,9 +82,9 @@ public class Login  extends javax.swing.JFrame{
 		        		    java.awt.EventQueue.invokeLater(new Runnable() {
 		        		        public void run() {
 		        		            setVisible(false);
-		        		            main x=new main();
-		        		            x.setVisible(true);
-		        		            centreWindow(x);
+		        		            main m=new main(pArr);
+		        		            m.setVisible(true);
+		        		            centreWindow(m);
 		        		        	//new main().setVisible(true);
 		        		        }
 		        		    });
@@ -215,5 +216,84 @@ public class Login  extends javax.swing.JFrame{
                 l.setVisible(true);
             }
         });
+    }
+	public ArrayList<person> fillArraylist() {
+		 ArrayList<person> pArr = new ArrayList<person>();
+		 int[] x= {0,20,40};
+		 int[] y= {0,20,40,0,5,0,20,40,2};
+		 int[] z= {0,20,30,0};
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     pArr.add(new person("666","420","Ayşe yş","Kadın","Havacılık Mühendisliği","SpaceX",
+	        		"ayse@gmail.com","0555555555","Adres","İstanbul","2014","2018",
+	        		"Aktif",x,"5 TL"));
+	     pArr.add(new person("707","46","Ali l","Erkek","Bilgisayar Mühendisliği","Google",
+	    		 "ali@gmail.com","0111111111","Adres","İstanbul","2012","2012",
+	    		 "Aktif",y,"15 TL"));
+	     pArr.add(new person("505","42","Mahmut mhmt","Erkek","Endüstri Mühendisliği","Henkel",
+	        		"ali@gmail.com","0555555555","Adres","İstanbul","2016","2017",
+	        		"Aktif",z,"15 TL"));
+	     return pArr;
     }
 }
