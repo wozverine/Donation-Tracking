@@ -26,6 +26,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 
 /*personal p = new personal();
@@ -37,7 +38,7 @@ public class personal extends JFrame{
 	
 	JLayeredPane layeredPane;
 	
-	public personal() {
+	public personal(ArrayList<person>list) {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
@@ -259,7 +260,7 @@ public class personal extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				
 				setVisible(false);
-				main m = new main();
+				main m = new main(list);
 				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				m.setVisible(true);
 				centreWindow(m);
