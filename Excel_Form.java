@@ -23,6 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -51,14 +54,16 @@ public class Excel_Form extends javax.swing.JFrame {
     	 ArrayList<person> pArr = new ArrayList<person>();
 
         jPanel1 = new javax.swing.JPanel();
-        ekle_btn = new javax.swing.JButton();
+        liste_ekle_btn = new javax.swing.JButton();
+        JButton dekont_ekle = new JButton();
+        JButton yeni_uye = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        ekle_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        ekle_btn.setText("DOSYA EKLE");
+        liste_ekle_btn.setFont(new Font("Calibri", Font.PLAIN, 20)); // NOI18N
+        liste_ekle_btn.setText("Üye Listesi Ekle");
         
-        ekle_btn.addMouseListener(new MouseAdapter() {
+        liste_ekle_btn.addMouseListener(new MouseAdapter() {
             @Override
         	public void mouseClicked(MouseEvent e) {
             	
@@ -215,25 +220,59 @@ public class Excel_Form extends javax.swing.JFrame {
         		centreWindow(m);
         	}
         });
+        
+        
+        dekont_ekle.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        dekont_ekle.setText("Banka Dekontu Ekle");
+        dekont_ekle.setFont(new Font("Calibri", Font.PLAIN, 20));
+        
+        
+        yeni_uye.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        yeni_uye.setText("Yeni Üye Ekle");
+        yeni_uye.setFont(new Font("Calibri", Font.PLAIN, 20));
+        yeni_uye.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				yeni_uye y = new yeni_uye();
+				y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				y.setSize(585,600);
+				y.setVisible(true);
+				centreWindow(y);
+				
+			}
+		});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        	jPanel1Layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(23)
-        			.addComponent(ekle_btn, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(198, Short.MAX_VALUE))
-        		.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        			.addContainerGap(284, Short.MAX_VALUE)
+        			.addContainerGap(322, Short.MAX_VALUE)
         			.addComponent(btnGeri)
         			.addContainerGap())
+        		.addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+        			.addGap(84)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
+        				.addComponent(liste_ekle_btn, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(yeni_uye, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(dekont_ekle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(25)
-        			.addComponent(ekle_btn, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+        		.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        			.addGap(34)
+        			.addComponent(liste_ekle_btn, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(dekont_ekle, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(yeni_uye, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
         			.addComponent(btnGeri)
         			.addContainerGap())
         );
@@ -269,6 +308,6 @@ public class Excel_Form extends javax.swing.JFrame {
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ekle_btn;
+    private javax.swing.JButton liste_ekle_btn;
     private javax.swing.JPanel jPanel1;
 }
