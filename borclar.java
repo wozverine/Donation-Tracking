@@ -15,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.LineBorder;
 
 public class borclar extends javax.swing.JFrame {
 	ArrayList<person> pArr = new ArrayList<person>();
@@ -58,7 +59,7 @@ public class borclar extends javax.swing.JFrame {
 		
 		borclar_txtf = new JTextField("Borclar");
 		borclar_txtf.setEditable(false);
-	    borclar_txtf.setBackground(Color.GRAY);
+	    borclar_txtf.setBackground(new Color(220, 220, 220));
 		borclar_txtf.setHorizontalAlignment(SwingConstants.LEFT);
 		borclar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
         borclar_txtf.setText("BORÇLAR");
@@ -82,7 +83,8 @@ public class borclar extends javax.swing.JFrame {
 		aidatlar_btn = new JButton("Aidatlar");
 		aidatlar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		aidatlar_btn.setForeground(Color.BLACK);
-		aidatlar_btn.setBackground(maroon);
+		aidatlar_btn.setBackground(new Color(169, 169, 169));
+		aidatlar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
 		aidatlar_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -120,7 +122,8 @@ public class borclar extends javax.swing.JFrame {
 		geri_btn = new JButton("Geri");
 		geri_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		geri_btn.setForeground(Color.BLACK);
-		geri_btn.setBackground(maroon);
+		geri_btn.setBackground(new Color(169, 169, 169));
+		geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
 		geri_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GeriActionPerformed(evt);
@@ -256,7 +259,7 @@ public class borclar extends javax.swing.JFrame {
 		jTable1.setEnabled(false);
 		top.setViewportView(jTable1);
 		frmAidatlar.getContentPane().setLayout(groupLayout);
-		frmAidatlar.getContentPane().setBackground(Color.GRAY);
+		frmAidatlar.getContentPane().setBackground(new Color(220, 220, 220));
 		
 	}
 	
