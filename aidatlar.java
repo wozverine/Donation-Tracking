@@ -12,6 +12,8 @@ import javax.swing.GroupLayout.*;
 import java.awt.*;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -60,25 +62,22 @@ public class aidatlar extends javax.swing.JFrame {
 		aidatlar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
         aidatlar_txtf.setText("AİDATLAR");
 		
-        Object[][] o=new Object[list.size()][year-2012+3];
-        Object[][] o0=new Object[list.size()][year-2012+3];
-        for (Object[] row: o) {Arrays.fill(row, "-1");}
-        for (Object[] row: o0) {Arrays.fill(row, 0);}
+        Object[][] o=new Object[list.size()][year-2010+4];
+       
+        for (Object[] row: o) {Arrays.fill(row, "");}
+        
 
         for (int count=0;count<list.size();count++) {
-        	o[count][0]=list.get(count).kimlikNo_lbl;
-        	o0[count][0]=list.get(count).kimlikNo_lbl;
-        	o[count][1]=list.get(count).ad_lbl;
-        	o0[count][1]=list.get(count).ad_lbl;
-        	int start=Integer.parseInt(list.get(count).getGirisTarihi_lbl());
-        	int b=0;
-        	for(int d=start;d<year+1;d++) {
-        		o[count][d-2010]=list.get(count).getBorcarray()[b];
-        		o0[count][d-2010]=list.get(count).getBorcarray()[b];
-        		b=b+1;
+        	o[count][0]=list.get(count).getKimlikNo_lbl();
+        	o[count][1]=list.get(count).getAd_lbl();
+        	o[count][2]=list.get(count).getSoy_lbl();
+        	int giriş = Integer.parseInt(list.get(count).getGirisTarihi_lbl().substring(6));
+        	for(int d=giriş-2010;d<(year-2010+1);d++) {
+        		o[count][d+3]=list.get(count).getAidatcarray()[d];
+        		
         	}
         }
-        String [] rows= {"ID","İsimler","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
+        String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
 		borclar_btn = new JButton("Borçlar");
 		borclar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -154,21 +153,24 @@ public class aidatlar extends javax.swing.JFrame {
 		borc_btn = new JButton("Ödenen aidat toplam");
         borc_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aidatlarActionPerformed(evt);
+               
+               aidatlarActionPerformed(evt);
             }
         });
         
         kisiler_btn = new JButton("Aidat Ödeyen Sayısı");
         kisiler_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kisilerActionPerformed(evt);
+            	kisilerActionPerformed(evt);
             }
         });
 		
         borclar_txta = new JTextArea();
+        borclar_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
         borclar_txta.setEditable(false);
 		
         kisiler_txta = new JTextArea();
+        kisiler_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
         kisiler_txta.setEditable(false);
         kisiler_txta.setColumns(10);
         GroupLayout groupLayout = new GroupLayout(frmAidatlar.getContentPane());
@@ -238,18 +240,28 @@ public class aidatlar extends javax.swing.JFrame {
 		jTable1 = new JTable();
 		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(o,rows));
+        
+
+      
+        jTable1 = new JTable();
+		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(o,rows));
 		jTable1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frmAidatlar.setVisible(false);
-        		personal p = new personal(list);
+				int rowSelected =jTable1.getSelectedRow();  // bi türlü olmadı row seçemedim -1 veriyo !!
+        		personal p = new personal(list, 0);
+        		System.out.println(rowSelected);
         		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         		p.setSize(700, 600);
+        		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
-        	    centreWindow(p);
+        		
 			}
 		});
+		
 		jTable1.setEnabled(false);
 		top.setViewportView(jTable1);
 		frmAidatlar.getContentPane().setLayout(groupLayout);
@@ -278,7 +290,8 @@ public class aidatlar extends javax.swing.JFrame {
     private void personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     	frmAidatlar.setVisible(false);
-		personal p = new personal(pArr);
+    	int rowSelected =jTable1.getSelectedRow();
+		personal p = new personal(pArr,0);
 		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		p.setSize(700, 600);
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -287,49 +300,67 @@ public class aidatlar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 	
 	private void aidatlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    	int[] dates=new int[year-2012+1];
-    	Arrays.fill(dates, 0);
-        int toplam=0;
+		 double toplam = 0;
+         int count=0;
+         String[] name = new String[50] ;
+         int [] yearsum = new int[50];
+          
         
-        for(int y=0; y<jTable1.getRowCount(); y++){
-        	for(int c=0;c<dates.length;c++) {
-        		int value=Integer.parseInt(jTable1.getValueAt(y, c+2).toString());
-        		if(value!=-1) {
-        			dates[c]+=value;
-        		}
-        	}
-        }
-  
-        for(int i=0; i<dates.length; i++){
-            toplam = toplam+ dates[i];
-        }
-        String write="";
-        for(int c=0;c<dates.length;c++) {
-    		write+=jTable1.getColumnName(c+2)+": "+dates[c]+".00 TL\n";
-    	}
-        borclar_txta.setText(write+ "\nGENEL TOPLAM: "+toplam+".00 TL");
+             for (int y = 3; y < jTable1.getColumnCount(); y++) {
+                  for (int x = 0; x < jTable1.getRowCount(); x++) {
+                 
+                      if(jTable1.getValueAt(x, y).toString() != ""){
+                 toplam = toplam + Double.parseDouble(jTable1.getValueAt(x, y).toString());
+                 
+                  }
+                      
+         }
+                  yearsum[count]= (int)toplam;
+                  name[count] = jTable1.getColumnName(y);
+                  count++;
+                  toplam=0;
+       
+         }
+             String show = "";
+             int toplamx = 0;
+             for(int i=0; i<count; i++){
+                 show = show + name[i]+  ": " + (int) yearsum[i] + ".00 TL\n";
+                 toplamx = toplamx +(int) yearsum[i];
+             }
+            
+             borclar_txta.setText(show +  "TOPLAM: " +toplamx+".00 TL");
     }//GEN-LAST:event_jButton3ActionPerformed
 	
 	private void kisilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    	int[] dates=new int[year-2012+1];
-    	Arrays.fill(dates, 0);
-        int toplam=0;
-        for(int y=0; y<jTable1.getRowCount(); y++){
-        	for(int c=0;c<dates.length;c++) {
-        		int value=Integer.parseInt(jTable1.getValueAt(y, c+2).toString());
-        		if(value>0) {
-        			dates[c]+=1;
-        		}
-        	}
+		double toplam = 0;
+        int count=0;
+        String[] name = new String[50] ;
+        int [] yearsum = new int[50];
+         
+       
+            for (int y = 3; y < jTable1.getColumnCount(); y++) {
+                 for (int x = 0; x < jTable1.getRowCount(); x++) {
+                
+                     if(jTable1.getValueAt(x, y).toString() != "" && Double.parseDouble(jTable1.getValueAt(x, y).toString()) != 0.0 ){
+                toplam = toplam + 1;
+                
+                 }
+                     
         }
-        for(int i=0; i<dates.length; i++){
-            toplam = toplam+ dates[i];
+                 yearsum[count]= (int)toplam;
+                 name[count] = jTable1.getColumnName(y);
+                 count++;
+                 toplam=0;
+      
         }
-        String write="";
-        for(int c=0;c<dates.length;c++) {
-    		write+=jTable1.getColumnName(c+2)+": "+dates[c]+" kişi\n";
-    	}
-        kisiler_txta.setText(write+ "\nTOPLAM: "+toplam+" kişi ödeme yapmıştır.");                                     
+            String show = "";
+            int toplamx = 0;
+            for(int i=0; i<count; i++){
+                show = show + name[i]+  ": " + (int) yearsum[i] + " kişi\n";
+                toplamx = toplamx +(int) yearsum[i];
+            }
+            
+            kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi");                                  
     }//GEN-LAST:event_jButton4ActionPerformed
 	
 	/*private void BorclarActionPerformed(java.awt.event.ActionEvent evt,ArrayList<person> list) {//GEN-FIRST:event_BorÃ§larActionPerformed
@@ -354,4 +385,3 @@ public class aidatlar extends javax.swing.JFrame {
 	    frame.setLocation(x, y);
 	}
 }
-
