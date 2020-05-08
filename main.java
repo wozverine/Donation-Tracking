@@ -37,7 +37,8 @@ public class main extends javax.swing.JFrame {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		setVisible(false);
-        		personal p = new personal(list);
+        		int rowSelected =jTable1.getSelectedRow();
+        		personal p = new personal(list, rowSelected);
         		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         		p.setSize(700, 600);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -134,9 +135,10 @@ public class main extends javax.swing.JFrame {
         
         Object[][] o=new Object[list.size()][3];
         for (int count=0;count<list.size();count++) {
-        	o[count][0]=list.get(count).ad_lbl.split(" ")[0];
-        	o[count][1]=list.get(count).ad_lbl.split(" ")[1];
+        	o[count][0]=list.get(count).getAd_lbl();
+        	o[count][1]=list.get(count).getSoy_lbl();
         	o[count][2]=list.get(count).getKimlikNo_lbl();
+        	
         }
         String[] s= {"Ad", "Soyad", "T.C Kimlik No"};
         jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION))));
