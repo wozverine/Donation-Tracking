@@ -71,7 +71,6 @@ public class personal extends JFrame{
 		uyeNo_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeNo_lbl);
 		
-		System.out.println(selectedRow);
 		JLabel uyeNoDB_lbl = new JLabel(Integer.toString(list.get(selectedRow).getUyeNo_lbl()));  //Üye no database'den çekilecek
 		uyeNoDB_lbl.setBounds(125, 7, 48, 17);
 		uyeNoDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -287,10 +286,10 @@ public class personal extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				
 				setVisible(false);
-				main m = new main(list);
+				/*main m = new main(list);
 				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				m.setVisible(true);
-				centreWindow(m);
+				centreWindow(m);*/
 			}
 		});
 		geri_btn.setBounds(612, 11, 62, 23);

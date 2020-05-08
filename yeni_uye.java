@@ -52,8 +52,27 @@ public class yeni_uye extends JFrame{
 	private JTextField yeni_uye_tarih;
 	private JTextField yeni_durum;
 	private JTextField textField_12;
+	int posX;
+	int posY;
 	
 	public yeni_uye() {
+		this.addMouseListener(new MouseAdapter()
+        {
+           public void mousePressed(MouseEvent e)
+           {
+              posX=e.getX();
+              posY=e.getY();
+           }
+        });
+        this.addMouseMotionListener(new MouseAdapter()
+        {
+             public void mouseDragged(MouseEvent evt)
+             {		
+        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
+        					
+             }
+        });
+
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
@@ -128,8 +147,7 @@ public class yeni_uye extends JFrame{
 		adres_lbl.setBounds(10, 245, 56, 17);
 		adres_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(adres_lbl);
-	
-		
+			
 		JLabel il_lbl = new JLabel("\u0130l:");
 		il_lbl.setForeground(new java.awt.Color(128, 0, 0));
 		il_lbl.setBounds(10, 295, 45, 17);
@@ -163,7 +181,7 @@ public class yeni_uye extends JFrame{
 		});
 		update_btn.setFont(new Font("Calibri", Font.BOLD, 14));
 		update_btn.setBackground(new java.awt.Color(211, 211, 211));
-		update_btn.setBounds(329, 450, 180, 25);
+		update_btn.setBounds(249, 450, 180, 25);
 		panel_in.add(update_btn);
 		
 		uye_no = new JTextField();
@@ -256,23 +274,26 @@ public class yeni_uye extends JFrame{
 		textField_12.setBounds(355, 5, 154, 20);
 		panel_in.add(textField_12);
 		
-		
-		
 		JButton geri_btn = new JButton("İptal");
+		geri_btn.setFont(new Font("Calibri", Font.BOLD, 14));
+		geri_btn.setForeground(new Color(128, 0, 0));
+		geri_btn.setBounds(430, 450, 79, 25);
 		geri_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		geri_btn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
+			public void actionPerformed(ActionEvent arg0) {		
 				setVisible(false);
-				
 			}
-		});
-		geri_btn.setBounds(495, 15, 62, 23);
-		panel.add(geri_btn);	
+        });
+		panel_in.add(geri_btn);
+		
+		
+		JButton minimize_btn = new JButton("_");
+        minimize_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				setState(JFrame.ICONIFIED);
+			}
+        });
+		minimize_btn.setBounds(529, 11, 39, 34);
+		panel.add(minimize_btn);
 	}
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
