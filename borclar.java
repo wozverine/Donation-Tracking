@@ -26,10 +26,6 @@ public class borclar extends javax.swing.JFrame {
     private javax.swing.JButton geri_btn;
     private javax.swing.JButton borc_btn;
     private javax.swing.JButton kisiler_btn;
-    /*private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;*/
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea borclar_txta;
     private javax.swing.JTextArea kisiler_txta;
@@ -37,25 +33,22 @@ public class borclar extends javax.swing.JFrame {
     private javax.swing.JTextField ara_txtf;
     private javax.swing.JTextField borclar_txtf;
     
-	JFrame frmAidatlar;
+	JFrame frmBorclar;
 
 	
 	public borclar(ArrayList<person> list) {
 		initialize(list);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(ArrayList<person> list) {
 		pArr=list;
 		Color maroon=Color.decode("#800000");
-		frmAidatlar = new JFrame();
-		frmAidatlar.setTitle("Borclar");
+		frmBorclar = new JFrame();
+		frmBorclar.setTitle("Borclar");
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frmAidatlar.setBounds(0, 0,screen.width,screen.height);
-		frmAidatlar.setExtendedState(Frame.MAXIMIZED_BOTH);
-		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmBorclar.setBounds(0, 0,screen.width,screen.height);
+		frmBorclar.setExtendedState(Frame.MAXIMIZED_BOTH);
+		frmBorclar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		borclar_txtf = new JTextField("Borclar");
 		borclar_txtf.setEditable(false);
@@ -85,49 +78,51 @@ public class borclar extends javax.swing.JFrame {
 		aidatlar_btn.setForeground(Color.BLACK);
 		aidatlar_btn.setBackground(new Color(169, 169, 169));
 		aidatlar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
-		aidatlar_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				frmAidatlar.setVisible(false);
-				
-				try {
-			            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-			                if ("Windows".equals(info.getName())) {
-			                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-			                    break;
-			                }
-			            }
-			        } catch (ClassNotFoundException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        } catch (InstantiationException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        } catch (IllegalAccessException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        }
-			        //</editor-fold>
-			        //</editor-fold>
-
-			        /* Create and display the form */
-			        java.awt.EventQueue.invokeLater(new Runnable() {
-			            public void run() {
-			            	aidatlar window = new aidatlar(list);
-							window.frmAidatlar.setVisible(true);
-			            }
-			        });
-			}
-		});
+		aidatlar_btn.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	
+        		//setVisible(false);
+        		EventQueue.invokeLater(new Runnable() {
+        			public void run() {
+        				try {
+        					frmBorclar.setVisible(false);
+        					aidatlar window = new aidatlar(list);
+        					window.frmAidatlar.setVisible(true);
+        					centreWindow(window.frmAidatlar);
+        				} catch (Exception e) {
+        					e.printStackTrace();
+        				}
+        			}
+        		});
+        		
+        	}
+        });
 		
 		geri_btn = new JButton("Geri");
 		geri_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		geri_btn.setForeground(Color.BLACK);
 		geri_btn.setBackground(new Color(169, 169, 169));
 		geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
-		geri_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GeriActionPerformed(evt);
-            }
+		geri_btn.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	
+        		EventQueue.invokeLater(new Runnable() {
+        			public void run() {
+        				try {
+        					frmBorclar.setVisible(false);
+        					main m= new main(list);
+        					m.setVisible(true);
+        					centreWindow(m);
+        					m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        				} catch (Exception e) {
+        					e.printStackTrace();
+        				}
+        			}
+        		});
+        		
+        	}
         });
 		
 		JScrollPane top = new JScrollPane();
@@ -175,7 +170,7 @@ public class borclar extends javax.swing.JFrame {
         kisiler_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
         kisiler_txta.setEditable(false);
         kisiler_txta.setColumns(10);
-		GroupLayout groupLayout = new GroupLayout(frmAidatlar.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(frmBorclar.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -242,13 +237,12 @@ public class borclar extends javax.swing.JFrame {
 		jTable1 = new JTable();
 		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(o,rows));
-		jTable1.addMouseListener(new MouseAdapter() {
+        jTable1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frmAidatlar.setVisible(false);
-				int rowSelected =jTable1.getSelectedRow();  // bi türlü olmadı row seçemedim -1 veriyo !!
-        		personal p = new personal(list, 0);
-        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+				//frmBorclar.setVisible(false);
+				int rowSelected =jTable1.getSelectedRow(); 
+        		personal p = new personal(list, rowSelected);
         		p.setSize(700, 600);
         		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -256,23 +250,11 @@ public class borclar extends javax.swing.JFrame {
         		
 			}
 		});
-		jTable1.setEnabled(false);
 		top.setViewportView(jTable1);
-		frmAidatlar.getContentPane().setLayout(groupLayout);
-		frmAidatlar.getContentPane().setBackground(new Color(220, 220, 220));
+		frmBorclar.getContentPane().setLayout(groupLayout);
+		frmBorclar.getContentPane().setBackground(new Color(220, 220, 220));
 		
 	}
-	
-	private void GeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeriActionPerformed
-        // TODO add your handling code here:
-    	
-    	frmAidatlar.setVisible(false);
-		main m = new main(pArr);
-		m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		m.setVisible(true);
-		centreWindow(m);
-    	
-    }//GEN-LAST:event_GeriActionPerformed
 	
 	private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
@@ -283,10 +265,9 @@ public class borclar extends javax.swing.JFrame {
 
     private void personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-    	frmAidatlar.setVisible(false);
+    	frmBorclar.setVisible(false);
     	int rowSelected =jTable1.getSelectedRow();
 		personal p = new personal(pArr, rowSelected);
-		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		p.setSize(700, 600);
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		centreWindow(p);

@@ -135,7 +135,8 @@ public class Login  extends javax.swing.JFrame{
 		        		    /* Create and display the form */
 		        		    java.awt.EventQueue.invokeLater(new Runnable() {
 		        		        public void run() {
-		        		            setVisible(false);
+		        		        	System.exit(0);
+		        		            //setVisible(false);
 		        		        }
 		        		    });
 		        	}
@@ -177,15 +178,15 @@ public class Login  extends javax.swing.JFrame{
 		        username_lbl.setBounds(460, 140, 264, 30);
 		        layeredPane.add(username_lbl);
 		        
-		JLabel loginLeft_lbl = new JLabel("");
-		loginLeft_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_left.png")));
-		loginLeft_lbl.setBounds(0, 0, 400, 500);
-		layeredPane.add(loginLeft_lbl);
-		
-		JLabel loginRight_lbl = new JLabel("");
-		loginRight_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_right.png")));
-		loginRight_lbl.setBounds(395, 0, 400, 500);
-		layeredPane.add(loginRight_lbl);	
+				JLabel loginLeft_lbl = new JLabel("");
+				loginLeft_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_left.png")));
+				loginLeft_lbl.setBounds(0, 0, 400, 500);
+				layeredPane.add(loginLeft_lbl);
+				
+				JLabel loginRight_lbl = new JLabel("");
+				loginRight_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_right.png")));
+				loginRight_lbl.setBounds(395, 0, 400, 500);
+				layeredPane.add(loginRight_lbl);	
 	}
 	
 	public static void centreWindow(JFrame frame) {
@@ -195,11 +196,6 @@ public class Login  extends javax.swing.JFrame{
 	    frame.setLocation(x, y);
 	}
 	public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -218,7 +214,6 @@ public class Login  extends javax.swing.JFrame{
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Login l = new Login();

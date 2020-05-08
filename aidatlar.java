@@ -42,9 +42,6 @@ public class aidatlar extends javax.swing.JFrame {
 		initialize(list);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(ArrayList<person> list) {
 		pArr=list;
 		Color maroon=Color.decode("#800000");
@@ -85,49 +82,50 @@ public class aidatlar extends javax.swing.JFrame {
 		borclar_btn.setForeground(Color.BLACK);
 		borclar_btn.setBackground(new Color(169, 169, 169));
 		borclar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
-		borclar_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				frmAidatlar.setVisible(false);
-				
-				try {
-			            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-			                if ("Windows".equals(info.getName())) {
-			                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-			                    break;
-			                }
-			            }
-			        } catch (ClassNotFoundException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        } catch (InstantiationException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        } catch (IllegalAccessException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			            java.util.logging.Logger.getLogger(aidatlar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-			        }
-			        //</editor-fold>
-			        //</editor-fold>
-
-			        /* Create and display the form */
-			        java.awt.EventQueue.invokeLater(new Runnable() {
-			            public void run() {
-			            	borclar window = new borclar(list);
-							window.frmAidatlar.setVisible(true);
-			            }
-			        });
-			}
-		});
+		borclar_btn.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	
+        		setVisible(false);
+        		EventQueue.invokeLater(new Runnable() {
+        			public void run() {
+        				try {
+        					frmAidatlar.setVisible(false);
+        					borclar window = new borclar(list);
+        					window.frmBorclar.setVisible(true);
+        				} catch (Exception e) {
+        					e.printStackTrace();
+        				}
+        			}
+        		});
+        		
+        	}
+        });
 		
 		geri_btn = new JButton("Geri");
 		geri_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
 		geri_btn.setForeground(Color.BLACK);
 		geri_btn.setBackground(new Color(169, 169, 169));
 		geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
-		geri_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GeriActionPerformed(evt);
-            }
+		geri_btn.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        	
+        		EventQueue.invokeLater(new Runnable() {
+        			public void run() {
+        				try {
+        					frmAidatlar.setVisible(false);
+        					main m= new main(list);
+        					m.setVisible(true);
+        					centreWindow(m);
+        					m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        				} catch (Exception e) {
+        					e.printStackTrace();
+        				}
+        			}
+        		});
+        		
+        	}
         });
 		
 		JScrollPane top = new JScrollPane();
@@ -249,39 +247,24 @@ public class aidatlar extends javax.swing.JFrame {
         jTable1 = new JTable();
 		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(o,rows));
-		jTable1.addMouseListener(new MouseAdapter() {
+        jTable1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frmAidatlar.setVisible(false);
-				int rowSelected =jTable1.getSelectedRow();  // bi türlü olmadı row seçemedim -1 veriyo !!
-        		personal p = new personal(list, 0);
-        		System.out.println(rowSelected);
-        		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+				//frmAidatlar.setVisible(false);
+				int rowSelected =jTable1.getSelectedRow(); 
+        		personal p = new personal(list, rowSelected);
         		p.setSize(700, 600);
         		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
         		
 			}
-		});
-		
-		jTable1.setEnabled(false);
+		});		
 		top.setViewportView(jTable1);
 		frmAidatlar.getContentPane().setLayout(groupLayout);
 		frmAidatlar.getContentPane().setBackground(new Color(220, 220, 220));
 		
 	}
-	
-	private void GeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeriActionPerformed
-        // TODO add your handling code here:
-    	
-    	frmAidatlar.setVisible(false);
-		main m = new main(pArr);
-		m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		m.setVisible(true);
-		centreWindow(m);
-    	
-    }//GEN-LAST:event_GeriActionPerformed
 	
 	private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
@@ -291,11 +274,9 @@ public class aidatlar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
     	frmAidatlar.setVisible(false);
     	int rowSelected =jTable1.getSelectedRow();
-		personal p = new personal(pArr,0);
-		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		personal p = new personal(pArr,rowSelected); 
 		p.setSize(700, 600);
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    p.setVisible(true);
@@ -364,23 +345,7 @@ public class aidatlar extends javax.swing.JFrame {
             }
             
             kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi");                                  
-    }//GEN-LAST:event_jButton4ActionPerformed
-	
-	/*private void BorclarActionPerformed(java.awt.event.ActionEvent evt,ArrayList<person> list) {//GEN-FIRST:event_BorÃ§larActionPerformed
-        // TODO add your handling code here:
-    	setVisible(false);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					aidatlar window = new aidatlar(list);
-					window.setVisible(true);
-					centreWindow(window);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-    }//GEN-LAST:event_BorÃ§larActionPerformed*/
+	}
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
