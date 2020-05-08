@@ -11,12 +11,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton borc_btn;
     private javax.swing.JButton aidat_btn;
     private javax.swing.JButton dosya_btn;
-    //private javax.swing.JButton exit_btn;
     private javax.swing.JButton ara_btn;
     private javax.swing.JLabel kisiler_lbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField kimlik_txtf;
+    private javax.swing.JTextField ara_txtf;
     private JButton exit_btn;
     private JButton minimize_btn;
     int posX;
@@ -112,8 +111,7 @@ public class main extends javax.swing.JFrame {
         		exc.setVisible(true);
         	}
         });
-        //exit_btn = new javax.swing.JButton();
-        kimlik_txtf = new javax.swing.JTextField();
+        ara_txtf = new javax.swing.JTextField();
         kisiler_lbl = new javax.swing.JLabel();
         ara_btn = new javax.swing.JButton();
 
@@ -135,9 +133,9 @@ public class main extends javax.swing.JFrame {
         for (int count=0;count<list.size();count++) {
         	o[count][0]=list.get(count).getAd_lbl();
         	o[count][1]=list.get(count).getSoy_lbl();
-        	o[count][2]=list.get(count).getKimlikNo_lbl();
-        	
+        	o[count][2]=list.get(count).getKimlikNo_lbl();        	
         }
+        
         String[] s= {"Ad", "Soyad", "T.C Kimlik No"};
         jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION))));
         jTable1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -169,28 +167,15 @@ public class main extends javax.swing.JFrame {
         dosya_btn.setBounds(605, 355, 161, 23);
         getContentPane().add(dosya_btn);
 
-        /*exit_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        exit_btn.setText("Çıkış ");
-        exit_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        exit_btn.setMinimumSize(new java.awt.Dimension(161, 23));
-        exit_btn.setPreferredSize(new java.awt.Dimension(161, 23));
-        exit_btn.setBounds(659, 347, 100, 23);
-        exit_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
-            }
-        });
-        getContentPane().add(exit_btn);*/
-
-        kimlik_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        ara_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         //kimlik_txtf.setText("T.C Kimlik No ");
-        kimlik_txtf.setBounds(500, 40, 220, 25);
-        kimlik_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
+        ara_txtf.setBounds(500, 40, 220, 25);
+        ara_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                kimlikActionPerformed(evt);
+                personalActionPerformed(evt);
             }
         });
-        getContentPane().add(kimlik_txtf);
+        getContentPane().add(ara_txtf);
 
         kisiler_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         kisiler_lbl.setText("Kişiler");
@@ -204,9 +189,8 @@ public class main extends javax.swing.JFrame {
         ara_btn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				kimlikAction(evt);
+				araButtonAction(evt);
 			}
-
         });
         getContentPane().add(ara_btn);
         
@@ -231,17 +215,17 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                                                       
 
-    private void kimlikActionPerformed(KeyEvent evt) {                                            
+    private void personalActionPerformed(KeyEvent evt) {                                            
     	DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
     	TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
     	jTable1.setRowSorter(tr);
-    	tr.setRowFilter(RowFilter.regexFilter(kimlik_txtf.getText().trim()));
+    	tr.setRowFilter(RowFilter.regexFilter(ara_txtf.getText().trim()));
     }                                           
-    private void kimlikAction(java.awt.event.ActionEvent evt) {                                            
+    private void araButtonAction(java.awt.event.ActionEvent evt) {                                            
     	DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
         jTable1.setRowSorter(tr);
-        tr.setRowFilter(RowFilter.regexFilter(kimlik_txtf.getText().trim()));
+        tr.setRowFilter(RowFilter.regexFilter(ara_txtf.getText().trim()));
     }                                                                          
     public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
