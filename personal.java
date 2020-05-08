@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import javafx.scene.paint.Color;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -38,7 +38,7 @@ public class personal extends JFrame{
 	
 	JLayeredPane layeredPane;
 	
-	public personal(ArrayList<person>list) {
+	public personal(ArrayList<person>list, int selectedRow) {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
@@ -71,7 +71,8 @@ public class personal extends JFrame{
 		uyeNo_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeNo_lbl);
 		
-		JLabel uyeNoDB_lbl = new JLabel("01");  //Üye no database'den çekilecek
+		System.out.println(selectedRow);
+		JLabel uyeNoDB_lbl = new JLabel(Integer.toString(list.get(selectedRow).getUyeNo_lbl()));  //Üye no database'den çekilecek
 		uyeNoDB_lbl.setBounds(125, 7, 48, 17);
 		uyeNoDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uyeNoDB_lbl);
@@ -81,7 +82,7 @@ public class personal extends JFrame{
 		kimlikNo_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(kimlikNo_lbl);
 		
-		JLabel kimlikNoDB_lbl = new JLabel("11111111111");  //Tc no database'den çekilecek
+		JLabel kimlikNoDB_lbl = new JLabel(Long.toString(list.get(selectedRow).getKimlikNo_lbl()));  //Tc no database'den çekilecek
 		kimlikNoDB_lbl.setBounds(361, 7, 109, 17);
 		kimlikNoDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(kimlikNoDB_lbl);
@@ -92,7 +93,7 @@ public class personal extends JFrame{
 		ad_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(ad_lbl);
 		
-		JLabel adDB_lbl = new JLabel("A B"); //ad soyad database'den çekilecek
+		JLabel adDB_lbl = new JLabel(list.get(selectedRow).getAd_lbl() + " " + list.get(selectedRow).getSoy_lbl()); //ad soyad database'den çekilecek
 		adDB_lbl.setBounds(125, 37, 345, 17);
 		adDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(adDB_lbl);
@@ -103,7 +104,7 @@ public class personal extends JFrame{
 		cinsiyet_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(cinsiyet_lbl);
 		
-		JLabel cinsiyetDB_lbl = new JLabel("Bayan"); //cinsiyet database'den çekilecek
+		JLabel cinsiyetDB_lbl = new JLabel(list.get(selectedRow).getCinsiyet_lbl()); //cinsiyet database'den çekilecek
 		cinsiyetDB_lbl.setBounds(125, 67, 86, 17);
 		cinsiyetDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(cinsiyetDB_lbl);
@@ -114,7 +115,7 @@ public class personal extends JFrame{
 		bolum_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(bolum_lbl);
 		
-		JLabel bolumDB_lbl = new JLabel("\u0130\u015Fletme"); //bölümü database'den çekilecek
+		JLabel bolumDB_lbl = new JLabel(list.get(selectedRow).getBolum_lbl()); //bölümü database'den çekilecek
 		bolumDB_lbl.setBounds(125, 97, 345, 17);
 		bolumDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(bolumDB_lbl);
@@ -125,7 +126,7 @@ public class personal extends JFrame{
 		calismayer_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(calismayer_lbl);
 		
-		JLabel calısmayerDB_lbl = new JLabel("XYZ"); //çalıştığı yer database'den çekilecek
+		JLabel calısmayerDB_lbl = new JLabel(list.get(selectedRow).getCalismayer_lbl()); //çalıştığı yer database'den çekilecek
 		calısmayerDB_lbl.setBounds(125, 127, 345, 17);
 		calısmayerDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(calısmayerDB_lbl);
@@ -136,7 +137,7 @@ public class personal extends JFrame{
 		mail_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(mail_lbl);
 		
-		JLabel mailDB_lbl = new JLabel("ab@gmail.com"); //mail adresi database'den çekilecek
+		JLabel mailDB_lbl = new JLabel(list.get(selectedRow).getMail_lbl()); //mail adresi database'den çekilecek
 		mailDB_lbl.setBounds(125, 157, 345, 17);
 		mailDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(mailDB_lbl);
@@ -147,7 +148,7 @@ public class personal extends JFrame{
 		tel_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(tel_lbl);
 		
-		JLabel telDB_lbl = new JLabel("05555555555"); //Tel no database'den çekilecek
+		JLabel telDB_lbl = new JLabel(Long.toString(list.get(selectedRow).getTel_lbl())); //Tel no database'den çekilecek
 		telDB_lbl.setBounds(125, 187, 251, 17);
 		telDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(telDB_lbl);
@@ -164,7 +165,7 @@ public class personal extends JFrame{
 		adres_txtp.setBackground(new java.awt.Color(211, 211, 211));
 		adres_txtp.setBounds(120, 210, 350, 53);
 		panel_in.add(adres_txtp);
-		adres_txtp.setText("S\u00F6\u011F\u00FCt\u00F6z\u00FC, S\u00F6\u011F\u00FCt\u00F6z\u00FC Cd. No:43, 06510 \u00C7ankaya/Ankara");
+		adres_txtp.setText(list.get(selectedRow).getAdres_lbl());
 	
 		
 		JLabel il_lbl = new JLabel("\u0130l:");
@@ -173,7 +174,7 @@ public class personal extends JFrame{
 		il_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(il_lbl);
 		
-		JLabel ilDB_lbl = new JLabel("Ankara"); //il database'den çekilecek
+		JLabel ilDB_lbl = new JLabel(list.get(selectedRow).getIl_lbl()); //il database'den çekilecek
 		ilDB_lbl.setBounds(125, 267, 167, 17);
 		ilDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(ilDB_lbl);
@@ -184,7 +185,7 @@ public class personal extends JFrame{
 		mezTarihi_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(mezTarihi_lbl);
 		
-		JLabel mezTarihiDB_lbl = new JLabel("01.01.2018"); //mezuniyet tarihi database'den çekilecek
+		JLabel mezTarihiDB_lbl = new JLabel(list.get(selectedRow).getMezTarihi_lbl()); //mezuniyet tarihi database'den çekilecek
 		mezTarihiDB_lbl.setBounds(135, 297, 167, 17);
 		mezTarihiDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(mezTarihiDB_lbl);
@@ -195,7 +196,7 @@ public class personal extends JFrame{
 		girisTarihi_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(girisTarihi_lbl);
 		
-		JLabel girisTarihiDB_lbl = new JLabel("01.01.2018"); //Üye giriş tarihi database'den çekilecek
+		JLabel girisTarihiDB_lbl = new JLabel(list.get(selectedRow).getGirisTarihi_lbl()); //Üye giriş tarihi database'den çekilecek
 		girisTarihiDB_lbl.setBounds(125, 327, 140, 17);
 		girisTarihiDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(girisTarihiDB_lbl);
@@ -206,7 +207,7 @@ public class personal extends JFrame{
 		uyeDurumu_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeDurumu_lbl);
 		
-		JLabel uyeDurumuDB_lbl = new JLabel("Aktif \u00DCye"); //üyelik durumu database'den çekilecek
+		JLabel uyeDurumuDB_lbl = new JLabel(list.get(selectedRow).getUyeDurumu_lbl()); //üyelik durumu database'den çekilecek
 		uyeDurumuDB_lbl.setBounds(125, 357, 140, 17);
 		uyeDurumuDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uyeDurumuDB_lbl);
@@ -228,7 +229,26 @@ public class personal extends JFrame{
 		panel.add(borc_txtp);
 		borc_txtp.setBackground(new java.awt.Color(211, 211, 211));
 		borc_txtp.setFont(new Font("Calibri", Font.PLAIN, 16));
-		borc_txtp.setText("Bor\u00E7lu Oldu\u011Fu Y\u0131l: Bor\u00E7 Miktar\u0131\r\n2019: 60 TL , 2020: 100 TL");
+		
+		int [] year = new int[50];
+		int [] borc = new int[50];
+		int count=0;
+		int toplam = 0;
+		String show = null;
+	
+		for(int i=0; i<list.get(selectedRow).getBorcarray().length; i++) {
+			if(list.get(selectedRow).getBorcarray()[i] > 0 && ! Integer.toString(list.get(selectedRow).getBorcarray()[i]).equals("")) {
+				borc[count] = list.get(selectedRow).getBorcarray()[i];
+				year[count] = 2010+i;
+				count++;
+			}
+		}
+		show = "Borçlu Olduğu Yıl: Borç Miktarı\n";
+		for(int i=0; i<count; i++) {
+			show =  show + year[i] + ": " + borc[i] + ", ";
+			toplam = toplam+ borc[i];
+		}
+		borc_txtp.setText(show);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new java.awt.Color(128, 0, 0), 1, true));
@@ -250,7 +270,7 @@ public class personal extends JFrame{
 		toplamBorc_txtp.setFont(new Font("Calibri", Font.PLAIN, 17));
 		toplamBorc_txtp.setEditable(false);
 		toplamBorc_txtp.setBackground(new java.awt.Color(211, 211, 211));
-		toplamBorc_txtp.setText("Toplam Bor\u00E7: 160 TL");
+		toplamBorc_txtp.setText("Toplam Bor\u00E7: "+ toplam);
 		toplamBorc_txtp.setBounds(125, 59, 331, 26);
 		panel_1.add(toplamBorc_txtp);
 		
@@ -276,4 +296,3 @@ public class personal extends JFrame{
 	    frame.setLocation(x, y);
 	}
 }
-
