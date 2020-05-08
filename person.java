@@ -1,38 +1,49 @@
-
-
 public class person {
-	String uyeNo_lbl;
-	String kimlikNo_lbl;
-	String ad_lbl;
+	int uyeNo_lbl;
 	String cinsiyet_lbl;
-	String bolum_lbl;
+	String ad_lbl;
+	String soyad_lbl;
 	String calismayer_lbl;
 	String mail_lbl;
-	String tel_lbl;
+	long kimlikNo_lbl;
+	String mezTarihi_lbl;
+	String bolum_lbl;
+	long tel_lbl;
 	String adres_lbl;
 	String il_lbl;
-	String mezTarihi_lbl;
 	String girisTarihi_lbl;
 	String uyeDurumu_lbl;
-	String tplm_borc;
 	int borcarray[];
+	int aidatarray[];
 	public int[] getBorcarray() {
 		return borcarray;
 	}
 	public void setBorcarray(int[] borcarray) {
 		this.borcarray = borcarray;
 	}
-	public String getUyeNo_lbl() {
+	public int[] getAidatcarray() {
+		return aidatarray;
+	}
+	public void setAidatarray(int[] aidatarray) {
+		this.aidatarray = borcarray;
+	}
+	public int getUyeNo_lbl() {
 		return uyeNo_lbl;
 	}
-	public void setUyeNo_lbl(String uyeNo_lbl) {
+	public void setUyeNo_lbl(int uyeNo_lbl) {
 		this.uyeNo_lbl = uyeNo_lbl;
 	}
-	public String getKimlikNo_lbl() {
+	public long getKimlikNo_lbl() {
 		return kimlikNo_lbl;
 	}
-	public void setKimlikNo_lbl(String kimlikNo_lbl) {
+	public void setKimlikNo_lbl(int kimlikNo_lbl) {
 		this.kimlikNo_lbl = kimlikNo_lbl;
+	}
+	public String getSoy_lbl() {
+		return soyad_lbl;
+	}
+	public void setSoy_lbl(String soyad_lbl) {
+		this.soyad_lbl = soyad_lbl;
 	}
 	public String getAd_lbl() {
 		return ad_lbl;
@@ -64,10 +75,10 @@ public class person {
 	public void setMail_lbl(String mail_lbl) {
 		this.mail_lbl = mail_lbl;
 	}
-	public String getTel_lbl() {
+	public long getTel_lbl() {
 		return tel_lbl;
 	}
-	public void setTel_lbl(String tel_lbl) {
+	public void setTel_lbl(long tel_lbl) {
 		this.tel_lbl = tel_lbl;
 	}
 	public String getAdres_lbl() {
@@ -100,36 +111,33 @@ public class person {
 	public void setUyeDurumu_lbl(String uyeDurumu_lbl) {
 		this.uyeDurumu_lbl = uyeDurumu_lbl;
 	}
-	public String getTplm_borc() {
-		return tplm_borc;
-	}
-	public void setTplm_borc(String tplm_borc) {
-		this.tplm_borc = tplm_borc;
-	}
+	
 	
 	person() {
-		this.uyeNo_lbl = "Bilinmiyor";
-		this.kimlikNo_lbl = "Bilinmiyor";
+		this.uyeNo_lbl = 0;
+		this.kimlikNo_lbl = 0;
 		this.ad_lbl = "Bilinmiyor";
+		this.soyad_lbl = "Bilinmiyor";
 		this.cinsiyet_lbl = "Bilinmiyor";
 		this.bolum_lbl = "Bilinmiyor";
 		this.calismayer_lbl = "Bilinmiyor";
 		this.mail_lbl = "Bilinmiyor";
-		this.tel_lbl = "Bilinmiyor";
+		this.tel_lbl = 0;
 		this.adres_lbl = "Bilinmiyor";
 		this.il_lbl = "Bilinmiyor";
 		this.mezTarihi_lbl = "Bilinmiyor";
 		this.girisTarihi_lbl = "Bilinmiyor";
 		this.uyeDurumu_lbl = "Bilinmiyor";
 		this.borcarray= null;
-		this.tplm_borc="Bilinmiyor";
+		this.aidatarray = null;
+		
 	}
-	person(String uyeNo,String kimlikNo,String ad,String cinsiyet,String bolum,String calismayer,
-	String mail,String tel,String adres,String il,String mezTarihi,String girisTarihi,
-	String uyeDurumu,int[] borcarr,String tplm) {
+	person(int uyeNo, String cinsiyet,String ad, String soyad,String calismayer, String mail, long kimlikNo,
+			String mezTarihi,String bolum, long tel,String adres,String il,int[] aidatarr, int[] borcarr, String uyeDurumu, String girisTarihi) {
 		this.uyeNo_lbl = uyeNo;
 		this.kimlikNo_lbl = kimlikNo;
 		this.ad_lbl = ad;
+		this.soyad_lbl = soyad;
 		this.cinsiyet_lbl = cinsiyet;
 		this.bolum_lbl = bolum;
 		this.calismayer_lbl = calismayer;
@@ -141,8 +149,7 @@ public class person {
 		this.girisTarihi_lbl = girisTarihi;
 		this.uyeDurumu_lbl = uyeDurumu;
 		this.borcarray= borcarr;
-		this.tplm_borc= tplm;
+		this.aidatarray = aidatarr;
+		
 	}
 }
-
-
