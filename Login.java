@@ -93,9 +93,13 @@ public class Login  extends javax.swing.JFrame{
 
 		        		    /* Create and display the form */
 		        		    java.awt.EventQueue.invokeLater(new Runnable() {
-		        		        public void run() {
-		        		            setVisible(false);
-		        		            main m=new main(pArr);
+		        		        public void run() {		        		 
+		        		            setVisible(false);		        		       
+		        		            main m=new main(pArr);	
+		        		            m.setVisible(false);
+		        		            m.dispose();
+		        		            m.setUndecorated(true);
+		        		            m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
 		        		            m.setVisible(true);
 		        		            centreWindow(m);
 		        		        	//new main().setVisible(true);

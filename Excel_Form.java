@@ -16,6 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -62,8 +63,7 @@ public class Excel_Form extends javax.swing.JFrame {
         					
              }
         });
-
-        
+    
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         liste_ekle_btn.setFont(new Font("Calibri", Font.PLAIN, 20)); // NOI18N
@@ -196,24 +196,30 @@ public class Excel_Form extends javax.swing.JFrame {
 
                     }
                 }
-				main m = new main(pArr);
-				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				m.setVisible(true);
-        		centreWindow(m);
+                main m=new main(pArr);	
+	            m.setVisible(false);
+	            m.dispose();
+	            m.setUndecorated(true);
+	            m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+	            m.setVisible(true);
+	            centreWindow(m);
         	}
         });
 
         
-        JButton btnGeri = new JButton("Geri");
-        btnGeri.setFont(new Font("Calibri", Font.PLAIN, 14));
-        btnGeri.addMouseListener(new MouseAdapter() {
+        JButton geri_btn = new JButton("Geri");
+        geri_btn.setFont(new Font("Calibri", Font.PLAIN, 14));
+        geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {        		
         		setVisible(false);
-				main m = new main(list);
-				m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				m.setVisible(true);
-        		centreWindow(m);
+        		 main m=new main(pArr);	
+		         m.setVisible(false);
+		         m.dispose();
+		         m.setUndecorated(true);
+		         m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+		         m.setVisible(true);
+		         centreWindow(m);
         	}
         });
         
@@ -233,10 +239,15 @@ public class Excel_Form extends javax.swing.JFrame {
         yeni_uye.setText("Yeni Üye Ekle");
         yeni_uye.setFont(new Font("Calibri", Font.PLAIN, 20));
         yeni_uye.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {			
+			public void actionPerformed(ActionEvent arg0) {		
+				//setVisible(false);
 				yeni_uye y = new yeni_uye();
-				y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				y.setSize(585,600);
+				y.setVisible(false);
+				y.setSize(575,600);
+		        y.dispose();
+		        y.setUndecorated(true);
+		        y.setShape(new RoundRectangle2D.Double(0, 0, y.getWidth(), y.getHeight(), 20, 20));
+				y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);				
 				y.setVisible(true);
 				centreWindow(y);				
 			}
@@ -248,6 +259,14 @@ public class Excel_Form extends javax.swing.JFrame {
 				System.exit(0);
 			}
         });
+        
+        JButton minimize_btn = new JButton("_");
+        minimize_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				setState(JFrame.ICONIFIED);
+			}
+        });
+        minimize_btn.setHorizontalAlignment(SwingConstants.RIGHT);
         //close_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("close.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -255,26 +274,31 @@ public class Excel_Form extends javax.swing.JFrame {
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
         			.addContainerGap(46, Short.MAX_VALUE)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
         						.addComponent(liste_ekle_btn, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(yeni_uye, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(dekont_ekle, Alignment.LEADING))
         					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(btnGeri, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(close_btn, Alignment.TRAILING)))
+        					.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addComponent(minimize_btn, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(close_btn))))
         );
         jPanel1Layout.setVerticalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addComponent(close_btn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        					.addComponent(btnGeri, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(close_btn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(minimize_btn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
         					.addContainerGap())
-        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addComponent(liste_ekle_btn, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
         					.addComponent(dekont_ekle, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)

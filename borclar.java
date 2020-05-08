@@ -15,6 +15,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
+
 import javax.swing.border.LineBorder;
 
 public class borclar extends javax.swing.JFrame {
@@ -112,10 +114,13 @@ public class borclar extends javax.swing.JFrame {
         			public void run() {
         				try {
         					frmBorclar.setVisible(false);
-        					main m= new main(list);
-        					m.setVisible(true);
-        					centreWindow(m);
-        					m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        					main m=new main(pArr);	
+	        		        m.setVisible(false);
+	        		        m.dispose();
+	        		        m.setUndecorated(true);
+	        		        m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+	        		        m.setVisible(true);
+	        		        centreWindow(m);
         				} catch (Exception e) {
         					e.printStackTrace();
         				}

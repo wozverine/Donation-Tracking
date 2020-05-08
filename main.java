@@ -1,30 +1,48 @@
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.table.*;
 
 public class main extends javax.swing.JFrame {
 	private javax.swing.JButton kisiler_btn;
     private javax.swing.JButton borc_btn;
     private javax.swing.JButton aidat_btn;
     private javax.swing.JButton dosya_btn;
-    private javax.swing.JButton exit_btn;
+    //private javax.swing.JButton exit_btn;
     private javax.swing.JButton ara_btn;
     private javax.swing.JLabel kisiler_lbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField kimlik_txtf;
-    
+    private JButton exit_btn;
+    private JButton minimize_btn;
+    int posX;
+    int posY;
     public main(ArrayList<person> list) {
     	initComponents(list);
     }
 
     private void initComponents(ArrayList<person> list) {
+    	this.addMouseListener(new MouseAdapter()
+        {
+           public void mousePressed(MouseEvent e)
+           {
+              posX=e.getX();
+              posY=e.getY();
+           }
+        });
+        this.addMouseMotionListener(new MouseAdapter()
+        {
+             public void mouseDragged(MouseEvent evt)
+             {		
+        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
+        					
+             }
+        });
+    	
     	kisiler_btn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -90,12 +108,11 @@ public class main extends javax.swing.JFrame {
         		exc.setUndecorated(true);
         		exc.setSize(370,270);
                 exc.setShape(new RoundRectangle2D.Double(0, 0, exc.getWidth(), exc.getHeight(), 20, 20));
-                System.out.println("Width: "+exc.getWidth()+ " Height: "+exc.getHeight());
         		centreWindow(exc);  		
         		exc.setVisible(true);
         	}
         });
-        exit_btn = new javax.swing.JButton();
+        //exit_btn = new javax.swing.JButton();
         kimlik_txtf = new javax.swing.JTextField();
         kisiler_lbl = new javax.swing.JLabel();
         ara_btn = new javax.swing.JButton();
@@ -128,20 +145,20 @@ public class main extends javax.swing.JFrame {
         jTable1.setSelectionBackground(new java.awt.Color(255, 255, 102));
         jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTable1);
-        jScrollPane1.setBounds(10, 71, 773, 245);
+        jScrollPane1.setBounds(10, 76, 773, 245);
         getContentPane().add(jScrollPane1);
 
         borc_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         borc_btn.setText("Borcu olanları görüntüle");
         borc_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         borc_btn.setPreferredSize(new java.awt.Dimension(161, 23));
-        borc_btn.setBounds(10, 347, 161, 23);
+        borc_btn.setBounds(10, 355, 161, 23);
         getContentPane().add(borc_btn);
 
         aidat_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         aidat_btn.setText("Ödenen aidatları görüntüle");
         aidat_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        aidat_btn.setBounds(215, 348, 160, 21);
+        aidat_btn.setBounds(215, 356, 160, 21);
         getContentPane().add(aidat_btn);
 
         dosya_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -149,10 +166,10 @@ public class main extends javax.swing.JFrame {
         dosya_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         dosya_btn.setMinimumSize(new java.awt.Dimension(161, 23));
         dosya_btn.setPreferredSize(new java.awt.Dimension(161, 23));
-        dosya_btn.setBounds(453, 347, 161, 23);
+        dosya_btn.setBounds(605, 355, 161, 23);
         getContentPane().add(dosya_btn);
 
-        exit_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        /*exit_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         exit_btn.setText("Çıkış ");
         exit_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         exit_btn.setMinimumSize(new java.awt.Dimension(161, 23));
@@ -163,13 +180,13 @@ public class main extends javax.swing.JFrame {
                 exitActionPerformed(evt);
             }
         });
-        getContentPane().add(exit_btn);
+        getContentPane().add(exit_btn);*/
 
         kimlik_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        kimlik_txtf.setText("T.C Kimlik No ");
-        kimlik_txtf.setBounds(480, 30, 220, 25);
-        kimlik_txtf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //kimlik_txtf.setText("T.C Kimlik No ");
+        kimlik_txtf.setBounds(500, 40, 220, 25);
+        kimlik_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 kimlikActionPerformed(evt);
             }
         });
@@ -177,26 +194,55 @@ public class main extends javax.swing.JFrame {
 
         kisiler_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         kisiler_lbl.setText("Kişiler");
-        kisiler_lbl.setBounds(41, 24, 145, 29);
+        kisiler_lbl.setBounds(39, 37, 145, 29);
         getContentPane().add(kisiler_lbl);
 
         ara_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ara_btn.setText("Ara");
         ara_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        ara_btn.setBounds(710, 30, 35, 25);
+        ara_btn.setBounds(730, 40, 43, 25);
+        ara_btn.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				kimlikAction(evt);
+			}
+
+        });
         getContentPane().add(ara_btn);
+        
+        exit_btn = new JButton("x");
+        exit_btn.setBounds(755, 2, 35, 29);
+        getContentPane().add(exit_btn);
+        exit_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				System.exit(0);
+			}
+        });
+        
+        minimize_btn = new JButton("_");
+        minimize_btn.setBounds(720, 2, 35, 29);
+        minimize_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				setState(JFrame.ICONIFIED);
+			}
+        });
+        getContentPane().add(minimize_btn);
 
         pack();
-    }// </editor-fold>                        
-  
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {    
-    	setVisible(false);
+    }// </editor-fold>                                                       
 
-    }                                        
-
-    private void kimlikActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+    private void kimlikActionPerformed(KeyEvent evt) {                                            
+    	DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+    	TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+    	jTable1.setRowSorter(tr);
+    	tr.setRowFilter(RowFilter.regexFilter(kimlik_txtf.getText().trim()));
     }                                           
+    private void kimlikAction(java.awt.event.ActionEvent evt) {                                            
+    	DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        jTable1.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(kimlik_txtf.getText().trim()));
+    }                                                                          
     public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
