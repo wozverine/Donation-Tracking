@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionListener;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.LineBorder;
 
 public class aidatlar extends javax.swing.JFrame {
 	ArrayList<person> pArr = new ArrayList<person>();
@@ -57,7 +58,7 @@ public class aidatlar extends javax.swing.JFrame {
 		
 		aidatlar_txtf = new JTextField("Aidatlar");
 		aidatlar_txtf.setEditable(false);
-	    aidatlar_txtf.setBackground(Color.GRAY);
+	    aidatlar_txtf.setBackground(new Color(220, 220, 220));
 		aidatlar_txtf.setHorizontalAlignment(SwingConstants.LEFT);
 		aidatlar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
         aidatlar_txtf.setText("AİDATLAR");
@@ -80,9 +81,10 @@ public class aidatlar extends javax.swing.JFrame {
         String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
 		borclar_btn = new JButton("Borçlar");
-		borclar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		borclar_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
 		borclar_btn.setForeground(Color.BLACK);
-		borclar_btn.setBackground(maroon);
+		borclar_btn.setBackground(new Color(169, 169, 169));
+		borclar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
 		borclar_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -118,9 +120,10 @@ public class aidatlar extends javax.swing.JFrame {
 		});
 		
 		geri_btn = new JButton("Geri");
-		geri_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		geri_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
 		geri_btn.setForeground(Color.BLACK);
-		geri_btn.setBackground(maroon);
+		geri_btn.setBackground(new Color(169, 169, 169));
+		geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
 		geri_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GeriActionPerformed(evt);
@@ -175,67 +178,67 @@ public class aidatlar extends javax.swing.JFrame {
         kisiler_txta.setColumns(10);
         GroupLayout groupLayout = new GroupLayout(frmAidatlar.getContentPane());
         groupLayout.setHorizontalGroup(
-    			groupLayout.createParallelGroup(Alignment.LEADING)
-    				.addGroup(groupLayout.createSequentialGroup()
-    					.addGap(21)
-    					.addComponent(aidatlar_txtf, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
-    					.addPreferredGap(ComponentPlacement.RELATED, 655, Short.MAX_VALUE)
-    					.addComponent(ara_txtf, 44, 44, 44)
-    					.addGap(18)
-    					.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-    					.addGap(24))
-    				.addGroup(groupLayout.createSequentialGroup()
-    					.addContainerGap()
-    					.addComponent(top, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
-    					.addContainerGap())
-    				.addGroup(groupLayout.createSequentialGroup()
-    					.addGap(252)
-    					.addComponent(borc_btn)
-    					.addPreferredGap(ComponentPlacement.RELATED, 673, Short.MAX_VALUE)
-    					.addComponent(kisiler_btn)
-    					.addGap(245))
-    				.addGroup(groupLayout.createSequentialGroup()
-    					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-    						.addGroup(groupLayout.createSequentialGroup()
-    							.addGap(42)
-    							.addComponent(borclar_btn, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
-    						.addGroup(groupLayout.createSequentialGroup()
-    							.addGap(148)
-    							.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
-    					.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
-    					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-    						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-    							.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-    							.addGap(65))
-    						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-    							.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
-    							.addGap(127))))
-    		);
-    		groupLayout.setVerticalGroup(
-    			groupLayout.createParallelGroup(Alignment.LEADING)
-    				.addGroup(groupLayout.createSequentialGroup()
-    					.addContainerGap()
-    					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-    						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-    							.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-    							.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-    						.addComponent(aidatlar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-    					.addPreferredGap(ComponentPlacement.RELATED)
-    					.addComponent(top, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
-    					.addGap(18)
-    					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-    						.addComponent(borc_btn)
-    						.addComponent(kisiler_btn))
-    					.addPreferredGap(ComponentPlacement.UNRELATED)
-    					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-    						.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-    						.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE))
-    					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-    					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-    						.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-    						.addComponent(borclar_btn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-    					.addGap(46))
-    		);
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGap(21)
+        			.addComponent(aidatlar_txtf, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 655, Short.MAX_VALUE)
+        			.addComponent(ara_txtf, 44, 44, 44)
+        			.addGap(18)
+        			.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+        			.addGap(24))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(top, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
+        			.addContainerGap())
+        		.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+        			.addGap(237)
+        			.addComponent(borc_btn)
+        			.addPreferredGap(ComponentPlacement.RELATED, 630, Short.MAX_VALUE)
+        			.addComponent(kisiler_btn)
+        			.addGap(221))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(42)
+        					.addComponent(borclar_btn, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(148)
+        					.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
+        			.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+        					.addGap(65))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+        					.addGap(127))))
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(row_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(aidatlar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(top, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(kisiler_btn)
+        				.addComponent(borc_btn))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(borclar_btn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+        			.addGap(46))
+        );
 		
 		jTable1 = new JTable();
 		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
@@ -265,7 +268,7 @@ public class aidatlar extends javax.swing.JFrame {
 		jTable1.setEnabled(false);
 		top.setViewportView(jTable1);
 		frmAidatlar.getContentPane().setLayout(groupLayout);
-		frmAidatlar.getContentPane().setBackground(Color.GRAY);
+		frmAidatlar.getContentPane().setBackground(new Color(220, 220, 220));
 		
 	}
 	
