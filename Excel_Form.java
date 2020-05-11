@@ -92,10 +92,7 @@ public class Excel_Form extends javax.swing.JFrame {
                         XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
                         
 
-                        for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
-                            
-                           
-                            
+                        for (int row = 1; row < excelSheet.getLastRowNum(); row++) {        
                             XSSFRow excelRow = excelSheet.getRow(row);
                             
                           

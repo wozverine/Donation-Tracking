@@ -68,6 +68,11 @@ public class main extends javax.swing.JFrame {
         			public void run() {
         				try {
         					borclar window = new borclar(list);
+        					//window.frmBorclar.setVisible(true);
+        					window.frmBorclar.setVisible(false);
+        					window.frmBorclar.dispose();
+        					window.frmBorclar.setUndecorated(true);
+        					window.frmBorclar.setShape(new RoundRectangle2D.Double(0, 0, window.frmBorclar.getWidth(), window.frmBorclar.getHeight(), 20, 20));
         					window.frmBorclar.setVisible(true);
         				} catch (Exception e) {
         					e.printStackTrace();
@@ -87,6 +92,10 @@ public class main extends javax.swing.JFrame {
         			public void run() {
         				try {
         					aidatlar window = new aidatlar(list);
+        					window.frmAidatlar.setVisible(false);
+        					window.frmAidatlar.dispose();
+        					window.frmAidatlar.setUndecorated(true);
+        					window.frmAidatlar.setShape(new RoundRectangle2D.Double(0, 0, window.frmAidatlar.getWidth(), window.frmAidatlar.getHeight(), 20, 20));
         					window.frmAidatlar.setVisible(true);
         				} catch (Exception e) {
         					e.printStackTrace();

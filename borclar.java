@@ -35,15 +35,40 @@ public class borclar extends javax.swing.JFrame {
     private javax.swing.JTextField ara_txtf;
     private javax.swing.JButton ara_btn;
     private javax.swing.JTextField borclar_txtf;
+    private javax.swing.JButton exit_btn;
+    private JButton minimize_btn;
     
 	JFrame frmBorclar;
-
+	private JScrollPane borclar_scrllpane;
+	private JScrollPane borclu_scrllpane;
+	private JScrollPane table_scrllpane;
+	int posX;
+	int posY;
+	
 	
 	public borclar(ArrayList<person> list) {
 		initialize(list);
 	}
 
 	private void initialize(ArrayList<person> list) {
+		//Move Window
+		this.addMouseListener(new MouseAdapter()
+        {
+           public void mousePressed(MouseEvent e)
+           {
+              posX=e.getX();
+              posY=e.getY();
+           }
+        });
+        this.addMouseMotionListener(new MouseAdapter()
+        {
+             public void mouseDragged(MouseEvent evt)
+             {		
+        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
+        					
+             }
+        });
+        //move window
 		pArr=list;
 		Color maroon=Color.decode("#800000");
 		frmBorclar = new JFrame();
@@ -59,6 +84,14 @@ public class borclar extends javax.swing.JFrame {
 		borclar_txtf.setHorizontalAlignment(SwingConstants.LEFT);
 		borclar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
         borclar_txtf.setText("BORÇLAR");
+        
+        ara_txtf = new JTextField();
+		ara_txtf.setColumns(10);
+		ara_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                araActionPerformed(evt);
+            }
+        });
 		
         Object[][] o=new Object[list.size()][year-2010+4];
         
@@ -89,8 +122,11 @@ public class borclar extends javax.swing.JFrame {
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					frmBorclar.setVisible(false);
         					aidatlar window = new aidatlar(list);
+        					window.frmAidatlar.setVisible(false);
+        					window.frmAidatlar.dispose();
+        					window.frmAidatlar.setUndecorated(true);
+        					window.frmAidatlar.setShape(new RoundRectangle2D.Double(0, 0, window.frmAidatlar.getWidth(), window.frmAidatlar.getHeight(), 20, 20));
         					window.frmAidatlar.setVisible(true);
         				} catch (Exception e) {
         					e.printStackTrace();
@@ -130,8 +166,6 @@ public class borclar extends javax.swing.JFrame {
         	}
         });
 		
-		JScrollPane top = new JScrollPane();
-		
 		ara_btn = new JButton("ARA");
 		ara_btn.setHorizontalAlignment(SwingConstants.CENTER);
 		ara_btn.setForeground(Color.BLACK);
@@ -142,15 +176,7 @@ public class borclar extends javax.swing.JFrame {
 				araButtonAction(evt);
 			}
         });
-		
-		ara_txtf = new JTextField();
-		ara_txtf.setColumns(10);
-		ara_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                araActionPerformed(evt);
-            }
-        });
-		
+
 		borc_btn = new JButton("Borç toplam");
         borc_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,78 +190,106 @@ public class borclar extends javax.swing.JFrame {
             	kisilerActionPerformed(evt);
             }
         });
+        
+        exit_btn = new JButton("x");
+		exit_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				System.exit(0);
+			}
+        });
 		
-        borclar_txta = new JTextArea();
-        borclar_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
-        borclar_txta.setEditable(false);
+        minimize_btn = new JButton("_");
+		minimize_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				setState(JFrame.ICONIFIED);
+			}
+        });
 		
-        kisiler_txta = new JTextArea();
-        kisiler_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
-        kisiler_txta.setEditable(false);
-        kisiler_txta.setColumns(10);
+        table_scrllpane = new JScrollPane();
+		borclar_scrllpane = new JScrollPane();		
+		borclu_scrllpane = new JScrollPane();
+
 		GroupLayout groupLayout = new GroupLayout(frmBorclar.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(21)
-					.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 665, Short.MAX_VALUE)
-					.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(ara_btn, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addGap(2))
+					.addGap(42)
+					.addComponent(aidatlar_btn, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 1071, Short.MAX_VALUE)
+					.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+					.addGap(65))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(top, GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(252)
-					.addComponent(borc_btn)
-					.addPreferredGap(ComponentPlacement.RELATED, 673, Short.MAX_VALUE)
-					.addComponent(kisiler_btn)
-					.addGap(245))
-				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(20)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(42)
-							.addComponent(aidatlar_btn, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+							.addGap(11)
+							.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 657, Short.MAX_VALUE)
+							.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(ara_btn, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(148)
-							.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addComponent(table_scrllpane, GroupLayout.DEFAULT_SIZE, 1326, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 4, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-							.addGap(65))
+							.addGap(216)
+							.addComponent(borc_btn)
+							.addPreferredGap(ComponentPlacement.RELATED, 726, Short.MAX_VALUE)
+							.addComponent(kisiler_btn)
+							.addGap(208))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
-							.addGap(127))))
+							.addGap(109)
+							.addComponent(borclar_scrllpane, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 486, Short.MAX_VALUE)
+							.addComponent(borclu_scrllpane, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE)
+							.addGap(95)))
+					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(1256, Short.MAX_VALUE)
+					.addComponent(minimize_btn)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(exit_btn)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(exit_btn)
+						.addComponent(minimize_btn))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(ara_btn)
 							.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(borclar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(top, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
+					.addComponent(table_scrllpane, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(borc_btn)
 						.addComponent(kisiler_btn))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(kisiler_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
-						.addComponent(borclar_txta, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+						.addComponent(borclar_scrllpane, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
+						.addComponent(borclu_scrllpane, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
+					.addGap(27)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(geri_btn, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
 						.addComponent(aidatlar_btn, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
 					.addGap(46))
 		);
+		
+        kisiler_txta = new JTextArea();
+        borclu_scrllpane.setViewportView(kisiler_txta);
+        kisiler_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        kisiler_txta.setEditable(false);
+        kisiler_txta.setColumns(10);
+		
+        borclar_txta = new JTextArea();
+        borclar_scrllpane.setViewportView(borclar_txta);
+        borclar_txta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        borclar_txta.setEditable(false);
 		
 		jTable1 = new JTable();
 		jTable1.setFont(new java.awt.Font("Times New Roman", 0, 15)); // NOI18N
@@ -253,7 +307,7 @@ public class borclar extends javax.swing.JFrame {
         		
 			}
 		});
-		top.setViewportView(jTable1);
+		table_scrllpane.setViewportView(jTable1);
 		frmBorclar.getContentPane().setLayout(groupLayout);
 		frmBorclar.getContentPane().setBackground(new Color(220, 220, 220));
 		
@@ -336,7 +390,7 @@ public class borclar extends javax.swing.JFrame {
             }
             kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi");    
         
-    }//GEN-LAST:event_BorÃ§larActionPerformed*/
+    }
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
