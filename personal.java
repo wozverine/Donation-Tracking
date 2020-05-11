@@ -214,8 +214,7 @@ public class personal extends JFrame{
 		JButton update_btn = new JButton("\u00DCye Bilgilerini G\u00FCncelle");
 		update_btn.setForeground(new java.awt.Color(128, 0, 0));
 		update_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
+			public void actionPerformed(ActionEvent arg0) {	
 				yeni_uye y = new yeni_uye();
 				y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				y.setSize(585,600);
