@@ -336,15 +336,7 @@ public class Excel_Form extends javax.swing.JFrame {
                   });
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         
         liste_ekle_btn.setFont(new Font("Calibri", Font.PLAIN, 20)); // NOI18N
