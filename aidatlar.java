@@ -332,12 +332,8 @@ public class aidatlar extends javax.swing.JFrame {
 	private void aidatlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 		 double toplam = 0;
          int count=0;
-         int size=jTable1.getColumnCount()+3;
-         if(jTable1.getRowCount()>0) {
-         	size=jTable1.getRowCount();
-         }
-         String[] name = new String[size];
-         int [] yearsum = new int[size];
+         String[] name = new String[50] ;
+         int [] yearsum = new int[50];
          for (int y = 3; y < jTable1.getColumnCount(); y++) {
         	 for (int x = 0; x < jTable1.getRowCount(); x++) {    
         		 if(jTable1.getValueAt(x, y).toString() != ""){
@@ -362,12 +358,8 @@ public class aidatlar extends javax.swing.JFrame {
 	private void kisilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 		double toplam = 0;
         int count=0;
-        int size=jTable1.getColumnCount()+3;
-        if(jTable1.getRowCount()>0) {
-        	size=jTable1.getRowCount();
-        }
-        String[] name = new String[size];
-        int [] yearsum = new int[size];
+        String[] name = new String[50] ;
+        int [] yearsum = new int[50];
         for (int y = 3; y < jTable1.getColumnCount(); y++) {
         	for (int x = 0; x < jTable1.getRowCount(); x++) {                
         		if(jTable1.getValueAt(x, y).toString() != "" && Double.parseDouble(jTable1.getValueAt(x, y).toString()) != 0.0 ){
