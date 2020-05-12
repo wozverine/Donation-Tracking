@@ -30,7 +30,7 @@ public class aidatlar extends javax.swing.JFrame {
     private javax.swing.JTextArea kisiler_txta;
     private javax.swing.JTextField ara_txtf;
     private javax.swing.JButton ara_btn;
-    private javax.swing.JTextField aidatlar_txtf;
+    private JLabel aidatlar_lbl;
     private javax.swing.JButton exit_btn;
     private JButton minimize_btn;
     
@@ -69,12 +69,12 @@ public class aidatlar extends javax.swing.JFrame {
 		frmAidatlar.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		aidatlar_txtf = new JTextField("Aidatlar");
-		aidatlar_txtf.setEditable(false);
-	    aidatlar_txtf.setBackground(new Color(220, 220, 220));
-		aidatlar_txtf.setHorizontalAlignment(SwingConstants.LEFT);
-		aidatlar_txtf.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
-        aidatlar_txtf.setText("AİDATLAR");
+		aidatlar_lbl = new JLabel("Aidatlar");
+		//aidatlar_lbl.setEditable(false);
+	    aidatlar_lbl.setBackground(new Color(220, 220, 220));
+		aidatlar_lbl.setHorizontalAlignment(SwingConstants.LEFT);
+		aidatlar_lbl.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
+        aidatlar_lbl.setText("AİDATLAR");
         
         ara_txtf = new JTextField();
 		ara_txtf.setColumns(10);
@@ -99,7 +99,14 @@ public class aidatlar extends javax.swing.JFrame {
         		
         	}
         }
-        String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
+        String rows[]=new String[year-2010+4];
+        rows[0]="TC";
+        rows[1]="İsim";
+        rows[2]="Soyisim";
+        for (int x=2010;x<year+1;x++) {
+        	rows[x-2007]=""+x;
+        }
+        //String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
 		borclar_btn = new JButton("Borçlar");
 		borclar_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
@@ -195,7 +202,7 @@ public class aidatlar extends javax.swing.JFrame {
         minimize_btn = new JButton("_");
 		minimize_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
-				setState(JFrame.ICONIFIED);
+				frmAidatlar.setExtendedState(frmAidatlar.getExtendedState() | Frame.ICONIFIED);
 			}
         });
         
@@ -219,7 +226,7 @@ public class aidatlar extends javax.swing.JFrame {
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         						.addGroup(groupLayout.createSequentialGroup()
         							.addGap(11)
-        							.addComponent(aidatlar_txtf, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(aidatlar_lbl, GroupLayout.PREFERRED_SIZE, 411, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED, 657, Short.MAX_VALUE)
         							.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
@@ -258,7 +265,7 @@ public class aidatlar extends javax.swing.JFrame {
         				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         					.addComponent(ara_btn)
         					.addComponent(ara_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(aidatlar_txtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(aidatlar_lbl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(table_scrllpane, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
         			.addGap(18)
@@ -325,66 +332,62 @@ public class aidatlar extends javax.swing.JFrame {
 	private void aidatlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 		 double toplam = 0;
          int count=0;
-         String[] name = new String[50] ;
-         int [] yearsum = new int[50];
-          
-        
-             for (int y = 3; y < jTable1.getColumnCount(); y++) {
-                  for (int x = 0; x < jTable1.getRowCount(); x++) {
-                 
-                      if(jTable1.getValueAt(x, y).toString() != ""){
-                 toplam = toplam + Double.parseDouble(jTable1.getValueAt(x, y).toString());
-                 
-                  }
-                      
+         int size=jTable1.getColumnCount()+3;
+         if(jTable1.getRowCount()>0) {
+         	size=jTable1.getRowCount();
          }
-                  yearsum[count]= (int)toplam;
-                  name[count] = jTable1.getColumnName(y);
-                  count++;
-                  toplam=0;
-       
+         String[] name = new String[size];
+         int [] yearsum = new int[size];
+         for (int y = 3; y < jTable1.getColumnCount(); y++) {
+        	 for (int x = 0; x < jTable1.getRowCount(); x++) {    
+        		 if(jTable1.getValueAt(x, y).toString() != ""){
+        			 toplam = toplam + Double.parseDouble(jTable1.getValueAt(x, y).toString());
+                  }     
+        	 }
+        	 yearsum[count]= (int)toplam;
+        	 name[count] = jTable1.getColumnName(y);
+        	 count++;
+        	 toplam=0;
          }
-             String show = "";
-             int toplamx = 0;
-             for(int i=0; i<count; i++){
-                 show = show + name[i]+  ": " + (int) yearsum[i] + ".00 TL\n";
-                 toplamx = toplamx +(int) yearsum[i];
-             }
-            
-             borclar_txta.setText(show +  "TOPLAM: " +toplamx+".00 TL");
+         
+         String show = "";
+         int toplamx = 0;
+         for(int i=0; i<count; i++){
+        	 show = show + name[i]+  ": " + (int) yearsum[i] + ".00 TL\n";
+        	 toplamx = toplamx +(int) yearsum[i];
+         }
+         borclar_txta.setText(show +  "TOPLAM: " +toplamx+".00 TL ödeme yapılmıştır");
     }//GEN-LAST:event_jButton3ActionPerformed
 	
 	private void kisilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 		double toplam = 0;
         int count=0;
-        String[] name = new String[50] ;
-        int [] yearsum = new int[50];
-         
-       
-            for (int y = 3; y < jTable1.getColumnCount(); y++) {
-                 for (int x = 0; x < jTable1.getRowCount(); x++) {
-                
-                     if(jTable1.getValueAt(x, y).toString() != "" && Double.parseDouble(jTable1.getValueAt(x, y).toString()) != 0.0 ){
-                toplam = toplam + 1;
-                
-                 }
-                     
+        int size=jTable1.getColumnCount()+3;
+        if(jTable1.getRowCount()>0) {
+        	size=jTable1.getRowCount();
         }
-                 yearsum[count]= (int)toplam;
-                 name[count] = jTable1.getColumnName(y);
-                 count++;
-                 toplam=0;
-      
+        String[] name = new String[size];
+        int [] yearsum = new int[size];
+        for (int y = 3; y < jTable1.getColumnCount(); y++) {
+        	for (int x = 0; x < jTable1.getRowCount(); x++) {                
+        		if(jTable1.getValueAt(x, y).toString() != "" && Double.parseDouble(jTable1.getValueAt(x, y).toString()) != 0.0 ){
+        	toplam = toplam + 1;    
+        		}                     
+        	}
+	        yearsum[count]= (int)toplam;
+	        name[count] = jTable1.getColumnName(y);
+	        count++;
+	        toplam=0;
         }
-            String show = "";
-            int toplamx = 0;
-            for(int i=0; i<count; i++){
-                show = show + name[i]+  ": " + (int) yearsum[i] + " kişi\n";
-                toplamx = toplamx +(int) yearsum[i];
-            }
-            
-            kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi");                                  
+        String show = "";
+        int toplamx = 0;
+        for(int i=0; i<count; i++){
+        	show = show + name[i]+  ": " + (int) yearsum[i] + " kişi\n";
+        	toplamx = toplamx +(int) yearsum[i];
+        }    
+        kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi ödeme yapmıştır");                                  
 	}
+	
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
