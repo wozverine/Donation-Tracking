@@ -74,7 +74,7 @@ public class Excel_Form extends javax.swing.JFrame {
                 FileInputStream excelFISX = null;
                 BufferedInputStream excelBISX = null;
                 XSSFWorkbook excelJTableImport = null;
-                String yourDesktopPath = System.getProperty("user.home") + "\\Desktop\\TOBB ETÜ MEZ.DER. ÜYE LİSTESİ ÖRNEĞİ-11.04.2020.xlsx\\";
+                String yourDesktopPath = System.getProperty("user.home") + "\\Desktop\\excel1.xlsx\\";
                 try {              
                     excelFISX = new FileInputStream(yourDesktopPath);
                     excelBISX = new BufferedInputStream(excelFISX);
