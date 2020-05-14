@@ -106,12 +106,12 @@ public class borclar extends javax.swing.JFrame {
 		aidatlar_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		setVisible(false);
-        		dispose();
+        		//setVisible(false);
+        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					//frmBorclar.setVisible(false);
+        					frmBorclar.setVisible(false);
         					aidatlar window = new aidatlar(list);
         					window.frmAidatlar.setVisible(false);
         					window.frmAidatlar.dispose();
@@ -134,12 +134,12 @@ public class borclar extends javax.swing.JFrame {
 		geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		setVisible(false);
-        		dispose();
+        		//setVisible(false);
+        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					//frmBorclar.setVisible(false);
+        					frmBorclar.setVisible(false);
         					main m=new main(pArr);	
 	        		        m.setVisible(false);
 	        		        m.dispose();

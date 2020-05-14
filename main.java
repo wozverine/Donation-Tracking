@@ -223,7 +223,7 @@ public class main extends javax.swing.JFrame {
         getContentPane().add(minimize_btn);
         
         stats_btn = new JButton("İstatistikler");
-        stats_btn.setBounds(434, 357, 98, 21);
+        stats_btn.setBounds(434, 355, 98, 23);
         getContentPane().add(stats_btn);
 
         pack();
