@@ -51,24 +51,6 @@ public class borclar extends javax.swing.JFrame {
 	}
 
 	private void initialize(ArrayList<person> list) {
-		//Move Window
-		this.addMouseListener(new MouseAdapter()
-        {
-           public void mousePressed(MouseEvent e)
-           {
-              posX=e.getX();
-              posY=e.getY();
-           }
-        });
-        this.addMouseMotionListener(new MouseAdapter()
-        {
-             public void mouseDragged(MouseEvent evt)
-             {		
-        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
-        					
-             }
-        });
-        //move window
 		pArr=list;
 		Color maroon=Color.decode("#800000");
 		frmBorclar = new JFrame();
@@ -124,11 +106,12 @@ public class borclar extends javax.swing.JFrame {
 		aidatlar_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        	
         		//setVisible(false);
+        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
+        					frmBorclar.setVisible(false);
         					aidatlar window = new aidatlar(list);
         					window.frmAidatlar.setVisible(false);
         					window.frmAidatlar.dispose();
@@ -139,8 +122,7 @@ public class borclar extends javax.swing.JFrame {
         					e.printStackTrace();
         				}
         			}
-        		});
-        		
+        		});        		
         	}
         });
 		
@@ -152,7 +134,8 @@ public class borclar extends javax.swing.JFrame {
 		geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        	
+        		//setVisible(false);
+        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {

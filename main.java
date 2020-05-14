@@ -18,6 +18,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField ara_txtf;
     private JButton exit_btn;
     private JButton minimize_btn;
+    private JButton stats_btn;
     int posX;
     int posY;
     public main(ArrayList<person> list) {
@@ -220,6 +221,10 @@ public class main extends javax.swing.JFrame {
 			}
         });
         getContentPane().add(minimize_btn);
+        
+        stats_btn = new JButton("İstatistikler");
+        stats_btn.setBounds(434, 355, 98, 23);
+        getContentPane().add(stats_btn);
 
         pack();
     }// </editor-fold>                                                       
