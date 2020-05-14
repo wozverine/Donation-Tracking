@@ -46,19 +46,6 @@ public class aidatlar extends javax.swing.JFrame {
 	}
 
 	private void initialize(ArrayList<person> list) {
-		//Move Window
-		this.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-		    	posX=e.getX();
-		    	posY=e.getY();
-			}
-		});
-		this.addMouseMotionListener(new MouseAdapter(){
-			public void mouseDragged(MouseEvent evt){		
-		        setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);					
-		    }
-		});
-		//move window
 		pArr=list;
 		Color maroon=Color.decode("#800000");
 		frmAidatlar = new JFrame();
@@ -70,7 +57,6 @@ public class aidatlar extends javax.swing.JFrame {
 		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		aidatlar_lbl = new JLabel("Aidatlar");
-		//aidatlar_lbl.setEditable(false);
 	    aidatlar_lbl.setBackground(new Color(220, 220, 220));
 		aidatlar_lbl.setHorizontalAlignment(SwingConstants.LEFT);
 		aidatlar_lbl.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
@@ -95,8 +81,7 @@ public class aidatlar extends javax.swing.JFrame {
         	o[count][2]=list.get(count).getSoy_lbl();
         	int giriş = Integer.parseInt(list.get(count).getGirisTarihi_lbl().substring(6));
         	for(int d=giriş-2010;d<(year-2010+1);d++) {
-        		o[count][d+3]=list.get(count).getAidatcarray()[d];
-        		
+        		o[count][d+3]=list.get(count).getAidatcarray()[d];        		
         	}
         }
         String rows[]=new String[year-2010+4];
@@ -116,13 +101,16 @@ public class aidatlar extends javax.swing.JFrame {
 		borclar_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        	
+        		frmAidatlar.dispatchEvent(new WindowEvent(frmAidatlar, WindowEvent.WINDOW_CLOSING));
         		setVisible(false);
+        		dispose();
+        		//frmAidatlar.setVisible(false);
+        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
+        					//frmAidatlar.setVisible(false);
         					borclar window = new borclar(list);
-        					//window.frmBorclar.setVisible(true);
         					window.frmBorclar.setVisible(false);
         					window.frmBorclar.dispose();
         					window.frmBorclar.setUndecorated(true);
@@ -132,8 +120,7 @@ public class aidatlar extends javax.swing.JFrame {
         					e.printStackTrace();
         				}
         			}
-        		});
-        		
+        		});       		
         	}
         });
 		
@@ -145,11 +132,13 @@ public class aidatlar extends javax.swing.JFrame {
 		geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        	
+        		frmAidatlar.dispatchEvent(new WindowEvent(frmAidatlar, WindowEvent.WINDOW_CLOSING));
+        		setVisible(false);
+        		dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					frmAidatlar.setVisible(false);
+        					//frmAidatlar.setVisible(false);
         					main m=new main(pArr);	
         					m.setVisible(false);
 	        		        m.dispose();

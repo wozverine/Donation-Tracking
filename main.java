@@ -220,6 +220,10 @@ public class main extends javax.swing.JFrame {
 			}
         });
         getContentPane().add(minimize_btn);
+        
+        JButton btnIstatistikler = new JButton("İstatistikler");
+        btnIstatistikler.setBounds(426, 356, 125, 21);
+        getContentPane().add(btnIstatistikler);
 
         pack();
     }// </editor-fold>                                                       

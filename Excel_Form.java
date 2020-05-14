@@ -45,15 +45,12 @@ public class Excel_Form extends javax.swing.JFrame {
         {
              public void mouseDragged(MouseEvent evt)
              {		
-        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
-        					
+        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);		
              }
         });
         //move window        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        	
 
-        
         dekont_ekle.addMouseListener(new MouseAdapter() {
             @Override
         	public void mouseClicked(MouseEvent e) { 
@@ -69,223 +66,171 @@ public class Excel_Form extends javax.swing.JFrame {
                    	excelJTableImport = new XSSFWorkbook(excelBISX);
                     XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
                     for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
-                            XSSFRow excelRow = excelSheet.getRow(row);
+                    	XSSFRow excelRow = excelSheet.getRow(row);
                             
-                            XSSFCell [] x=new XSSFCell[12+(year-2010+1)*2+2];
-                            for(int cou=0;cou<x.length;cou++) {
-                            	x[cou]=excelRow.getCell(cou);
-                            }                       
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                            String Graduation = sdf.format(x[7].getDateCellValue());
-                            String Enter = sdf.format(x[x.length-1].getDateCellValue());
-                            
-                            int ID = (int) x[0].getNumericCellValue();
-                          	long TC = (long) x[6].getNumericCellValue();
-                          	long Phone = (long) x[9].getNumericCellValue();
-                            int A[]=new int[year-2010+1];
-                            int B[]=new int[year-2010+1];
-                            int a=0;
-                            for(int cou=0;cou<(year-2010+1)*2;cou++) { 
-                            	A[a]=(int) x[cou+12].getNumericCellValue();
-                            	B[a]=(int) x[cou+13].getNumericCellValue();
-                            	cou++;
-                            	a++;
-                            }                            
-                            String Gender = x[1].getStringCellValue();
-                            String Name = x[2].getStringCellValue();
-                            String Surname = x[3].getStringCellValue();
-                            String Work = x[4].getStringCellValue();
-                            String Mail = x[5].getStringCellValue();
-                            String Department = x[8].getStringCellValue();
-                            String Address = x[10].getStringCellValue();
-                            String City = x[11].getStringCellValue();                     
-                            String Mood = x[x.length-2].getStringCellValue();                         
-                          
-                          pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, 
-                        		  Department, Phone, Address, City, A, B, Mood, Enter));
-                          
-                          
-                        }
+                    	XSSFCell [] x=new XSSFCell[12+(year-2010+1)*2+2];
+                    	for(int cou=0;cou<x.length;cou++) {
+                    		x[cou]=excelRow.getCell(cou);
+                    }                       
+                   	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                   	String Graduation = sdf.format(x[7].getDateCellValue());
+                   	String Enter = sdf.format(x[x.length-1].getDateCellValue());
+                           
+                   	int ID = (int) x[0].getNumericCellValue();
+                   	long TC = (long) x[6].getNumericCellValue();
+                   	long Phone = (long) x[9].getNumericCellValue();
+                   	int A[]=new int[year-2010+1];
+                   	int B[]=new int[year-2010+1];
+                   	int a=0;
+                   	for(int cou=0;cou<(year-2010+1)*2;cou++) { 
+                   		A[a]=(int) x[cou+12].getNumericCellValue();
+                   		B[a]=(int) x[cou+13].getNumericCellValue();
+                   		cou++;
+                   		a++;
+                    }                            
+                   	String Gender = x[1].getStringCellValue();
+                   	String Name = x[2].getStringCellValue();
+                   	String Surname = x[3].getStringCellValue();
+                   	String Work = x[4].getStringCellValue();
+                   	String Mail = x[5].getStringCellValue();
+                   	String Department = x[8].getStringCellValue();
+                   	String Address = x[10].getStringCellValue();
+                   	String City = x[11].getStringCellValue();                     
+                   	String Mood = x[x.length-2].getStringCellValue();                         
+                   	pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, 
+                   			Department, Phone, Address, City, A, B, Mood, Enter));               
+                    }
+               	}
+                catch (FileNotFoundException ex) {
+                   	JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-                        catch (FileNotFoundException ex) {
-                            JOptionPane.showMessageDialog(null, ex.getMessage());
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, ex.getMessage());
 
-                        }
-               
-               
-                
-                          File excelFile;  
-                          FileInputStream excelFIS = null;
-                          BufferedInputStream excelBIS = null;
-                          XSSFWorkbook excelImport = null;
-                          String yourDesktopPath2 = System.getProperty("user.home") + "\\Desktop\\";
-                          JFileChooser excelFileChooser = new JFileChooser(yourDesktopPath2);
-                          int excelChooser = excelFileChooser.showOpenDialog(null);
-                          if (excelChooser == JFileChooser.APPROVE_OPTION) {
-                       
-                              try {
-                                  excelFile = excelFileChooser.getSelectedFile();
-                                  excelFIS = new FileInputStream(excelFile);
-                                  excelBIS = new BufferedInputStream(excelFIS);
-
-                                  excelImport = new XSSFWorkbook(excelBIS);
-                                  XSSFSheet excelSheetX = excelImport.getSheetAt(0);
-                            
+                File excelFile;  
+               	FileInputStream excelFIS = null;
+               	BufferedInputStream excelBIS = null;
+               	XSSFWorkbook excelImport = null;
+               	String yourDesktopPath2 = System.getProperty("user.home") + "\\Desktop\\";
+               	JFileChooser excelFileChooser = new JFileChooser(yourDesktopPath2);
+               	int excelChooser = excelFileChooser.showOpenDialog(null);
+               	if (excelChooser == JFileChooser.APPROVE_OPTION) {
+               		try {
+                		excelFile = excelFileChooser.getSelectedFile();
+                		excelFIS = new FileInputStream(excelFile);
+                		excelBIS = new BufferedInputStream(excelFIS);
+               			
+               			excelImport = new XSSFWorkbook(excelBIS);
+               			XSSFSheet excelSheetX = excelImport.getSheetAt(0);    
+               			ArrayList<Integer> tutar = new ArrayList<Integer>();                                 
                                   
-                                  ArrayList<Integer> tutar = new ArrayList<Integer>();
-                                 
-                                  
-                                  for (int rowX = 1; rowX <= excelSheetX.getLastRowNum(); rowX++) {
-                                      XSSFRow excelRowX = excelSheetX.getRow(rowX);
-                                      if(excelRowX == null) {
-                                 		 continue;
-                                 	 }
-                                      for (int cell = 1; cell <= excelRowX.getLastCellNum(); cell++) {
-                                      	 XSSFCell excelCellX = excelRowX.getCell(cell);
-                                      	 if(excelCellX == null) {
-                                      		 continue;
-                                      	 }
-                  
-                                      	 if( excelCellX.toString().equals("Tutar")) {
-                                      		 
-                                      		for(int i= rowX+1; i<= excelSheetX.getLastRowNum(); i++) {
-                                      			XSSFRow excelRowin = excelSheetX.getRow(i);
-                                     			 XSSFCell excelCellin = excelRowin.getCell(cell);
-                                     			 int tut=  (int) excelCellin.getNumericCellValue();
-                                     			 tutar.add(tut);
-                                      			
-                                      		}
-                                      		break;
-                                      		 
-                                      		 
-                                      	 }
-                                      }
-                                  }
-                                  
-                                  
-                                 for (int rowX = 1; rowX <= excelSheetX.getLastRowNum(); rowX++) {
-                                      XSSFRow excelRowX = excelSheetX.getRow(rowX);
-                                      if(excelRowX == null) {
-                                 		 continue;
-                                 	 }
-                                      for (int cell = 1; cell <= excelRowX.getLastCellNum(); cell++) {
-                                      	 XSSFCell excelCellX = excelRowX.getCell(cell);
-                                      	 if(excelCellX == null) {
-                                      		 continue;
-                                      	 }
-                                      	 
-                                      	
-                                      	 if( excelCellX.toString().equals("Açıklama")) {
-                                      		 int tutarC=0;
-                                      		 for(int i= rowX+1; i<= excelSheetX.getLastRowNum(); i++) {
-                                      			 ArrayList<Integer> kim = new ArrayList<Integer>();
-                                      			 XSSFRow excelRowin = excelSheetX.getRow(i);
-                                      			 XSSFCell excelCellin = excelRowin.getCell(cell);
-                                      			 String arastır = excelCellin.getStringCellValue();
-                                      			 String[] words1 = arastır.split("-");
-                                      			 
-                                      				for(int k=0; k<words1.length; k++) {
-                                      					String[] words2 = words1[k].split("\\s+");
-                                      				
-                                      					for(int j=0; j<words2.length;j++ ) {
-                                      						for(int t=0; t<pArr.size(); t++) {
-                                      							if((words2[j]).equals(pArr.get(t).ad_lbl)) {
-                                      								kim.add(t);
-                                      								
-                                          						}
-                                      							
-                                      							if((words2[j]).equals(pArr.get(t).soyad_lbl)) {
-                                      								kim.add(t);
-                                      								
-                                      								
-                                      							
-                                          						}
-                                      						}
-                                      					  
-                                      					}
-                                      				}
-                                      				
-                                      					for(int h=0; h<kim.size(); h++) {
-                                      						for(int f=h+1; f<kim.size(); f++) {
-                                      						if(kim.get(h) == kim.get(f)) {		
-                                      							int d = kim.get(h);
-                                      							int giriş = Integer.parseInt(pArr.get(d).getGirisTarihi_lbl().substring(6));
-                                      							int money = tutar.get(tutarC);
-                                      							for(int p = pArr.get(h).getBorcarray().length-1; p>=giriş-2010; p--) {
-                                      								 if(pArr.get(d).getBorcarray()[p] >0) {
-                                      								if(money >= pArr.get(d).getBorcarray()[p]) {
-                                      									pArr.get(d).getAidatcarray()[p] = pArr.get(d).getBorcarray()[p];
-                                      									money = money - pArr.get(d).getBorcarray()[p];
-                                      									pArr.get(d).getBorcarray()[p] = 0;
-                                      									
-                                      								}
-                                      								}
-                                      							}
-                                      						
-                                      						for(int p = giriş-2010; p< pArr.get(h).getBorcarray().length; p++) {
-                                      							if(money>0) {
-                                      								if(pArr.get(d).getBorcarray()[p] > 0 ) {	
-                                      								pArr.get(d).getBorcarray()[p] = pArr.get(d).getBorcarray()[p] -money;
-                                      								pArr.get(d).getAidatcarray()[p] = money;
-                                      								money = money - pArr.get(d).getAidatcarray()[p];
-                                      						    }
-                                      								
-                                      							}
-                                      							else {
-                                      								break;
-                                      							}
-                                      									
-                                      									
-                                      								
-                                      							}
-                                      							
-                                      							
-                                      						
-                                      						}
-                                      						}
-                                      					}
-                                      					
-                                      				tutarC++;
-                                      		 }
-                                      		 break;
-                                      	 }
-                                      	
-                                      
-                                      }
-                                      
-                                      
+                        for (int rowX = 1; rowX <= excelSheetX.getLastRowNum(); rowX++) {
+                           	XSSFRow excelRowX = excelSheetX.getRow(rowX);
+                           	if(excelRowX == null) {
+                           		continue;
+                           	}
+                           	for (int cell = 1; cell <= excelRowX.getLastCellNum(); cell++) {
+                           		XSSFCell excelCellX = excelRowX.getCell(cell);
+                           		if(excelCellX == null) {
+                           			continue;
+                                }
+                            	if( excelCellX.toString().equals("Tutar")) {
+                            		for(int i= rowX+1; i<= excelSheetX.getLastRowNum(); i++) {
+                            			XSSFRow excelRowin = excelSheetX.getRow(i);
+                            			XSSFCell excelCellin = excelRowin.getCell(cell);
+                           				int tut=  (int) excelCellin.getNumericCellValue();
+                           				tutar.add(tut);
+                                     }
+                                     break; 
                                  }
-                                  
-                              }
-                                 
-                           catch (FileNotFoundException ex) {
-                              JOptionPane.showMessageDialog(null, ex.getMessage());
-                          } catch (IOException ex) {
-                              JOptionPane.showMessageDialog(null, ex.getMessage());
-
-                          }
-                         
-                 
+                            }
                         }
-                   
-                    
-                
-                          main m=new main(pArr);	
-          	            m.setVisible(false);
-          	            m.dispose();
-          	            m.setUndecorated(true);
-          	            m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
-          	            m.setVisible(true);
-          	            centreWindow(m);
-                  	}
-                  });
-        
-        
+                        for (int rowX = 1; rowX <= excelSheetX.getLastRowNum(); rowX++) {
+                           	XSSFRow excelRowX = excelSheetX.getRow(rowX);
+                           	if(excelRowX == null) {
+                           		continue;
+                           	}
+                           	for (int cell = 1; cell <= excelRowX.getLastCellNum(); cell++) {
+                           		XSSFCell excelCellX = excelRowX.getCell(cell);
+                           		if(excelCellX == null) {
+                           			continue;
+                                }
+                                if( excelCellX.toString().equals("Açıklama")) {
+                                    int tutarC=0;
+                                   	for(int i= rowX+1; i<= excelSheetX.getLastRowNum(); i++) {
+                                   		ArrayList<Integer> kim = new ArrayList<Integer>();
+                                   		XSSFRow excelRowin = excelSheetX.getRow(i);
+                                   		XSSFCell excelCellin = excelRowin.getCell(cell);
+                                   		String arastır = excelCellin.getStringCellValue();
+                                   		String[] words1 = arastır.split("-");
+                                      			 
+                                   		for(int k=0; k<words1.length; k++) {
+                                   			String[] words2 = words1[k].split("\\s+");
+                                     				
+                                   			for(int j=0; j<words2.length;j++ ) {
+                                   				for(int t=0; t<pArr.size(); t++) {
+                                   					if((words2[j]).equals(pArr.get(t).ad_lbl)) {
+                                   						kim.add(t);
+                                      				}
+                                      				if((words2[j]).equals(pArr.get(t).soyad_lbl)) {
+                                      							kim.add(t);
+                                      				}
+                                      			}	  
+                                      		}
+                                   		}
+                                  		for(int h=0; h<kim.size(); h++) {
+                                  			for(int f=h+1; f<kim.size(); f++) {
+                                   				if(kim.get(h) == kim.get(f)) {		
+                                   					int d = kim.get(h);
+                                      				int giriş = Integer.parseInt(pArr.get(d).getGirisTarihi_lbl().substring(6));
+                                      				int money = tutar.get(tutarC);
+                                      				for(int p = pArr.get(h).getBorcarray().length-1; p>=giriş-2010; p--) {
+                                      					if(pArr.get(d).getBorcarray()[p] >0) {
+                                      						if(money >= pArr.get(d).getBorcarray()[p]) {
+                                   								pArr.get(d).getAidatcarray()[p] = pArr.get(d).getBorcarray()[p];
+                                   								money = money - pArr.get(d).getBorcarray()[p];
+                                   								pArr.get(d).getBorcarray()[p] = 0;
+                                   							}
+                                   						}
+                                   					}
+                                      				for(int p = giriş-2010; p< pArr.get(h).getBorcarray().length; p++) {
+                                      					if(money>0) {
+                                      						if(pArr.get(d).getBorcarray()[p] > 0 ) {	
+                                      							pArr.get(d).getBorcarray()[p] = pArr.get(d).getBorcarray()[p] -money;
+                                      							pArr.get(d).getAidatcarray()[p] = money;
+                                   								money = money - pArr.get(d).getAidatcarray()[p];
+                                   						    }
+                                   						}
+                                   						else {
+                                   							break;
+                                   						}
+                                   					}
+                                    			}
+                                      		}
+                                      	}
+                                      	tutarC++;
+                                   	}
+                                   	break;
+                                }
+                           	}  
+                       }      
+               		}      
+               		catch (FileNotFoundException ex) {
+               			JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }catch (IOException ex) {
+                    	JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }    
+               	}
+               	main m=new main(pArr);	
+               	m.setVisible(false);
+               	m.dispose();
+               	m.setUndecorated(true);
+               	m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+               	m.setVisible(true);
+               	centreWindow(m);
+        	}
+        });
 
-        
-        
         liste_ekle_btn.setFont(new Font("Calibri", Font.PLAIN, 20)); // NOI18N
         liste_ekle_btn.setText("Üye Listesi Ekle");       
         liste_ekle_btn.addMouseListener(new MouseAdapter() {
@@ -392,7 +337,6 @@ public class Excel_Form extends javax.swing.JFrame {
         yeni_uye.setFont(new Font("Calibri", Font.PLAIN, 20));
         yeni_uye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
-				//setVisible(false);
 				yeni_uye y = new yeni_uye();
 				y.setVisible(false);
 				y.setSize(575,600);
