@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/commons-codec-1.13.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/commons-collections4-4.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/commons-compress-1.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/commons-math3-3.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/curvesapi-1.06.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/poi-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/poi-examples-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/poi-excelant-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/poi-ooxml-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/poi-ooxml-schemas-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/poi-scratchpad-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/excelOkumaKütüphane/xmlbeans-3.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/commons-codec-1.13.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/commons-collections4-4.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/commons-compress-1.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/commons-math3-3.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/curvesapi-1.06.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/poi-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/poi-examples-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/poi-excelant-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/poi-ooxml-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/poi-ooxml-schemas-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/poi-scratchpad-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/iremc/Desktop/Donation-Tracking-master/xmlbeans-3.1.0.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
