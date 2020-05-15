@@ -200,6 +200,10 @@ public class Login  extends javax.swing.JFrame{
 	    frame.setLocation(x, y);
 	}
 	public static void main(String args[]) {
+		
+		MySQLConnection connection = new MySQLConnection();
+		connection.mysql_connection();
+		
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
