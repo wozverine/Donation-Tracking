@@ -26,23 +26,19 @@ public class main extends javax.swing.JFrame {
     }
 
     private void initComponents(ArrayList<person> list) {
-    	this.addMouseListener(new MouseAdapter()
-        {
-           public void mousePressed(MouseEvent e)
-           {
-              posX=e.getX();
-              posY=e.getY();
-           }
-        });
-        this.addMouseMotionListener(new MouseAdapter()
-        {
-             public void mouseDragged(MouseEvent evt)
-             {		
-        		setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
-        					
-             }
-        });
-    	
+    	//move window
+    	this.addMouseListener(new MouseAdapter(){
+  			public void mousePressed(MouseEvent e){
+  				posX=e.getX();
+    			posY=e.getY();
+  			}	
+    	});
+    	this.addMouseMotionListener(new MouseAdapter(){
+    		public void mouseDragged(MouseEvent evt){		
+    			setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);	        					
+    		}
+    	});
+    	//move window
     	kisiler_btn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -178,7 +174,7 @@ public class main extends javax.swing.JFrame {
         getContentPane().add(dosya_btn);
 
         ara_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        //kimlik_txtf.setText("T.C Kimlik No ");
+        //kimlik_txtf.setText("T.C Kimlik No");
         ara_txtf.setBounds(500, 40, 220, 25);
         ara_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -224,6 +220,20 @@ public class main extends javax.swing.JFrame {
         
         stats_btn = new JButton("İstatistikler");
         stats_btn.setBounds(434, 355, 98, 23);
+        stats_btn.setFont(new java.awt.Font("Arial", 0, 12));
+        stats_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        stats_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				stats stat = new stats("Comparison", "Hangi bölümden daha çok mezun var?");
+				stat.setVisible(false);
+				stat.dispose();
+				stat.setUndecorated(true);
+				stat.setSize(605,410);
+				stat.setShape(new RoundRectangle2D.Double(0, 0, stat.getWidth(), stat.getHeight(), 20, 20));
+        		centreWindow(stat);  		
+        		stat.setVisible(true);
+			}
+        });
         getContentPane().add(stats_btn);
 
         pack();
