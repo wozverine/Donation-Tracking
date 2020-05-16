@@ -4,6 +4,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import org.apache.poi.xssf.usermodel.*;
+import java.sql.*;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedInputStream;
@@ -98,7 +102,11 @@ public class Excel_Form extends javax.swing.JFrame {
                    	String City = x[11].getStringCellValue();                     
                    	String Mood = x[x.length-2].getStringCellValue();                         
                    	pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, 
-                   			Department, Phone, Address, City, A, B, Mood, Enter));               
+                   			Department, Phone, Address, City, A, B, Mood, Enter));  
+                   	
+                   	
+                   	
+                   	
                     }
                	}
                 catch (FileNotFoundException ex) {
@@ -234,6 +242,30 @@ public class Excel_Form extends javax.swing.JFrame {
         liste_ekle_btn.setFont(new Font("Calibri", Font.PLAIN, 20)); // NOI18N
         liste_ekle_btn.setText("Üye Listesi Ekle");       
         liste_ekle_btn.addMouseListener(new MouseAdapter() {
+        	
+        	//METHOD TO INSERT CLIENT INTO DATABASE
+        	public void AddClient(int ID, String Gender,String Name,String Surname,String Work,String Mail, long TC,String Graduation,
+                String Department, long Phone, String Address, String City, String Mood, String Enter) {
+        		String Phone_String = String.valueOf(Phone);
+        		String TC_String = String.valueOf(TC);
+        		MySQLConnection db = new MySQLConnection();
+                db.mysql_connection();
+                Statement st = db.getStatement();
+                System.out.println("Inserting records into the table...");
+                String sql = "INSERT INTO client " +
+                        "VALUES (ID, Gender, Name, Surname, Work, Mail, TC, Graduation, \n" + 
+                        "Department, Phone, Address, City, Mood, Enter)";
+              st.executeUpdate(sql);
+              System.out.println("Insertion of client is succesfull");
+
+        	}
+        	public void AddAB() {
+        		//It will be completed.
+        	}
+        	
+        	
+        	
+        	
             @Override
         	public void mouseClicked(MouseEvent e) {            	
         		setVisible(false);
@@ -289,6 +321,11 @@ public class Excel_Form extends javax.swing.JFrame {
                             
                             pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, 
                         		  Department, Phone, Address, City, A, B, Mood, Enter));
+                        
+                            //Adding Client into the client table in the donation database.
+                            AddClient(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, 
+                        		  Department, Phone, Address, City,Mood, Enter);
+                        
                         }
                     } catch (FileNotFoundException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
