@@ -15,6 +15,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
+import java.util.Date;
 
 public class Excel_Form extends javax.swing.JFrame {
 
@@ -169,9 +170,6 @@ public class Excel_Form extends javax.swing.JFrame {
 							a++;
 						}
 
-						// AddAB method.
-						AddAB(ID, A[0], B[0], A[1], B[1], A[2], B[2], A[3], B[3], A[4], B[4], A[5], B[5], A[6], B[6],
-								A[7], B[7], A[8], B[8], A[9], B[9], A[10], B[10]);
 
 						String Gender = x[1].getStringCellValue();
 						String Name = x[2].getStringCellValue();
@@ -185,10 +183,7 @@ public class Excel_Form extends javax.swing.JFrame {
 						pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone,
 								Address, City, A, B, Mood, Enter));
 
-						// AddClient Method.
-						AddClient(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone, Address,
-								City, Mood, Enter);
-
+						
 					}
 				} catch (FileNotFoundException ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -326,28 +321,6 @@ public class Excel_Form extends javax.swing.JFrame {
 		liste_ekle_btn.setFont(new Font("Calibri", Font.PLAIN, 20)); // NOI18N
 		liste_ekle_btn.setText("Üye Listesi Ekle");
 		liste_ekle_btn.addMouseListener(new MouseAdapter() {
-
-			// METHOD TO INSERT CLIENT INTO DATABASE
-			public void AddClient(int ID, String Gender, String Name, String Surname, String Work, String Mail, long TC,
-					String Graduation, String Department, long Phone, String Address, String City, String Mood,
-					String Enter) {
-				String Phone_String = String.valueOf(Phone);
-				String TC_String = String.valueOf(TC);
-				MySQLConnection db = new MySQLConnection();
-				db.mysql_connection();
-				Statement st = db.getStatement();
-				System.out.println("Inserting records into the table...");
-				String sql = "INSERT INTO client " + "VALUES (ID, Gender, Name, Surname, Work, Mail, TC, Graduation, \n"
-						+ "Department, Phone, Address, City, Mood, Enter)";
-				st.executeUpdate(sql);
-				System.out.println("Insertion of client is succesfull");
-
-			}
-
-			public void AddAB() {
-				// It will be completed.
-			}
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
@@ -391,6 +364,10 @@ public class Excel_Form extends javax.swing.JFrame {
 								cou++;
 								a++;
 							}
+
+							// AddAB method.
+							AddAB(ID, A[0], B[0], A[1], B[1], A[2], B[2], A[3], B[3], A[4], B[4], A[5], B[5], A[6], B[6],
+									A[7], B[7], A[8], B[8], A[9], B[9], A[10], B[10]);
 							String Gender = x[1].getStringCellValue();
 							String Name = x[2].getStringCellValue();
 							String Surname = x[3].getStringCellValue();
