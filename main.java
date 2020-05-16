@@ -227,8 +227,16 @@ public class main extends javax.swing.JFrame {
         stats_btn.setFont(new Font("Arial", Font.PLAIN, 12));
         stats_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         stats_btn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
+        	public void actionPerformed(ActionEvent arg0) {		
+				stats stat = new stats("Comparison", "Hangi bölümden daha çok mezun var?");
+				stat.setVisible(false);
+				stat.dispose();
+				stat.setUndecorated(true);
+				stat.setSize(605,410);
+				stat.setShape(new RoundRectangle2D.Double(0, 0, stat.getWidth(), stat.getHeight(), 20, 20));
+        		centreWindow(stat);  		
+        		stat.setVisible(true);
+			}
         });
         stats_btn.setBounds(389, 356, 98, 23);
         getContentPane().add(stats_btn);
