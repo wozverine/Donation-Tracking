@@ -22,12 +22,11 @@ import org.jfree.data.general.*;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
-
-public class stats extends JFrame{
+public class bolum_stats extends JFrame{
 	int posX;
 	int posY;
 	int toplam=0;
-	public stats(String title, String chartTitle) {
+	public bolum_stats(String title, String chartTitle) {
 		super("statfrm");
 		super.setBackground(Color.WHITE);
 		super.setForeground(Color.WHITE);
@@ -57,7 +56,22 @@ public class stats extends JFrame{
 	    		{"Mimarlık ve Tasarım Fakültesi","15"},{"Fen Edebiyat Fakültesi","60"},
 	    		{"Yabancı Diller Bölümü","20"},{"Fen Bilimleri Enstitüsü","40"},
 	    		{"Sosyal Bilimler Enstitüsü","30"},{"Sağlık Bilimleri Enstitüsü","50"}};
+	    
+	    String arr2[][]= {{"İktisat","20"},{"İşletme","40"},{"İşletme","60"},{"Uluslararası Girişimcilik","20"}};
+	    String arr3[][]= {{"Bilgisayar Mühendisliği","10"},{"Biyomedikal Mühendisliği","20"},
+	    		{"Elektrik-Elektronik Mühendisliği","30"},{"Endüstri Mühendisliği","40"},{"Makine Mühendisliği","10"},
+	    		{"Malzeme Bilimi ve Nanoteknoloji Müh.","10"},{"Mekatronik Mühendisliği Yandal Programı","1"},
+	    		{"Yapay Zeka Mühendisliği","1"}};
+	    		 
+	    System.out.println(chartTitle);
 	    PieDataset mezun_bolum_dataset = createDataset(arr);
+	    if(chartTitle.equals("İktisadi")) {
+	    	mezun_bolum_dataset = createDataset(arr2);
+	    }
+	    if(chartTitle.equals("Mühendislik")) {
+	    	mezun_bolum_dataset = createDataset(arr3);
+	    }
+	    
 	    JFreeChart mezun_bolum_chart = createChart(mezun_bolum_dataset, chartTitle,gen);
         
         JPanel panel_1 = new JPanel();
@@ -69,19 +83,6 @@ public class stats extends JFrame{
         mezun_bolum_chartPanel.addChartMouseListener(new ChartMouseListener() {
             @Override
             public void chartMouseClicked(ChartMouseEvent event) {
-                ChartEntity entity = event.getEntity();
-                String v=entity.toString();
-                String fakulte=v.split(" ")[2].split("\\(")[1];
-                //System.out.println(fakulte);
-                //setVisible(false);
-        		bolum_stats b=new bolum_stats("fakülte",fakulte);
-        		b.setVisible(false);
-        		b.dispose();
-        		b.setUndecorated(true);
-        		b.setSize(605,410);
-                b.setShape(new RoundRectangle2D.Double(0, 0, b.getWidth(), b.getHeight(), 20, 20));
-        		centreWindow(b);  		
-        		b.setVisible(true);
             }
             @Override
             public void chartMouseMoved(ChartMouseEvent event) {
