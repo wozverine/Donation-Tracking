@@ -17,8 +17,7 @@ public class stats extends JFrame{
 	int posY;
 	int toplam=0;
 	public stats(String title,String title2) {
-
-		 initUI(title, title2);
+		initUI(title, title2);
 	}
 	public void initUI(String title, String chartTitle) {
 		setTitle("İstatistikler");
@@ -27,7 +26,7 @@ public class stats extends JFrame{
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 600, 370);
+		panel.setBounds(0, 0, 605, 370);
 		getContentPane().add(panel);
 				
 		//move window
@@ -63,16 +62,19 @@ public class stats extends JFrame{
                 String v=entity.toString();
                 if(!"JFreeChartEntity: tooltip = null".equals(v)) {
                 	String fakulte=v.split(" ")[2].split("\\(")[1];
-                    //System.out.println(fakulte);
-                    //setVisible(false);
-            		bolum_stats b=new bolum_stats("fakülte",fakulte);
-            		b.setVisible(false);
-            		b.dispose();
-            		b.setUndecorated(true);
-            		b.setSize(605,410);
-                    b.setShape(new RoundRectangle2D.Double(0, 0, b.getWidth(), b.getHeight(), 20, 20));
-            		centreWindow(b);  		
-            		b.setVisible(true);
+                	System.out.println(fakulte);
+                	if("Fen".equals(fakulte)||"Mimarlık".equals(fakulte)||"İktisadi".equals(fakulte)||"Mühendislik".equals(fakulte)) {
+                		//System.out.println(fakulte);
+                        //setVisible(false);
+                		bolum_stats b=new bolum_stats("fakülte",fakulte);
+                		b.setVisible(false);
+                		b.dispose();
+                		b.setUndecorated(true);
+                		b.setSize(605,410);
+                        b.setShape(new RoundRectangle2D.Double(0, 0, b.getWidth(), b.getHeight(), 20, 20));
+                		centreWindow(b);  		
+                		b.setVisible(true);
+                	}
                 }               
             }
             @Override

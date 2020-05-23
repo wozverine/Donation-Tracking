@@ -25,7 +25,7 @@ public class bolum_stats extends JFrame{
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 600, 370);
+		panel.setBounds(0, 0, 605, 370);
 		getContentPane().add(panel);
 				
 		//move window
@@ -54,14 +54,23 @@ public class bolum_stats extends JFrame{
 	    		{"Elektrik-Elektronik Mühendisliği","30"},{"Endüstri Mühendisliği","40"},{"Makine Mühendisliği","10"},
 	    		{"Malzeme Bilimi ve Nanoteknoloji Müh.","10"},{"Mekatronik Mühendisliği Yandal Programı","1"},
 	    		{"Yapay Zeka Mühendisliği","1"}};
-	    		 
-	    System.out.println(chartTitle);
+	    String arr4[][]= {{"İngiliz Dili ve Edebiyatı","10"},{"Matematik","5"},{"Psikoloji","2"},
+	    		{"Tarih","5"},{"Türk Dili ve Edebiyatı","8"}};
+	    String arr5[][]= {{"Endüstriyel Tasarım","10"},{"Görsel İletişim Tasarımı","5"},{"İç Mimarlık ve Çevre Tasarımı","2"},
+	    		{"Mimarlık","5"},{"Sanat ve Tasarım","8"}};
+	    //System.out.println(chartTitle);
 	    PieDataset mezun_bolum_dataset = createDataset(arr);
 	    if(chartTitle.equals("İktisadi")) {
 	    	mezun_bolum_dataset = createDataset(arr2);
 	    }
 	    if(chartTitle.equals("Mühendislik")) {
 	    	mezun_bolum_dataset = createDataset(arr3);
+	    }
+	    if(chartTitle.equals("Fen")) {
+	    	mezun_bolum_dataset = createDataset(arr4);
+	    }
+	    if(chartTitle.equals("Mimarlık")) {
+	    	mezun_bolum_dataset = createDataset(arr5);
 	    }
 	    
 	    JFreeChart mezun_bolum_chart = createChart(mezun_bolum_dataset, chartTitle,gen);

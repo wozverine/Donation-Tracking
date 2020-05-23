@@ -14,12 +14,10 @@ import java.awt.event.MouseEvent;
 		p.setSize(700, 600);
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    p.setVisible(true);	*/
-public class personal extends JFrame{
-	
+public class personal extends JFrame{	
 	JLayeredPane layeredPane;
 	
-	public personal(ArrayList<person>list, int selectedRow) {
-		
+	public personal(ArrayList<person>list, int selectedRow) {		
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
 		getContentPane().add(panel, BorderLayout.CENTER);

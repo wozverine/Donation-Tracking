@@ -79,7 +79,6 @@ public class borclar extends javax.swing.JFrame {
         
         for (Object[] row: o) {Arrays.fill(row, "");}
         
-
         for (int count=0;count<list.size();count++) {
         	o[count][0]=list.get(count).getKimlikNo_lbl();
         	o[count][1]=list.get(count).getAd_lbl();
@@ -290,11 +289,14 @@ public class borclar extends javax.swing.JFrame {
 				//frmBorclar.setVisible(false);
 				int rowSelected =jTable1.getSelectedRow(); 
         		personal p = new personal(list, rowSelected);
-        		p.setSize(700, 600);
+        		p.setVisible(false);
+        		p.dispose();
+        		p.setUndecorated(true);
+        		p.setSize(700, 562);
+		        p.setShape(new RoundRectangle2D.Double(0, 0, p.getWidth(), p.getHeight(), 20, 20));
         		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        	    p.setVisible(true);
-        		
+        	    p.setVisible(true);       		
 			}
 		});
 		table_scrllpane.setViewportView(jTable1);
