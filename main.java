@@ -49,10 +49,14 @@ public class main extends javax.swing.JFrame {
         		//setVisible(false);
         		int rowSelected =jTable1.getSelectedRow();
         		personal p = new personal(list, rowSelected);
-        		p.setSize(700, 600);
+        		p.setVisible(false);
+        		p.dispose();
+        		p.setUndecorated(true);
+        		p.setSize(700, 562);
+		        p.setShape(new RoundRectangle2D.Double(0, 0, p.getWidth(), p.getHeight(), 20, 20));
+        		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
-        		centreWindow(p);
         	}
         });
         borc_btn = new javax.swing.JButton();

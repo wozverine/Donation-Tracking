@@ -291,12 +291,15 @@ public class aidatlar extends javax.swing.JFrame {
 			public void mouseClicked(MouseEvent e) {
 				//frmAidatlar.setVisible(false);
 				int rowSelected =jTable1.getSelectedRow(); 
-        		personal p = new personal(list, rowSelected);
-        		p.setSize(700, 600);
+				personal p = new personal(list, rowSelected);
+        		p.setVisible(false);
+        		p.dispose();
+        		p.setUndecorated(true);
+        		p.setSize(700, 562);
+		        p.setShape(new RoundRectangle2D.Double(0, 0, p.getWidth(), p.getHeight(), 20, 20));
         		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
-        		
 			}
 		});		
 		table_scrllpane.setViewportView(jTable1);
