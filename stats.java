@@ -1,15 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 import java.text.DecimalFormat;
-import java.util.Arrays;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import org.jfree.chart.*;
 import org.jfree.chart.entity.ChartEntity;
@@ -18,26 +11,29 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.Rotation;
 import org.jfree.data.general.*;
-import javax.swing.JButton;
-import java.awt.Color;
 
 public class stats extends JFrame{
 	int posX;
 	int posY;
 	int toplam=0;
-	public stats(String title, String chartTitle) {
-		super("statfrm");
-		super.setBackground(Color.WHITE);
-		super.setForeground(Color.WHITE);
+	public stats(String title,String title2) {
+
+		 initUI(title, title2);
+	}
+	public void initUI(String title, String chartTitle) {
 		setTitle("İstatistikler");
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setBackground(Color.WHITE);
-		getContentPane().setForeground(Color.WHITE);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 600, 370);
+		getContentPane().add(panel);
+				
 		//move window
 		this.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
-				posX=e.getX();
+				posX=e.getX();			
 				posY=e.getY();
 	        }	
 	    });
@@ -57,39 +53,42 @@ public class stats extends JFrame{
 	    		{"Sosyal Bilimler Enstitüsü","30"},{"Sağlık Bilimleri Enstitüsü","50"}};
 	    PieDataset mezun_bolum_dataset = createDataset(arr);
 	    JFreeChart mezun_bolum_chart = createChart(mezun_bolum_dataset, chartTitle,gen);
-        
-        JPanel panel_1 = new JPanel();
-        panel_1.setForeground(Color.WHITE);
-        getContentPane().add(panel_1, BorderLayout.CENTER);
-        ChartPanel mezun_bolum_chartPanel = new ChartPanel(mezun_bolum_chart);
-        panel_1.add(mezun_bolum_chartPanel);
-        mezun_bolum_chartPanel.setPreferredSize(new java.awt.Dimension(600, 370));
+	    ChartPanel mezun_bolum_chartPanel = new ChartPanel(mezun_bolum_chart);
+	    panel.add(mezun_bolum_chartPanel);
+	    mezun_bolum_chartPanel.setPreferredSize(new java.awt.Dimension(600, 370));
         mezun_bolum_chartPanel.addChartMouseListener(new ChartMouseListener() {
             @Override
             public void chartMouseClicked(ChartMouseEvent event) {
-                ChartEntity entity = event.getEntity();
+            	ChartEntity entity = event.getEntity();
                 String v=entity.toString();
-                String fakulte=v.split(" ")[2].split("\\(")[1];
-                //System.out.println(fakulte);
+                if(!"JFreeChartEntity: tooltip = null".equals(v)) {
+                	String fakulte=v.split(" ")[2].split("\\(")[1];
+                    //System.out.println(fakulte);
+                    //setVisible(false);
+            		bolum_stats b=new bolum_stats("fakülte",fakulte);
+            		b.setVisible(false);
+            		b.dispose();
+            		b.setUndecorated(true);
+            		b.setSize(605,410);
+                    b.setShape(new RoundRectangle2D.Double(0, 0, b.getWidth(), b.getHeight(), 20, 20));
+            		centreWindow(b);  		
+            		b.setVisible(true);
+                }               
             }
             @Override
             public void chartMouseMoved(ChartMouseEvent event) {
             }
         });
-	    
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel.setForeground(Color.WHITE);
-        panel.setBackground(Color.WHITE);
-        getContentPane().add(panel, BorderLayout.SOUTH);
-        
         JButton btnGeri = new JButton("Geri");
-        panel.add(btnGeri);
-        btnGeri.addActionListener(new ActionListener() {
+		btnGeri.setBounds(485, 375, 89, 23);
+		getContentPane().add(btnGeri);
+		btnGeri.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {		
         		setVisible(false);
 			}
         });
-        //frmstats.getContentPane().setLayout(groupLayout);
+		panel.setBackground(Color.white);
+		getContentPane().setBackground(Color.WHITE);
 	}
 
 	private  PieDataset createDataset(String [][]arr) {
@@ -116,4 +115,10 @@ public class stats extends JFrame{
 		plot.setLabelGenerator(w);
 		return chart;
 	}
+	public static void centreWindow(JFrame frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
+	}      
 }
