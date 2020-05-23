@@ -9,23 +9,29 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.Rotation;
 import org.jfree.data.general.*;
+
 public class bolum_stats extends JFrame{
 	int posX;
 	int posY;
 	int toplam=0;
-	public bolum_stats(String title, String chartTitle) {
-		super("statfrm");
-		super.setBackground(Color.WHITE);
-		super.setForeground(Color.WHITE);
+	public bolum_stats(String title,String title2) {
+
+		 initUI(title, title2);
+	}
+	public void initUI(String title, String chartTitle) {
 		setTitle("İstatistikler");
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setBackground(Color.WHITE);
-		getContentPane().setForeground(Color.WHITE);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 600, 370);
+		getContentPane().add(panel);
+				
 		//move window
 		this.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
-				posX=e.getX();
+				posX=e.getX();			
 				posY=e.getY();
 	        }	
 	    });
@@ -35,15 +41,14 @@ public class bolum_stats extends JFrame{
 	        }
 		});
 	    //move window
-		
+				
 		PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
 			    "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%"));
 	    String arr[][]= {{"Mühendislik Fakültesi","29"},{"Tıp Fakültesi","20"},
 	    		{"İktisadi ve İdari Bilimler Fakültesi","51"},{"Hukuk Fakültesi","5"},
 	    		{"Mimarlık ve Tasarım Fakültesi","15"},{"Fen Edebiyat Fakültesi","60"},
 	    		{"Yabancı Diller Bölümü","20"},{"Fen Bilimleri Enstitüsü","40"},
-	    		{"Sosyal Bilimler Enstitüsü","30"},{"Sağlık Bilimleri Enstitüsü","50"}};
-	    
+	    		{"Sosyal Bilimler Enstitüsü","30"},{"Sağlık Bilimleri Enstitüsü","50"}};	    
 	    String arr2[][]= {{"İktisat","20"},{"İşletme","40"},{"İşletme","60"},{"Uluslararası Girişimcilik","20"}};
 	    String arr3[][]= {{"Bilgisayar Mühendisliği","10"},{"Biyomedikal Mühendisliği","20"},
 	    		{"Elektrik-Elektronik Mühendisliği","30"},{"Endüstri Mühendisliği","40"},{"Makine Mühendisliği","10"},
@@ -60,12 +65,9 @@ public class bolum_stats extends JFrame{
 	    }
 	    
 	    JFreeChart mezun_bolum_chart = createChart(mezun_bolum_dataset, chartTitle,gen);
-        
-        JPanel panel_1 = new JPanel();
-        panel_1.setForeground(Color.WHITE);
-        getContentPane().add(panel_1, BorderLayout.CENTER);
+
         ChartPanel mezun_bolum_chartPanel = new ChartPanel(mezun_bolum_chart);
-        panel_1.add(mezun_bolum_chartPanel);
+        panel.add(mezun_bolum_chartPanel);
         mezun_bolum_chartPanel.setPreferredSize(new java.awt.Dimension(600, 370));
         mezun_bolum_chartPanel.addChartMouseListener(new ChartMouseListener() {
             @Override
@@ -76,19 +78,16 @@ public class bolum_stats extends JFrame{
             }
         });
 	    
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel.setForeground(Color.WHITE);
-        panel.setBackground(Color.WHITE);
-        getContentPane().add(panel, BorderLayout.SOUTH);
-        
         JButton btnGeri = new JButton("Geri");
-        panel.add(btnGeri);
-        btnGeri.addActionListener(new ActionListener() {
+		btnGeri.setBounds(485, 375, 89, 23);
+		getContentPane().add(btnGeri);
+		btnGeri.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {		
         		setVisible(false);
 			}
         });
-        //frmstats.getContentPane().setLayout(groupLayout);
+		panel.setBackground(Color.white);
+		getContentPane().setBackground(Color.WHITE);
 	}
 
 	private  PieDataset createDataset(String [][]arr) {
