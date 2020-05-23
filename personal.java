@@ -1,32 +1,12 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-
-
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.BoxLayout;
-import javax.swing.JSeparator;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;	
 import javax.swing.border.LineBorder;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 
 /*personal p = new personal();
@@ -44,8 +24,7 @@ public class personal extends JFrame{
 		panel.setBackground(new java.awt.Color(211, 211, 211));
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
-		
+				
 		JLabel image_lbl = new JLabel("");
 		image_lbl.setBounds(0, 0, 170, 561);
 		image_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("image.jpeg")));
@@ -60,7 +39,7 @@ public class personal extends JFrame{
 		
 		JPanel panel_in = new JPanel();
 		panel_in.setBorder(new LineBorder(java.awt.Color.DARK_GRAY, 1, true));
-		panel_in.setBackground(new java.awt.Color(211, 211, 211));
+		panel_in.setBackground(Color.WHITE);
 		panel_in.setBounds(190, 60, 480, 389);
 		panel.add(panel_in);
 		panel_in.setLayout(null);
@@ -165,8 +144,7 @@ public class personal extends JFrame{
 		adres_txtp.setBounds(120, 210, 350, 53);
 		panel_in.add(adres_txtp);
 		adres_txtp.setText(list.get(selectedRow).getAdres_lbl());
-	
-		
+			
 		JLabel il_lbl = new JLabel("\u0130l:");
 		il_lbl.setForeground(new java.awt.Color(128, 0, 0));
 		il_lbl.setBounds(10, 267, 45, 17);
@@ -216,6 +194,7 @@ public class personal extends JFrame{
 		update_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {	
 				yeni_uye y = new yeni_uye();
+				y.txtTc.setText(kimlikNoDB_lbl.getText());
 				y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				y.setSize(585,600);
 				y.setVisible(true);
@@ -228,9 +207,31 @@ public class personal extends JFrame{
 		update_btn.setBounds(290, 353, 180, 25);
 		panel_in.add(update_btn);
 		
+		JButton uye_file = new JButton("Üyelik Formu");
+		uye_file.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				if (Desktop.isDesktopSupported()) {
+				    try {
+				        File myFile = new File("C:/Users/serra/Desktop/"+kimlikNoDB_lbl.getText()+".pdf");
+				        Desktop.getDesktop().open(myFile);
+				    } catch (IOException ex) {
+				        // no application registered for PDFs
+				    }
+				}
+
+			}
+		});
+		uye_file.setForeground(new Color(128, 0, 0));
+		uye_file.setFont(new Font("Calibri", Font.BOLD, 14));
+		uye_file.setBackground(new Color(211, 211, 211));
+		uye_file.setBounds(290, 324, 180, 25);
+		panel_in.add(uye_file);
+		
 		JTextPane borc_txtp = new JTextPane();
 		borc_txtp.setEditable(false);
-		borc_txtp.setBounds(313, 461, 334, 46);
+		borc_txtp.setBounds(313, 461, 334, 64);
 		panel.add(borc_txtp);
 		borc_txtp.setBackground(new java.awt.Color(211, 211, 211));
 		borc_txtp.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -250,15 +251,15 @@ public class personal extends JFrame{
 		}
 		show = "Borçlu Olduğu Yıl: Borç Miktarı\n";
 		for(int i=0; i<count; i++) {
-			show =  show + year[i] + ": " + borc[i] + ", ";
+			show =  show + year[i] + ": " + borc[i] + " TL , ";
 			toplam = toplam+ borc[i];
 		}
 		borc_txtp.setText(show);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new java.awt.Color(128, 0, 0), 1, true));
-		panel_1.setBackground(new java.awt.Color(211, 211, 211));
-		panel_1.setBounds(190, 454, 480, 96);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(190, 454, 480, 103);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -275,8 +276,8 @@ public class personal extends JFrame{
 		toplamBorc_txtp.setFont(new Font("Calibri", Font.PLAIN, 17));
 		toplamBorc_txtp.setEditable(false);
 		toplamBorc_txtp.setBackground(new java.awt.Color(211, 211, 211));
-		toplamBorc_txtp.setText("Toplam Bor\u00E7: "+ toplam);
-		toplamBorc_txtp.setBounds(125, 59, 331, 26);
+		toplamBorc_txtp.setText("Toplam Bor\u00E7: "+ toplam + " TL");
+		toplamBorc_txtp.setBounds(123, 70, 331, 26);
 		panel_1.add(toplamBorc_txtp);
 		
 		JButton geri_btn = new JButton("Geri");

@@ -51,7 +51,7 @@ public class yeni_uye extends JFrame{
 	private JTextField yeni_mezun;
 	private JTextField yeni_uye_tarih;
 	private JTextField yeni_durum;
-	private JTextField textField_12;
+	JTextField txtTc;
 	int posX;
 	int posY;
 	
@@ -268,11 +268,11 @@ public class yeni_uye extends JFrame{
 		yeni_durum.setBounds(150, 399, 163, 20);
 		panel_in.add(yeni_durum);
 		
-		textField_12 = new JTextField();
-		textField_12.setFont(new Font("Calibri", Font.PLAIN, 10));
-		textField_12.setColumns(10);
-		textField_12.setBounds(355, 5, 154, 20);
-		panel_in.add(textField_12);
+		txtTc = new JTextField();
+		txtTc.setFont(new Font("Calibri", Font.PLAIN, 10));
+		txtTc.setColumns(10);
+		txtTc.setBounds(355, 5, 154, 20);
+		panel_in.add(txtTc);
 		
 		JButton geri_btn = new JButton("İptal");
 		geri_btn.setFont(new Font("Calibri", Font.BOLD, 14));
