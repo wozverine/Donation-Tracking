@@ -170,7 +170,6 @@ public class Excel_Form extends javax.swing.JFrame {
 							a++;
 						}
 
-
 						String Gender = x[1].getStringCellValue();
 						String Name = x[2].getStringCellValue();
 						String Surname = x[3].getStringCellValue();
@@ -181,9 +180,7 @@ public class Excel_Form extends javax.swing.JFrame {
 						String City = x[11].getStringCellValue();
 						String Mood = x[x.length - 2].getStringCellValue();
 						pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone,
-								Address, City, A, B, Mood, Enter));
-
-						
+								Address, City, A, B, Mood, Enter));				
 					}
 				} catch (FileNotFoundException ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage());

@@ -6,12 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;
 
-public class main extends javax.swing.JFrame {
-	private javax.swing.JButton kisiler_btn;
-    private javax.swing.JButton borc_btn;
-    private javax.swing.JButton aidat_btn;
-    private javax.swing.JButton dosya_btn;
-    private javax.swing.JButton ara_btn;
+public class main extends javax.swing.JFrame {	
     private javax.swing.JLabel kisiler_lbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -19,6 +14,12 @@ public class main extends javax.swing.JFrame {
     private JButton exit_btn;
     private JButton minimize_btn;
     private JButton stats_btn;
+    private JButton aidat_bilgi_btn;
+    private javax.swing.JButton kisiler_btn;
+    private javax.swing.JButton borc_btn;
+    private javax.swing.JButton aidat_btn;
+    private javax.swing.JButton dosya_btn;
+    private javax.swing.JButton ara_btn;
     int posX;
     int posY;
     public main(ArrayList<person> list) {
@@ -39,7 +40,7 @@ public class main extends javax.swing.JFrame {
     		}
     	});
     	//move window
-    	kisiler_btn = new javax.swing.JButton();
+    	
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTable1.addMouseListener(new MouseAdapter() {
@@ -117,14 +118,6 @@ public class main extends javax.swing.JFrame {
         		exc.setVisible(true);
         	}
         });
-        ara_txtf = new javax.swing.JTextField();
-        kisiler_lbl = new javax.swing.JLabel();
-        ara_btn = new javax.swing.JButton();
-
-        kisiler_btn.setBackground(javax.swing.UIManager.getDefaults().getColor("EditorPane.foreground"));
-        kisiler_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        kisiler_btn.setForeground(new java.awt.Color(0, 0, 255));
-        kisiler_btn.setText("Kişiler");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBox.foreground"));
@@ -151,28 +144,8 @@ public class main extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         jScrollPane1.setBounds(10, 76, 773, 245);
         getContentPane().add(jScrollPane1);
-
-        borc_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        borc_btn.setText("Borcu olanları görüntüle");
-        borc_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        borc_btn.setPreferredSize(new java.awt.Dimension(161, 23));
-        borc_btn.setBounds(10, 355, 161, 23);
-        getContentPane().add(borc_btn);
-
-        aidat_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        aidat_btn.setText("Ödenen aidatları görüntüle");
-        aidat_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        aidat_btn.setBounds(215, 356, 160, 21);
-        getContentPane().add(aidat_btn);
-
-        dosya_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        dosya_btn.setText("Dosya ekle");
-        dosya_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        dosya_btn.setMinimumSize(new java.awt.Dimension(161, 23));
-        dosya_btn.setPreferredSize(new java.awt.Dimension(161, 23));
-        dosya_btn.setBounds(605, 355, 161, 23);
-        getContentPane().add(dosya_btn);
-
+        
+        ara_txtf = new javax.swing.JTextField();
         ara_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         //kimlik_txtf.setText("T.C Kimlik No");
         ara_txtf.setBounds(500, 40, 220, 25);
@@ -182,12 +155,41 @@ public class main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ara_txtf);
-
+        
+        kisiler_lbl = new javax.swing.JLabel();
         kisiler_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         kisiler_lbl.setText("Kişiler");
         kisiler_lbl.setBounds(39, 37, 145, 29);
         getContentPane().add(kisiler_lbl);
+        
+        kisiler_btn = new javax.swing.JButton();
+        kisiler_btn.setBackground(javax.swing.UIManager.getDefaults().getColor("EditorPane.foreground"));
+        kisiler_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        kisiler_btn.setForeground(new java.awt.Color(0, 0, 255));
+        kisiler_btn.setText("Kişiler");
+        
+        borc_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        borc_btn.setText("Borcu olanları görüntüle");
+        borc_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        borc_btn.setPreferredSize(new java.awt.Dimension(161, 23));
+        borc_btn.setBounds(10, 356, 161, 23);
+        getContentPane().add(borc_btn);
 
+        aidat_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        aidat_btn.setText("Ödenen aidatları görüntüle");
+        aidat_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        aidat_btn.setBounds(204, 357, 160, 21);
+        getContentPane().add(aidat_btn);
+
+        dosya_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        dosya_btn.setText("Dosya ekle");
+        dosya_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        dosya_btn.setMinimumSize(new java.awt.Dimension(161, 23));
+        dosya_btn.setPreferredSize(new java.awt.Dimension(161, 23));
+        dosya_btn.setBounds(685, 355, 98, 23);
+        getContentPane().add(dosya_btn);
+        
+        ara_btn = new javax.swing.JButton();
         ara_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         ara_btn.setText("Ara");
         ara_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -219,11 +221,10 @@ public class main extends javax.swing.JFrame {
         getContentPane().add(minimize_btn);
         
         stats_btn = new JButton("İstatistikler");
-        stats_btn.setBounds(434, 355, 98, 23);
-        stats_btn.setFont(new java.awt.Font("Arial", 0, 12));
+        stats_btn.setFont(new Font("Arial", Font.PLAIN, 12));
         stats_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         stats_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {		
+        	public void actionPerformed(ActionEvent arg0) {		
 				stats stat = new stats("Comparison", "Hangi bölümden daha çok mezun var?");
 				stat.setVisible(false);
 				stat.dispose();
@@ -234,10 +235,29 @@ public class main extends javax.swing.JFrame {
         		stat.setVisible(true);
 			}
         });
+        stats_btn.setBounds(389, 356, 98, 23);
         getContentPane().add(stats_btn);
 
+        aidat_bilgi_btn = new JButton("Aidat Bilgileri");
+        aidat_bilgi_btn.setFont(new Font("Arial", Font.PLAIN, 12));
+        aidat_bilgi_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        aidat_bilgi_btn.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		aidat_info l = new aidat_info();
+        		l.setSize(480,460);
+        		l.setUndecorated(true);
+        		l.setShape(new RoundRectangle2D.Double(0, 0, l.getWidth(), l.getHeight(), 20, 20));
+        		l.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        		l.setVisible(true);
+        		centreWindow(l);
+        	}
+        });
+        aidat_bilgi_btn.setBounds(523, 356, 123, 23);
+        getContentPane().add(aidat_bilgi_btn);
+        
         pack();
-    }// </editor-fold>                                                       
+    }                                                    
 
     private void personalActionPerformed(KeyEvent evt) {                                            
     	DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
