@@ -266,30 +266,40 @@ public class Excel_Form extends javax.swing.JFrame {
 													int giriş = Integer
 															.parseInt(pArr.get(d).getGirisTarihi_lbl().substring(6));
 													int money = tutar.get(tutarC);
-													for (int p = pArr.get(h).getBorcarray().length - 1; p >= giriş
-															- 2010; p--) {
-														if (pArr.get(d).getBorcarray()[p] > 0) {
-															if (money >= pArr.get(d).getBorcarray()[p]) {
-																pArr.get(d).getAidatcarray()[p] = pArr.get(d)
-																		.getBorcarray()[p];
-																money = money - pArr.get(d).getBorcarray()[p];
-																pArr.get(d).getBorcarray()[p] = 0;
-															}
-														}
-													}
-													for (int p = giriş - 2010; p < pArr.get(h)
-															.getBorcarray().length; p++) {
-														if (money > 0) {
-															if (pArr.get(d).getBorcarray()[p] > 0) {
-																pArr.get(d).getBorcarray()[p] = pArr.get(d)
-																		.getBorcarray()[p] - money;
-																pArr.get(d).getAidatcarray()[p] = money;
-																money = money - pArr.get(d).getAidatcarray()[p];
-															}
-														} else {
-															break;
-														}
-													}
+													
+													for(int p = giriş-2010; p< pArr.get(h).getBorcarray().length; p++) {
+                         								 if(pArr.get(d).getBorcarray()[p] >0) {
+                         								if(money == pArr.get(d).getBorcarray()[p]) {
+                         									pArr.get(d).getAidatcarray()[p] = pArr.get(d).getBorcarray()[p];
+                         									money = money - pArr.get(d).getBorcarray()[p];
+                         									pArr.get(d).getBorcarray()[p] = 0;
+                         									
+                         								}
+                         								}
+                         							}
+                         							
+                         						
+                         						for(int p = giriş-2010; p< pArr.get(h).getBorcarray().length; p++) {
+                         							if(money>0) {
+                         								if(pArr.get(d).getBorcarray()[p] > 0 ) {	
+                         									if(money > pArr.get(d).getBorcarray()[p]) {
+                         										pArr.get(d).getAidatcarray()[p] = pArr.get(d).getBorcarray()[p];
+                         										money= money-pArr.get(d).getBorcarray()[p];
+                         										pArr.get(d).getBorcarray()[p]=0;
+                         										
+                         									}
+                         									else {
+                         										pArr.get(d).getBorcarray()[p] = pArr.get(d).getBorcarray()[p] -money;
+                         										pArr.get(d).getAidatcarray()[p] = money;
+                         										money = money - pArr.get(d).getAidatcarray()[p];
+                         									}
+                         						    }
+                         								
+                         							}
+                         							else {
+                         								break;
+                         							}
+                         							}
 												}
 											}
 										}
