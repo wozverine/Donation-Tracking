@@ -24,6 +24,7 @@ public class Excel_Form extends javax.swing.JFrame {
 	Date date = new Date();
 	LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	int year = localDate.getYear();
+	
 
 	public Excel_Form(ArrayList<person> list) {
 		initComponents(list);
@@ -32,82 +33,7 @@ public class Excel_Form extends javax.swing.JFrame {
 	int posX = 0;
 	int posY = 0;
 
-	// AddClient Method: the method which adds client to the client table in the
-	// donation database.
-	private void AddClient(int ID, String Gender, String Name, String Surname, String Work, String Mail, long TC,
-			String Graduation, String Department, long Phone, String Address, String City, String Mood, String Enter) {
-		try {
-			String phoneString = String.valueOf(Phone);
-			String tcString = String.valueOf(TC);
-			MySQLConnection db = new MySQLConnection();
-			Connection con = db.getmysql_connection();
-			String query = "INSERT INTO client(client_id, gender, name, surname, work, mail, tc, graduation,department, phone, address, city, mood, enter) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, ID);
-			preparedStmt.setString(2, Gender);
-			preparedStmt.setString(3, Name);
-			preparedStmt.setString(4, Surname);
-			preparedStmt.setString(5, Work);
-			preparedStmt.setString(6, Mail);
-			preparedStmt.setString(7, tcString);
-			preparedStmt.setString(8, Graduation);
-			preparedStmt.setString(9, Department);
-			preparedStmt.setString(10, phoneString);
-			preparedStmt.setString(11, Address);
-			preparedStmt.setString(12, City);
-			preparedStmt.setString(13, Mood);
-			preparedStmt.setString(14, Enter);
-			preparedStmt.execute();
-			con.close();
-			System.out.println("Insertion to the client table is successful!");
-		} catch (Exception e) {
-			System.out.println("error while inserting to the client table");
-		}
-	}
-
-	// AddAB Method: the method which adds aidat and borc to the ABtable in the
-	// donation database.
-
-	private void AddAB(int ID, int A2010, int B2010, int A2011, int B2011, int A2012, int B2012, int A2013, int B2013,
-			int A2014, int B2014, int A2015, int B2015, int A2016, int B2016, int A2017, int B2017, int A2018,
-			int B2018, int A2019, int B2019, int A2020, int B2020) {
-		try {
-			MySQLConnection db = new MySQLConnection();
-			Connection con = db.getmysql_connection();
-			String query = "INSERT INTO abtable(ab_id, A2010,B2010,A2011,B2011,A2012,B2012,A2013,B2013,A2014,B2014,A2015,B2015,A2016,B2016,A2017,B2017,A2018,B2018,A2019,B2019,A2020,B2020) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, ID);
-			preparedStmt.setInt(2, A2010);
-			preparedStmt.setInt(3, B2010);
-			preparedStmt.setInt(4, A2011);
-			preparedStmt.setInt(5, B2011);
-			preparedStmt.setInt(6, A2012);
-			preparedStmt.setInt(7, B2012);
-			preparedStmt.setInt(8, A2013);
-			preparedStmt.setInt(9, B2013);
-			preparedStmt.setInt(10, A2014);
-			preparedStmt.setInt(11, B2014);
-			preparedStmt.setInt(12, A2015);
-			preparedStmt.setInt(13, B2015);
-			preparedStmt.setInt(14, A2016);
-			preparedStmt.setInt(15, B2016);
-			preparedStmt.setInt(16, A2017);
-			preparedStmt.setInt(17, B2017);
-			preparedStmt.setInt(18, A2018);
-			preparedStmt.setInt(19, B2018);
-			preparedStmt.setInt(20, A2019);
-			preparedStmt.setInt(21, B2019);
-			preparedStmt.setInt(22, A2020);
-			preparedStmt.setInt(23, B2020);
-			preparedStmt.execute();
-			con.close();
-			System.out.println("Insertion to the abtable is successful!");
-		} catch (Exception e) {
-			System.out.println("error while inserting to the abtable!");
-
-		}
-	}
+	
 
 	private void initComponents(ArrayList<person> list) {
 		ArrayList<person> pArr = new ArrayList<person>();
@@ -136,61 +62,6 @@ public class Excel_Form extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				File excelFileX;
-				FileInputStream excelFISX = null;
-				BufferedInputStream excelBISX = null;
-				XSSFWorkbook excelJTableImport = null;
-				String yourDesktopPath = System.getProperty("user.home") + "\\Desktop\\excel1.xlsx\\";
-				try {
-					excelFISX = new FileInputStream(yourDesktopPath);
-					excelBISX = new BufferedInputStream(excelFISX);
-					excelJTableImport = new XSSFWorkbook(excelBISX);
-					XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
-					for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
-						XSSFRow excelRow = excelSheet.getRow(row);
-
-						XSSFCell[] x = new XSSFCell[12 + (year - 2010 + 1) * 2 + 2];
-						for (int cou = 0; cou < x.length; cou++) {
-							x[cou] = excelRow.getCell(cou);
-						}
-						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-						String Graduation = sdf.format(x[7].getDateCellValue());
-						String Enter = sdf.format(x[x.length - 1].getDateCellValue());
-
-						int ID = (int) x[0].getNumericCellValue();
-						long TC = (long) x[6].getNumericCellValue();
-						long Phone = (long) x[9].getNumericCellValue();
-						int A[] = new int[year - 2010 + 1];
-						int B[] = new int[year - 2010 + 1];
-						int a = 0;
-						for (int cou = 0; cou < (year - 2010 + 1) * 2; cou++) {
-							A[a] = (int) x[cou + 12].getNumericCellValue();
-							B[a] = (int) x[cou + 13].getNumericCellValue();
-							cou++;
-							a++;
-						}
-
-
-						String Gender = x[1].getStringCellValue();
-						String Name = x[2].getStringCellValue();
-						String Surname = x[3].getStringCellValue();
-						String Work = x[4].getStringCellValue();
-						String Mail = x[5].getStringCellValue();
-						String Department = x[8].getStringCellValue();
-						String Address = x[10].getStringCellValue();
-						String City = x[11].getStringCellValue();
-						String Mood = x[x.length - 2].getStringCellValue();
-						pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone,
-								Address, City, A, B, Mood, Enter));
-
-						
-					}
-				} catch (FileNotFoundException ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage());
-				} catch (IOException ex) {
-					JOptionPane.showMessageDialog(null, ex.getMessage());
-				}
-
 				File excelFile;
 				FileInputStream excelFIS = null;
 				BufferedInputStream excelBIS = null;
@@ -203,11 +74,14 @@ public class Excel_Form extends javax.swing.JFrame {
 						excelFile = excelFileChooser.getSelectedFile();
 						excelFIS = new FileInputStream(excelFile);
 						excelBIS = new BufferedInputStream(excelFIS);
-
 						excelImport = new XSSFWorkbook(excelBIS);
 						XSSFSheet excelSheetX = excelImport.getSheetAt(0);
 						ArrayList<Integer> tutar = new ArrayList<Integer>();
-
+						Database_methods dbmethods3 = new Database_methods();
+						int sizeOfClient = dbmethods3.getSize();
+						int countColumnA = 11; //TO-DO : HER YILDA ARTIRILACAK METHOD VE DATABASE E COLUMN EKLEYECEK METHOD YAZILACAK.
+						System.out.println("size sizeOfClient: " + sizeOfClient);
+						
 						for (int rowX = 1; rowX <= excelSheetX.getLastRowNum(); rowX++) {
 							XSSFRow excelRowX = excelSheetX.getRow(rowX);
 							if (excelRowX == null) {
@@ -250,68 +124,44 @@ public class Excel_Form extends javax.swing.JFrame {
 
 										for (int k = 0; k < words1.length; k++) {
 											String[] words2 = words1[k].split("\\s+");
-
-											for (int j = 0; j < words2.length; j++) {
-												for (int t = 0; t < pArr.size(); t++) {
-													if ((words2[j]).equals(pArr.get(t).ad_lbl)) {
+											for (int j = 0; j < words2.length-1; j++) {
+												for (int t = 0; t < sizeOfClient; t++) {
+													if ((words2[j]).equals(dbmethods3.getName(t)) && words2[j+1].equals(dbmethods3.getSurname(t))) {
 														kim.add(t);
 													}
-													if ((words2[j]).equals(pArr.get(t).soyad_lbl)) {
-														kim.add(t);
-													}
+													
 												}
 											}
 										}
 										for (int h = 0; h < kim.size(); h++) {
-											for (int f = h + 1; f < kim.size(); f++) {
-												if (kim.get(h) == kim.get(f)) {
 													int d = kim.get(h);
 													int giriş = Integer
-															.parseInt(pArr.get(d).getGirisTarihi_lbl().substring(6));
-													int money = tutar.get(tutarC);
+															.parseInt(dbmethods3.getEnter(d).substring(6)); //giriş tarihi
 													
-													for(int p = giriş-2010; p< pArr.get(h).getBorcarray().length; p++) {
-                         								 if(pArr.get(d).getBorcarray()[p] >0) {
-                         								if(money == pArr.get(d).getBorcarray()[p]) {
-                         									pArr.get(d).getAidatcarray()[p] = pArr.get(d).getBorcarray()[p];
-                         									money = money - pArr.get(d).getBorcarray()[p];
-                         									pArr.get(d).getBorcarray()[p] = 0;
-                         									
+													int money = tutar.get(tutarC); //kişinin yatırdığı tutar 
+													for(int p = giriş-2010; p<countColumnA; p++) { //BORÇ ARRAY
+                         								 if(dbmethods3.getBorc(d,p) > 0) {
+                         								if(money >= dbmethods3.getBorc(d,p) && money>0) {
+                         									dbmethods3.updateAidat(d, p, dbmethods3.getBorc(d,p));
+                         									money -= dbmethods3.getBorc(d,p);
+                         									dbmethods3.updateBorc(d,p,0); 
                          								}
+                         								else if(money < dbmethods3.getBorc(d,p) && money>0) {
+                         									dbmethods3.updateAidat(d, p, money);
+                     
+                         									dbmethods3.updateBorc(d,p,dbmethods3.getBorc(d,p)-money);
+                         									money = 0;
                          								}
-                         							}
-                         							
-                         						
-                         						for(int p = giriş-2010; p< pArr.get(h).getBorcarray().length; p++) {
-                         							if(money>0) {
-                         								if(pArr.get(d).getBorcarray()[p] > 0 ) {	
-                         									if(money > pArr.get(d).getBorcarray()[p]) {
-                         										pArr.get(d).getAidatcarray()[p] = pArr.get(d).getBorcarray()[p];
-                         										money= money-pArr.get(d).getBorcarray()[p];
-                         										pArr.get(d).getBorcarray()[p]=0;
-                         										
-                         									}
-                         									else {
-                         										pArr.get(d).getBorcarray()[p] = pArr.get(d).getBorcarray()[p] -money;
-                         										pArr.get(d).getAidatcarray()[p] = money;
-                         										money = money - pArr.get(d).getAidatcarray()[p];
-                         									}
-                         						    }
-                         								
-                         							}
-                         							else {
-                         								break;
-                         							}
-                         							}
-												}
-											}
+             
+                         								}
+                         							} 
 										}
 										tutarC++;
 									}
 									break;
 								}
-							}
-						}
+							}//cell
+						}//row
 					} catch (FileNotFoundException ex) {
 						JOptionPane.showMessageDialog(null, ex.getMessage());
 					} catch (IOException ex) {
@@ -351,7 +201,7 @@ public class Excel_Form extends javax.swing.JFrame {
 						excelJTableImport = new XSSFWorkbook(excelBIS);
 						XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
 
-						for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
+						for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
 							XSSFRow excelRow = excelSheet.getRow(row);
 
 							XSSFCell[] x = new XSSFCell[12 + (year - 2010 + 1) * 2 + 2];
@@ -385,14 +235,19 @@ public class Excel_Form extends javax.swing.JFrame {
 							String Address = x[10].getStringCellValue();
 							String City = x[11].getStringCellValue();
 							String Mood = x[x.length - 2].getStringCellValue();
-
+							
+							
 							pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department,
 									Phone, Address, City, A, B, Mood, Enter));
+							
+							System.out.println(Name);
 							// Adding Client into the client table in the donation database.
-							AddClient(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone, Address,
+							Database_methods dbmethods = new Database_methods();					
+							dbmethods.AddClient(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone, Address,
 									City, Mood, Enter);
 							// AddAB method.
-							AddAB(ID, A[0], B[0], A[1], B[1], A[2], B[2], A[3], B[3], A[4], B[4], A[5], B[5], A[6], B[6],
+							Database_methods dbmethods2 = new Database_methods();
+							dbmethods2.AddAB(ID, A[0], B[0], A[1], B[1], A[2], B[2], A[3], B[3], A[4], B[4], A[5], B[5], A[6], B[6],
 									A[7], B[7], A[8], B[8], A[9], B[9], A[10], B[10]);
 							
 						}
