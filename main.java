@@ -1,7 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -59,8 +64,73 @@ public class main extends javax.swing.JFrame {
         	    p.setVisible(true);
         	}
         });
-        borc_btn = new javax.swing.JButton();
         
+        
+        stats_btn = new JButton("İstatistikler");
+        stats_btn.setFont(new Font("Arial", Font.PLAIN, 12));
+        stats_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        stats_btn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {	
+        		String []bolum=new String[list.size()];
+        		String []giris_yıl=new String[list.size()];
+        		String []mezun_yıl=new String[list.size()];
+        		String []calısma=new String[list.size()];
+        		String []il=new String[list.size()];
+        		Date date = new Date();
+        		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        		int year_now = localDate.getYear();
+        		String[][]odeme=new String[year_now-2010+1][list.size()];
+        		if(list!=null) {
+        			int sum=0;
+        			for(int x=0;x<list.size();x++) {
+        				bolum[x]=list.get(x).getBolum_lbl();
+        				giris_yıl[x]=list.get(x).getGirisTarihi_lbl().split("-")[2];
+        				mezun_yıl[x]=list.get(x).getMezTarihi_lbl().split("-")[2];
+        				calısma[x]=list.get(x).getCalismayer_lbl();
+        				il[x]=list.get(x).getIl_lbl();
+        				
+        				//odeme[year][x]=""+list.get(x).getBorcarray()[year_now-2010];
+        				//odeme[year][x]=""+sum(list.get(x).getBorcarray());
+        				       		
+        			}
+        			int len=list.get(0).getBorcarray().length; 
+        			System.out.println("len: "+len);
+        			for(int x=0;x<year_now-2010+1;x++) {
+        				for(int t=0;t<len;t++) {
+        					//System.out.println("t: "+t+" : "+list.get(t).getBorcarray()[x]+" "+(x+2010));
+        					odeme[x][t]=Integer.toString(list.get(t).getBorcarray()[x]);
+        					System.out.println("sss "+" "+x+" "+"year"+(2010+x)+odeme[x][t]);
+        				}
+        			}
+
+        		}
+        		Map<String, Integer> bolum_map=countArray(bolum);
+        		Map<String, Integer> giris_yıl_map=countArray(giris_yıl);
+        		Map<String, Integer> mezun_yıl_map=countArray(mezun_yıl);
+        		Map<String, Integer> calısma_map=countArray(calısma);
+        		Map<String, Integer> il_map=countArray(il);
+        		
+        		/*System.out.println(bolum_map);
+        		System.out.println(giris_yıl_map);
+        		System.out.println(mezun_yıl_map);
+        		System.out.println(calısma_map);
+        		System.out.println(il_map);*/
+        		stats_choose stats=new stats_choose(bolum_map,giris_yıl_map,mezun_yıl_map,calısma_map,il_map,odeme);
+        		stats.setVisible(false);
+				stats.dispose();
+				stats.setUndecorated(true);
+				stats.setSize(370,270);
+				stats.setShape(new RoundRectangle2D.Double(0, 0, stats.getWidth(), stats.getHeight(), 20, 20));
+        		centreWindow(stats);  		
+        		stats.setVisible(true);
+        		
+        		
+        	}
+        });
+        stats_btn.setBounds(389, 356, 98, 23);
+        getContentPane().add(stats_btn);
+        
+        borc_btn = new javax.swing.JButton();
         borc_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -224,32 +294,6 @@ public class main extends javax.swing.JFrame {
         });
         getContentPane().add(minimize_btn);
         
-        stats_btn = new JButton("İstatistikler");
-        stats_btn.setFont(new Font("Arial", Font.PLAIN, 12));
-        stats_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        stats_btn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {		
-        		/*stats2 stat = new stats2("Comparison", "Hangi bölümden daha çok mezun var?");
-				stat.setVisible(false);
-				stat.dispose();
-				stat.setUndecorated(true);
-				stat.setSize(605,410);
-				stat.setShape(new RoundRectangle2D.Double(0, 0, stat.getWidth(), stat.getHeight(), 20, 20));
-        		centreWindow(stat);  		
-        		stat.setVisible(true);*/
-				stats stat = new stats("Comparison", "Hangi bölümden daha çok mezun var?");
-				stat.setVisible(false);
-				stat.dispose();
-				stat.setUndecorated(true);
-				stat.setSize(605,410);
-				stat.setShape(new RoundRectangle2D.Double(0, 0, stat.getWidth(), stat.getHeight(), 20, 20));
-        		centreWindow(stat);  		
-        		stat.setVisible(true);
-			}
-        });
-        stats_btn.setBounds(389, 356, 98, 23);
-        getContentPane().add(stats_btn);
-
         aidat_bilgi_btn = new JButton("Aidat Bilgileri");
         aidat_bilgi_btn.setFont(new Font("Arial", Font.PLAIN, 12));
         aidat_bilgi_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -288,5 +332,27 @@ public class main extends javax.swing.JFrame {
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 	    frame.setLocation(x, y);
-	}          
+	}        
+    
+    public Map<String, Integer> countArray(String[] arr) {
+        int len = arr.length;
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        for(int i = 0; i < len; i++) {
+            String key = arr[i];
+            if (map.containsKey(key)) {
+                int value = map.get(key);
+                map.put(key, value + 1);
+            } else {
+                map.put(key, 1);
+            }
+        }
+        return map;
+    }
+    public int sum(int arr[]) {
+    	int sum_arr=0;
+    	for(int x=0;x<arr.length;x++) {
+    		sum_arr=sum_arr+arr[x];
+    	}
+    	return sum_arr;
+    }
 }

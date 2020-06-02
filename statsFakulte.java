@@ -12,11 +12,11 @@ import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.Rotation;
 import org.jfree.data.general.*;
 
-public class stats extends JFrame{
+public class statsFakulte extends JFrame{
 	int posX;
 	int posY;
 	int toplam=0;
-	public stats(String title,String title2) {
+	public statsFakulte(String title,String title2) {
 		initUI(title, title2);
 	}
 	public void initUI(String title, String chartTitle) {
