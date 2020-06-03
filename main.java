@@ -88,18 +88,11 @@ public class main extends javax.swing.JFrame {
         				mezun_yıl[x]=list.get(x).getMezTarihi_lbl().split("-")[2];
         				calısma[x]=list.get(x).getCalismayer_lbl();
         				il[x]=list.get(x).getIl_lbl();
-        				
-        				//odeme[year][x]=""+list.get(x).getBorcarray()[year_now-2010];
-        				//odeme[year][x]=""+sum(list.get(x).getBorcarray());
-        				       		
         			}
-        			int len=list.get(0).getBorcarray().length; 
-        			System.out.println("len: "+len);
+        			int len=bolum.length;
         			for(int x=0;x<year_now-2010+1;x++) {
         				for(int t=0;t<len;t++) {
-        					//System.out.println("t: "+t+" : "+list.get(t).getBorcarray()[x]+" "+(x+2010));
         					odeme[x][t]=Integer.toString(list.get(t).getBorcarray()[x]);
-        					System.out.println("sss "+" "+x+" "+"year"+(2010+x)+odeme[x][t]);
         				}
         			}
 
@@ -110,11 +103,6 @@ public class main extends javax.swing.JFrame {
         		Map<String, Integer> calısma_map=countArray(calısma);
         		Map<String, Integer> il_map=countArray(il);
         		
-        		/*System.out.println(bolum_map);
-        		System.out.println(giris_yıl_map);
-        		System.out.println(mezun_yıl_map);
-        		System.out.println(calısma_map);
-        		System.out.println(il_map);*/
         		stats_choose stats=new stats_choose(bolum_map,giris_yıl_map,mezun_yıl_map,calısma_map,il_map,odeme);
         		stats.setVisible(false);
 				stats.dispose();
@@ -123,8 +111,6 @@ public class main extends javax.swing.JFrame {
 				stats.setShape(new RoundRectangle2D.Double(0, 0, stats.getWidth(), stats.getHeight(), 20, 20));
         		centreWindow(stats);  		
         		stats.setVisible(true);
-        		
-        		
         	}
         });
         stats_btn.setBounds(389, 356, 98, 23);

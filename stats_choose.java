@@ -97,7 +97,7 @@ public class stats_choose extends JFrame{
 			}
         });
 		
-		JButton fakulte_btn = new JButton("Fakülteye göre");
+		JButton fakulte_btn = new JButton("Bölüme göre");
 		GridBagConstraints gbc_fakulte_btn = new GridBagConstraints();
 		gbc_fakulte_btn.insets = new Insets(0, 0, 5, 0);
 		gbc_fakulte_btn.gridx = 0;
@@ -106,7 +106,7 @@ public class stats_choose extends JFrame{
 		getContentPane().add(fakulte_btn, gbc_fakulte_btn);
 		fakulte_btn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {		
-        		statsFakulte stats=new statsFakulte("Comparison", "Hangi bölümden daha çok mezun var?");
+        		stats_general stats=new stats_general("Comparison", "Hangi b?",map_to_array(bolum_map));
 				stats.setVisible(false);
 				stats.dispose();
 				stats.setUndecorated(true);
@@ -142,14 +142,7 @@ public class stats_choose extends JFrame{
 		for(int x=0;x<year_now-2010+1;x++) {
 			year_str[x]=(2010+x)+"";
 		}
-		/*SpinnerModel value =  
-	             new SpinnerNumberModel(2010, //initial value  
-	                2010, //minimum value  
-	                year_now, //maximum value  
-	                1); //step  */
-//		JSpinner spinner = new JSpinner(new SpinnerListModel(new String[] {"2010", "2011", "2001"}));
 		JSpinner spinner = new JSpinner(new SpinnerListModel(year_str));
-		//JSpinner spinner = new JSpinner(new SpinnerDateModel(new Date(1591045200000L), new Date(1275426000000L), new Date(1591045200000L), Calendar.YEAR));
 		GridBagConstraints gbc_spinner = new GridBagConstraints();
 		gbc_spinner.weightx = 2.0;
 		gbc_spinner.insets = new Insets(0, 100, 5, 0);
@@ -173,21 +166,8 @@ public class stats_choose extends JFrame{
 		getContentPane().add(odeme_btn, gbc_odeme_btn);
 		odeme_btn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		System.out.println("spinner year "+spinnerYear);
-        		System.out.println(Integer.parseInt(spinnerYear)-2010);
-        		String []one=new String[year_now-2010+1];
-        		for(int x=0;x<one.length;x++) {
-        			one[x]=odeme[0][x];
-        		}
-        		//one=odeme[Integer.parseInt(spinnerYear)-2010];
-        		System.out.println("odeme array "+Arrays.toString(odeme[Integer.parseInt(spinnerYear)-2010]));
-        		System.out.println("one array "+Arrays.toString(one));
-        		
         		Map<String, Integer> odeme_map=countArray(odeme[Integer.parseInt(spinnerYear)-2010]);
-        		System.out.println("odeme map "+odeme_map);
         		stats_general stats=new stats_general("Comparison", "Borç miktarı",map_to_array(odeme_map));
-        		System.out.println(spinnerYear);
-        		System.out.println(map_to_array(odeme_map));
 				stats.setVisible(false);
 				stats.dispose();
 				stats.setUndecorated(true);
