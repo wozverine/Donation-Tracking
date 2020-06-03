@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 import javax.swing.*;
@@ -8,17 +8,17 @@ import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.Rotation;
-import org.jfree.data.general.*;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
-public class bolum_stats extends JFrame{
+public class stats_general extends JFrame{
 	int posX;
 	int posY;
-	int toplam=0;
-	public bolum_stats(String title,String title2) {
+	public stats_general(String title,String title2,String[][]arr) {
 
-		 initUI(title, title2);
+		 initUI(title, title2,arr);
 	}
-	public void initUI(String title, String chartTitle) {
+	public void initUI(String title, String chartTitle,String[][]arr) {
 		setTitle("İstatistikler");
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,39 +41,12 @@ public class bolum_stats extends JFrame{
 	        }
 		});
 	    //move window
-				
+		
 		PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
 			    "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0.0%"));
-	    String arr[][]= {{"Mühendislik Fakültesi","29"},{"Tıp Fakültesi","20"},
-	    		{"İktisadi ve İdari Bilimler Fakültesi","51"},{"Hukuk Fakültesi","5"},
-	    		{"Mimarlık ve Tasarım Fakültesi","15"},{"Fen Edebiyat Fakültesi","60"},
-	    		{"Yabancı Diller Bölümü","20"},{"Fen Bilimleri Enstitüsü","40"},
-	    		{"Sosyal Bilimler Enstitüsü","30"},{"Sağlık Bilimleri Enstitüsü","50"}};	    
-	    String arr2[][]= {{"İktisat","20"},{"İşletme","40"},{"Uluslararası İlişkiler","60"},{"Uluslararası Girişimcilik","20"}};
-	    String arr3[][]= {{"Bilgisayar Mühendisliği","10"},{"Biyomedikal Mühendisliği","20"},
-	    		{"Elektrik-Elektronik Mühendisliği","30"},{"Endüstri Mühendisliği","40"},{"Makine Mühendisliği","10"},
-	    		{"Malzeme Bilimi ve Nanoteknoloji Müh.","10"},{"Mekatronik Mühendisliği Yandal Programı","1"},
-	    		{"Yapay Zeka Mühendisliği","1"}};
-	    String arr4[][]= {{"İngiliz Dili ve Edebiyatı","10"},{"Matematik","5"},{"Psikoloji","2"},
-	    		{"Tarih","5"},{"Türk Dili ve Edebiyatı","8"}};
-	    String arr5[][]= {{"Endüstriyel Tasarım","10"},{"Görsel İletişim Tasarımı","5"},{"İç Mimarlık ve Çevre Tasarımı","2"},
-	    		{"Mimarlık","5"},{"Sanat ve Tasarım","8"}};
-	    //System.out.println(chartTitle);
-	    PieDataset mezun_bolum_dataset = createDataset(arr);
-	    if(chartTitle.equals("İktisadi")) {
-	    	mezun_bolum_dataset = createDataset(arr2);
-	    }
-	    if(chartTitle.equals("Mühendislik")) {
-	    	mezun_bolum_dataset = createDataset(arr3);
-	    }
-	    if(chartTitle.equals("Fen")) {
-	    	mezun_bolum_dataset = createDataset(arr4);
-	    }
-	    if(chartTitle.equals("Mimarlık")) {
-	    	mezun_bolum_dataset = createDataset(arr5);
-	    }
-	    
-	    JFreeChart mezun_bolum_chart = createChart(mezun_bolum_dataset, chartTitle,gen);
+		PieDataset mezun_bolum_dataset = createDataset(arr);
+		
+		JFreeChart mezun_bolum_chart = createChart(mezun_bolum_dataset, chartTitle,gen);
 
         ChartPanel mezun_bolum_chartPanel = new ChartPanel(mezun_bolum_chart);
         panel.add(mezun_bolum_chartPanel);
@@ -98,16 +71,13 @@ public class bolum_stats extends JFrame{
 		panel.setBackground(Color.white);
 		getContentPane().setBackground(Color.WHITE);
 	}
-
 	private  PieDataset createDataset(String [][]arr) {
 		DefaultPieDataset set = new DefaultPieDataset();
 		for(int x=0;x<arr.length;x++) {
 			set.setValue(arr[x][0], Integer.parseInt(arr[x][1]));
-			toplam=toplam+Integer.parseInt(arr[x][1]);
 		}
 		return set;
 	}
-
 	private JFreeChart createChart(PieDataset dataset, String title,PieSectionLabelGenerator w) {
 		JFreeChart chart = ChartFactory.createPieChart3D(
 			title,                  // chart title
@@ -123,10 +93,4 @@ public class bolum_stats extends JFrame{
 		plot.setLabelGenerator(w);
 		return chart;
 	}
-	public static void centreWindow(JFrame frame) {
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-	    frame.setLocation(x, y);
-	}      
 }

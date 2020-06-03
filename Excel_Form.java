@@ -24,16 +24,12 @@ public class Excel_Form extends javax.swing.JFrame {
 	Date date = new Date();
 	LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	int year = localDate.getYear();
+	int posX = 0;
+	int posY = 0;
 	
-
 	public Excel_Form(ArrayList<person> list) {
 		initComponents(list);
 	}
-
-	int posX = 0;
-	int posY = 0;
-
-	
 
 	private void initComponents(ArrayList<person> list) {
 		ArrayList<person> pArr = new ArrayList<person>();
