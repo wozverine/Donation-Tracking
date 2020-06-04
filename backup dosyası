@@ -1,1 +1,3 @@
+cd "C:\Program Files\MySQL\MySQL Server 8.0\bin"
 
+mysqldump -hlocalhost -uroot -psql111 donation > "C:\backup\donationyedek_%date:~-4,4%%date:~-10,2%%date:~-7,2%_%time:~0,2%%time:~3,2%%time:~6,2%.sql"
