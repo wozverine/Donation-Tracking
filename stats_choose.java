@@ -106,7 +106,7 @@ public class stats_choose extends JFrame{
 		getContentPane().add(fakulte_btn, gbc_fakulte_btn);
 		fakulte_btn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {		
-        		stats_general stats=new stats_general("Comparison", "Hangi b?",map_to_array(bolum_map));
+        		stats_general stats=new stats_general("Comparison", "Üyler hangi bölümlerden?",map_to_array(bolum_map));
 				stats.setVisible(false);
 				stats.dispose();
 				stats.setUndecorated(true);
