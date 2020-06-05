@@ -9,7 +9,7 @@ public class MySQLConnection {
 	private String kullanıcı_adı = "root";
 	private String db_name = "donation";
 	private String host = "localhost";
-	private int port = 3306;
+	private int port = 3307;
 
 	String url = "jdbc:mysql://" + host + ":" + port + "/" + db_name;
 
