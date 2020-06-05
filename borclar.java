@@ -6,7 +6,11 @@ import java.util.*;
 import java.awt.event.ActionEvent;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.*;
 
@@ -17,6 +21,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.border.LineBorder;
 
@@ -29,6 +38,7 @@ public class borclar extends javax.swing.JFrame {
     private javax.swing.JButton geri_btn;
     private javax.swing.JButton borc_btn;
     private javax.swing.JButton kisiler_btn;
+    private javax.swing.JButton exportTable;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea borclar_txta;
     private javax.swing.JTextArea kisiler_txta;
@@ -180,6 +190,13 @@ public class borclar extends javax.swing.JFrame {
             }
         });
         
+        exportTable = new JButton("Borçları Tabloya Aktar");
+        exportTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	toExcel(evt);
+            }
+        });
+        
         exit_btn = new JButton("x");
 		exit_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
@@ -223,6 +240,8 @@ public class borclar extends javax.swing.JFrame {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(216)
 							.addComponent(borc_btn)
+							.addGap(250)
+        					.addComponent(exportTable)
 							.addPreferredGap(ComponentPlacement.RELATED, 726, Short.MAX_VALUE)
 							.addComponent(kisiler_btn)
 							.addGap(208))
@@ -257,7 +276,8 @@ public class borclar extends javax.swing.JFrame {
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(borc_btn)
-						.addComponent(kisiler_btn))
+						.addComponent(kisiler_btn)
+						.addComponent(exportTable))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(borclar_scrllpane, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
@@ -368,6 +388,57 @@ public class borclar extends javax.swing.JFrame {
         }    
         kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi");                                  
 	}
+    
+    
+	public void toExcel(java.awt.event.ActionEvent evt){
+	    try{
+	        TableModel model = jTable1.getModel();
+	        File excelFile;
+			FileInputStream excelFIS = null;
+			BufferedInputStream excelBIS = null;
+			XSSFWorkbook excelImport = null;
+			String yourDesktopPath2 = System.getProperty("user.home") + "\\Desktop\\";
+			JFileChooser excelFileChooser = new JFileChooser(yourDesktopPath2);
+			int excelChooser = excelFileChooser.showOpenDialog(null);
+			if (excelChooser == JFileChooser.APPROVE_OPTION) {
+			
+					excelFile = excelFileChooser.getSelectedFile();
+					FileWriter excel = new FileWriter(excelFile);
+
+	        for(int i = 3; i < model.getColumnCount(); i++){
+	            excel.write(model.getColumnName(i) + "\t");
+	        }
+
+	        excel.write("\n");
+	        int check=0;
+
+	        for(int i=0; i< model.getRowCount(); i++) {
+	            for(int j=3; j < model.getColumnCount(); j++) {
+	            	if(model.getValueAt(i,j).toString().equals("")) {
+	            		check=0;
+	            	}
+	            	else {
+	            	check = Integer.parseInt(model.getValueAt(i,j).toString());
+	            	}
+	            	
+	            	if(check > 0) {
+	            	excel.write(model.getValueAt(i,0).toString()+ " " + model.getValueAt(i,1).toString()+ " "+ model.getValueAt(i,2).toString() + "\t");
+	            	}
+	            	else {
+	            		excel.write("\t");
+	            	}
+	            	}
+	            excel.write("\n");
+	        }
+
+	        excel.close();
+
+	    }
+	    }	
+	    catch(IOException e){
+	    	System.out.println(e); 
+	    }
+	    }
 	
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
