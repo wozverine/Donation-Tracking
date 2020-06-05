@@ -134,7 +134,7 @@ public class Database_methods {
 			preparedStmt.setString(13, Mood);
 			preparedStmt.setString(14, Enter);
 			preparedStmt.execute();
-			con.close();
+			//con.close();
 			System.out.println("Insertion to the client table is successful!");
 		} catch (Exception e) {
 			System.out.println("error: ");

@@ -172,17 +172,37 @@ public class yeni_uye extends JFrame{
 		uyeDurumu_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeDurumu_lbl);
 		
-		JButton update_btn = new JButton("Yeni Üye Ekle");
-		update_btn.setForeground(new java.awt.Color(128, 0, 0));
-		update_btn.addActionListener(new ActionListener() {
+		JButton new_btn = new JButton("Yeni Üye Ekle");
+		new_btn.setForeground(new java.awt.Color(128, 0, 0));
+		new_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//database'e yeni üyeyi ekleyecek
+				int ID = Integer.parseInt(uye_no.getText());
+				String Gender=yeni_cinsiyet.getText();
+				String Name=yeni_ad.getText();
+				String Surname=yeni_soyad.getText();
+				String Work=yeni_çalısma.getText();
+				String Mail=yeni_mail.getText();
+				long TC=Long.parseLong(txtTc.getText());
+				String Graduation=yeni_mezun.getText();
+				String Department=yeni_bölüm.getText();
+				long Phone=Long.parseLong(yeni_tel.getText());
+				String Address=yeni_adres.getText();
+				String City=yeni_il.getText();
+				String Mood=yeni_durum.getText();
+				String Enter=yeni_uye_tarih.getText();
+				Database_methods dbmethods3 = new Database_methods();
+				dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
+						Graduation, Department, Phone, Address, City, Mood, Enter);
+				dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				
+				setVisible(false);
+				
 			}
 		});
-		update_btn.setFont(new Font("Calibri", Font.BOLD, 14));
-		update_btn.setBackground(new java.awt.Color(211, 211, 211));
-		update_btn.setBounds(249, 450, 180, 25);
-		panel_in.add(update_btn);
+		new_btn.setFont(new Font("Calibri", Font.BOLD, 14));
+		new_btn.setBackground(new java.awt.Color(211, 211, 211));
+		new_btn.setBounds(249, 450, 180, 25);
+		panel_in.add(new_btn);
 		
 		uye_no = new JTextField();
 		uye_no.setFont(new Font("Calibri", Font.PLAIN, 10));
