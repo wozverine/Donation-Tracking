@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
@@ -31,9 +31,13 @@ public class Login  extends javax.swing.JFrame{
 	JLabel username_lbl = new JLabel();
 	JButton login_btn = new JButton();
 	JButton exit_btn = new JButton();
+	ArrayList<person> pArr= new ArrayList<person>();
 
 	public Login() {
-		ArrayList<person> pArr= new ArrayList<person>();
+		Database_methods dbmethods3 = new Database_methods();
+		pArr=dbmethods3.GetPerson();
+		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
+		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         		
@@ -73,7 +77,7 @@ public class Login  extends javax.swing.JFrame{
 		        layeredPane.add(password_pf);
 		        login_btn.addMouseListener(new MouseAdapter() {
 		        	@Override
-		        	public void mouseClicked(MouseEvent e) {
+		        	public void mouseClicked(MouseEvent e) {		   
 		        		 try {
 		        		        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 		        		            if ("Nimbus".equals(info.getName())) {

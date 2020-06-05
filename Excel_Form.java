@@ -236,7 +236,7 @@ public class Excel_Form extends javax.swing.JFrame {
 							pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department,
 									Phone, Address, City, A, B, Mood, Enter));
 							
-							System.out.println(Name);
+							//System.out.println(Name);
 							// Adding Client into the client table in the donation database.
 							Database_methods dbmethods = new Database_methods();					
 							dbmethods.AddClient(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone, Address,

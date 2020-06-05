@@ -80,7 +80,6 @@ public class aidatlar extends javax.swing.JFrame {
                 araActionPerformed(evt);
             }
         });
-		
         Object[][] o=new Object[list.size()][year-2010+4];
        
         for (Object[] row: o) {Arrays.fill(row, "");}
