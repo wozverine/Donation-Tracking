@@ -26,14 +26,15 @@ public class Excel_Form extends javax.swing.JFrame {
 	int year = localDate.getYear();
 	int posX = 0;
 	int posY = 0;
-	
-	public Excel_Form(ArrayList<person> list) {
+	int changed=0;
+	ArrayList<person> pArr = new ArrayList<person>();
+	public Excel_Form(ArrayList<person> list){
 		initComponents(list);
 	}
 
 	private void initComponents(ArrayList<person> list) {
-		ArrayList<person> pArr = new ArrayList<person>();
-
+		//ArrayList<person> pArr = new ArrayList<person>();
+		pArr=list;
 		jPanel1 = new javax.swing.JPanel();
 		liste_ekle_btn = new javax.swing.JButton();
 		JButton dekont_ekle = new JButton();
@@ -57,6 +58,7 @@ public class Excel_Form extends javax.swing.JFrame {
 		dekont_ekle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				changed=1;
 				setVisible(false);
 				File excelFile;
 				FileInputStream excelFIS = null;
@@ -180,6 +182,7 @@ public class Excel_Form extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
+				changed=1;
 
 				File excelFile;
 				FileInputStream excelFIS = null;
@@ -270,13 +273,26 @@ public class Excel_Form extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				main m = new main(pArr);
-				m.setVisible(false);
-				m.dispose();
-				m.setUndecorated(true);
-				m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
-				m.setVisible(true);
-				centreWindow(m);
+				if(changed==0) {
+					main m = new main(pArr);
+					m.setVisible(false);
+					m.dispose();
+					m.setUndecorated(true);
+					m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+					m.setVisible(true);
+					centreWindow(m);
+				}
+				if(changed==1) {
+					Database_methods dbmethods3 = new Database_methods();
+					pArr=dbmethods3.GetPerson();
+					main m = new main(pArr);
+					m.setVisible(false);
+					m.dispose();
+					m.setUndecorated(true);
+					m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+					m.setVisible(true);
+					centreWindow(m);
+				}
 			}
 		});
 
@@ -295,6 +311,7 @@ public class Excel_Form extends javax.swing.JFrame {
 		yeni_uye.setFont(new Font("Calibri", Font.PLAIN, 20));
 		yeni_uye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				changed=1;
 				yeni_uye y = new yeni_uye();
 				y.setVisible(false);
 				y.setSize(575, 600);
