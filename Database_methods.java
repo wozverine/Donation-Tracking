@@ -22,33 +22,32 @@ public class Database_methods {
 	// donation database.
 	public ArrayList<person> GetPerson() {
 		ArrayList<person> pArr= new ArrayList<person>();
+		int uyeNo_lbl;
+		String cinsiyet_lbl = null;
+		String ad_lbl = null;
+		String soyad_lbl= null;
+		String calismayer_lbl= null;
+		String mail_lbl= null;
+		long kimlikNo_lbl= 0;
+		String mezTarihi_lbl= null;
+		String bolum_lbl= null;
+		long tel_lbl= 0;
+		String adres_lbl= null;
+		String il_lbl= null;
+		String uyeDurumu_lbl= null;
+		String girisTarihi_lbl= null;
+		int []aidatarr=new int[year-2010+1];
+		int []borcarr=new int[year-2010+1];
+		int count=0;
 		try {
 			String query="SELECT * FROM `abtable` WHERE `ab_id`>-1";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			ResultSet rs2 = null;
 			
-			int uyeNo_lbl;
-			String cinsiyet_lbl = null;
-			String ad_lbl = null;
-			String soyad_lbl= null;
-			String calismayer_lbl= null;
-			String mail_lbl= null;
-			long kimlikNo_lbl= 0;
-			String mezTarihi_lbl= null;
-			String bolum_lbl= null;
-			long tel_lbl= 0;
-			String adres_lbl= null;
-			String il_lbl= null;
-			String uyeDurumu_lbl= null;
-			String girisTarihi_lbl= null;
-			int []aidatarr=new int[year-2010+1];
-			int []borcarr=new int[year-2010+1];
-			int count=0;
 			while (rs.next()) {
 				uyeNo_lbl=(int) rs.getObject(1);
-				//arrperson.add((Integer) rs.getObject(1));
-				
+				System.out.println("no "+uyeNo_lbl);
 				String query2="SELECT * FROM `client` WHERE `client_id`="+rs.getObject(1);
 				Statement stmt2 = (Statement) con2.createStatement();
 				rs2 = stmt2.executeQuery(query2);
@@ -69,27 +68,47 @@ public class Database_methods {
 				}
 				//System.out.println("done");
 				
-				for(int x=0;x<aidatarr.length;x++) {
-					aidatarr[x]=(int) rs.getObject(x+2);
-					borcarr[x]=(int) rs.getObject(x+3);
-					x++;
+				for(int arrx=0;arrx<aidatarr.length;arrx++) {
+					aidatarr[arrx]=(int) rs.getObject(2*arrx+2);
+					borcarr[arrx]=(int) rs.getObject(2*arrx+3);
 				}
-				System.out.println(count+" aidat "+Arrays.toString(aidatarr));
-				System.out.println(count+" aidat "+Arrays.toString(borcarr));
+				//System.out.println(count+" aidat 0 "+Arrays.toString(aidatarr));
+				//System.out.println(count+" borc 0 "+Arrays.toString(borcarr));
 				
-				pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
+				person per=new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
 						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,
-						il_lbl,aidatarr, borcarr, uyeDurumu_lbl, girisTarihi_lbl));
+						il_lbl,borcarr, aidatarr, uyeDurumu_lbl, girisTarihi_lbl);
+				//per.setBorcarray(borcarr);
+				//per.setAidatarray(aidatarr);
+				//System.out.println(count+" tc "+per.getKimlikNo_lbl());
+				//System.out.println(count+" aidat 1 "+Arrays.toString(per.getAidatarray()));
+				//System.out.println(count+" borc 1 "+Arrays.toString(per.getBorcarray()));
+				
+				/*pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
+						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,il_lbl,borcarr, aidatarr, uyeDurumu_lbl, girisTarihi_lbl));*/
+				pArr.add(per);
+				System.out.println(count+" aidat 1 "+Arrays.toString(per.getAidatarray()));
+				System.out.println(count+" borc 1 "+Arrays.toString(per.getBorcarray()));
+				/*pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
+						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,
+						il_lbl,aidatarr, borcarr, uyeDurumu_lbl, girisTarihi_lbl));*/
+			
 				count++;
             }
+			System.out.println("f");
 			rs.close();
 			rs2.close();
 		}catch (Exception e) {
 			System.out.println("error: ");
 			e.printStackTrace();
 		}
-		System.out.println("kk0 "+Arrays.toString(pArr.get(0).getAidatcarray()));
-		System.out.println("kk1 "+Arrays.toString(pArr.get(1).getAidatcarray()));
+		/*System.out.println(pArr.size());
+		System.out.println("kk0 "+Arrays.toString(pArr.get(0).getAidatarray()));
+		System.out.println("kk0 "+pArr.get(0).getAd_lbl());
+		System.out.println("kk1 "+Arrays.toString(pArr.get(1).getAidatarray()));
+		System.out.println("kk1 "+pArr.get(1).getAd_lbl());
+		System.out.println("kk2 "+Arrays.toString(pArr.get(2).getAidatarray()));
+		System.out.println("kk2 "+pArr.get(2).getAd_lbl());*/
 		return pArr;
 	};
 	

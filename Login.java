@@ -36,7 +36,8 @@ public class Login  extends javax.swing.JFrame{
 	public Login() {
 		Database_methods dbmethods3 = new Database_methods();
 		pArr=dbmethods3.GetPerson();
-		System.out.println("login"+Arrays.toString(pArr.get(0).getAidatcarray()));
+		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
+		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         		
@@ -76,7 +77,7 @@ public class Login  extends javax.swing.JFrame{
 		        layeredPane.add(password_pf);
 		        login_btn.addMouseListener(new MouseAdapter() {
 		        	@Override
-		        	public void mouseClicked(MouseEvent e) {
+		        	public void mouseClicked(MouseEvent e) {		   
 		        		 try {
 		        		        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 		        		            if ("Nimbus".equals(info.getName())) {

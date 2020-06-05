@@ -22,11 +22,13 @@ public class person {
 	public void setBorcarray(int[] borcarray) {
 		this.borcarray = borcarray;
 	}
-	public int[] getAidatcarray() {
+	
+	
+	public int[] getAidatarray() {
 		return aidatarray;
 	}
 	public void setAidatarray(int[] aidatarray) {
-		this.aidatarray = borcarray;
+		this.aidatarray = aidatarray;
 	}
 	public int getUyeNo_lbl() {
 		return uyeNo_lbl;
@@ -129,9 +131,8 @@ public class person {
 		this.mezTarihi_lbl = "Bilinmiyor";
 		this.girisTarihi_lbl = "Bilinmiyor";
 		this.uyeDurumu_lbl = "Bilinmiyor";
-		this.borcarray= null;
 		this.aidatarray = null;
-		
+		this.borcarray= null;
 	}
 	person(int uyeNo, String cinsiyet,String ad, String soyad,String calismayer, String mail, long kimlikNo,
 			String mezTarihi,String bolum, long tel,String adres,String il,int[] aidatarr, int[] borcarr, 
@@ -150,8 +151,8 @@ public class person {
 		this.mezTarihi_lbl = mezTarihi;
 		this.girisTarihi_lbl = girisTarihi;
 		this.uyeDurumu_lbl = uyeDurumu;
-		this.borcarray= borcarr;
 		this.aidatarray = aidatarr;
+		this.borcarray= borcarr;
 		
 	}
 }
