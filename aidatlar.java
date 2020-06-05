@@ -4,7 +4,12 @@ import java.time.ZoneId;
 import java.util.*;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.*;
 
@@ -13,6 +18,11 @@ import java.awt.*;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.geom.RoundRectangle2D;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.border.LineBorder;
 
@@ -25,6 +35,7 @@ public class aidatlar extends javax.swing.JFrame {
     private javax.swing.JButton geri_btn;
     private javax.swing.JButton toplamaidat_btn;
     private javax.swing.JButton aidatkisiler_btn;
+    private javax.swing.JButton exportTable;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea borclar_txta;
     private javax.swing.JTextArea kisiler_txta;
@@ -181,6 +192,13 @@ public class aidatlar extends javax.swing.JFrame {
             }
         });
         
+        exportTable = new JButton("Ödenen Aidatları Tabloya Aktar");
+        exportTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	toExcel(evt);
+            }
+        });
+        
         exit_btn = new JButton("x");
 		exit_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
@@ -233,9 +251,12 @@ public class aidatlar extends javax.swing.JFrame {
         				.addGroup(groupLayout.createSequentialGroup()
         					.addGap(206)
         					.addComponent(toplamaidat_btn)
+        					.addGap(200)
+        					.addComponent(exportTable)
         					.addPreferredGap(ComponentPlacement.RELATED, 679, Short.MAX_VALUE)
         					.addComponent(aidatkisiler_btn)
-        					.addGap(183))))
+        					.addGap(183)
+        						)))
         		.addGroup(groupLayout.createSequentialGroup()
         			.addContainerGap(1256, Short.MAX_VALUE)
         			.addComponent(minimize_btn)
@@ -260,7 +281,8 @@ public class aidatlar extends javax.swing.JFrame {
         			.addGap(18)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(toplamaidat_btn)
-        				.addComponent(aidatkisiler_btn))
+        				.addComponent(aidatkisiler_btn)
+        				.addComponent(exportTable))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(aidatlar_scrllpane, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
@@ -371,6 +393,58 @@ public class aidatlar extends javax.swing.JFrame {
         }    
         kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi ödeme yapmıştır");                                  
 	}
+	
+	
+	public void toExcel(java.awt.event.ActionEvent evt){
+	    try{
+	        TableModel model = jTable1.getModel();
+	        File excelFile;
+			FileInputStream excelFIS = null;
+			BufferedInputStream excelBIS = null;
+			XSSFWorkbook excelImport = null;
+			String yourDesktopPath2 = System.getProperty("user.home") + "\\Desktop\\";
+			JFileChooser excelFileChooser = new JFileChooser(yourDesktopPath2);
+			int excelChooser = excelFileChooser.showOpenDialog(null);
+			if (excelChooser == JFileChooser.APPROVE_OPTION) {
+			
+					excelFile = excelFileChooser.getSelectedFile();
+					FileWriter excel = new FileWriter(excelFile);
+
+	        for(int i = 3; i < model.getColumnCount(); i++){
+	            excel.write(model.getColumnName(i) + "\t");
+	        }
+
+	        excel.write("\n");
+	        int check=0;
+
+	        for(int i=0; i< model.getRowCount(); i++) {
+	            for(int j=3; j < model.getColumnCount(); j++) {
+	            	if(model.getValueAt(i,j).toString().equals("")) {
+	            		check=0;
+	            	}
+	            	else {
+	            	check = Integer.parseInt(model.getValueAt(i,j).toString());
+	            	}
+	            	
+	            	if(check > 0) {
+	            	excel.write(model.getValueAt(i,0).toString()+ " " + model.getValueAt(i,1).toString()+ " "+ model.getValueAt(i,2).toString() + "\t");
+	            	}
+	            	else {
+	            		excel.write("\t");
+	            	}
+	            	}
+	            excel.write("\n");
+	        }
+
+	        excel.close();
+
+	    }
+	    }	
+	    catch(IOException e){
+	    	System.out.println(e); 
+	    }
+	    }
+	    
 	
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
