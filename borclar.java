@@ -115,12 +115,11 @@ public class borclar extends javax.swing.JFrame {
 		aidatlar_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		//setVisible(false);
-        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					frmBorclar.setVisible(false);
+        					frmBorclar.dispose();
+        					//frmBorclar.setVisible(false);
         					aidatlar window = new aidatlar(list);
         					window.frmAidatlar.setVisible(false);
         					window.frmAidatlar.dispose();
@@ -143,12 +142,11 @@ public class borclar extends javax.swing.JFrame {
 		geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		//setVisible(false);
-        		//dispose();
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
-        					frmBorclar.setVisible(false);
+        					frmBorclar.dispose();
+        					//frmBorclar.setVisible(false);
         					main m=new main(pArr);	
 	        		        m.setVisible(false);
 	        		        m.dispose();
@@ -306,7 +304,6 @@ public class borclar extends javax.swing.JFrame {
         jTable1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//frmBorclar.setVisible(false);
 				int rowSelected =jTable1.getSelectedRow(); 
         		personal p = new personal(list, rowSelected);
         		p.setVisible(false);
@@ -401,44 +398,39 @@ public class borclar extends javax.swing.JFrame {
 			JFileChooser excelFileChooser = new JFileChooser(yourDesktopPath2);
 			int excelChooser = excelFileChooser.showOpenDialog(null);
 			if (excelChooser == JFileChooser.APPROVE_OPTION) {
-			
-					excelFile = excelFileChooser.getSelectedFile();
-					FileWriter excel = new FileWriter(excelFile);
+				excelFile = excelFileChooser.getSelectedFile();
+				FileWriter excel = new FileWriter(excelFile);
 
-	        for(int i = 3; i < model.getColumnCount(); i++){
-	            excel.write(model.getColumnName(i) + "\t");
-	        }
+				for(int i = 3; i < model.getColumnCount(); i++){
+					excel.write(model.getColumnName(i) + "\t");
+				}
 
-	        excel.write("\n");
-	        int check=0;
+				excel.write("\n");
+				int check=0;
 
-	        for(int i=0; i< model.getRowCount(); i++) {
-	            for(int j=3; j < model.getColumnCount(); j++) {
-	            	if(model.getValueAt(i,j).toString().equals("")) {
-	            		check=0;
-	            	}
-	            	else {
-	            	check = Integer.parseInt(model.getValueAt(i,j).toString());
-	            	}
-	            	
-	            	if(check > 0) {
-	            	excel.write(model.getValueAt(i,0).toString()+ " " + model.getValueAt(i,1).toString()+ " "+ model.getValueAt(i,2).toString() + "\t");
-	            	}
-	            	else {
-	            		excel.write("\t");
-	            	}
-	            	}
-	            excel.write("\n");
-	        }
-
-	        excel.close();
-
-	    }
+		        for(int i=0; i< model.getRowCount(); i++) {
+		            for(int j=3; j < model.getColumnCount(); j++) {
+		            	if(model.getValueAt(i,j).toString().equals("")) {
+		            		check=0;
+		            	}else{
+		            		check = Integer.parseInt(model.getValueAt(i,j).toString());
+		            	}
+		            	
+		            	if(check > 0) {
+		            		excel.write(model.getValueAt(i,0).toString()+ " " + model.getValueAt(i,1).toString()+ " "+ model.getValueAt(i,2).toString() + "\t");
+		            	}else{
+		            		excel.write("\t");
+		            	}
+		            }
+		            excel.write("\n");
+		        }
+		        excel.close();
+			}
 	    }	
 	    catch(IOException e){
 	    	System.out.println(e); 
 	    }
-	    }
+	}
 	
 	public static void centreWindow(JFrame frame) {
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();

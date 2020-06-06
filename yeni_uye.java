@@ -26,7 +26,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.Color;
 
 
@@ -36,7 +39,6 @@ import java.awt.Color;
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    p.setVisible(true);	*/
 public class yeni_uye extends JFrame{
-	
 	JLayeredPane layeredPane;
 	JTextField uye_no;
 	JTextField yeni_ad;
@@ -48,14 +50,23 @@ public class yeni_uye extends JFrame{
 	JTextField yeni_tel;
 	JTextField yeni_adres;
 	JTextField yeni_il;
-	JTextField yeni_mezun;
-	JTextField yeni_uye_tarih;
+	JTextField yeni_mezun_day;
+	JTextField yeni_uye_day;
 	JTextField yeni_durum;
 	JTextField txtTc;
 	int posX;
 	int posY;
-	
+	Date date = new Date();
+	LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	int year  = localDate.getYear();
+	int month=localDate.getMonthValue();
+	int day=localDate.getDayOfMonth();
+	JTextField yeni_mezun_month;
+	JTextField yeni_mezun_year;
+	JTextField yeni_uye_month;
+	JTextField yeni_uye_year;
 	public yeni_uye(boolean is_new) {
+		//move window
 		this.addMouseListener(new MouseAdapter()
         {
            public void mousePressed(MouseEvent e)
@@ -72,7 +83,7 @@ public class yeni_uye extends JFrame{
         					
              }
         });
-
+        //move window
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
@@ -82,8 +93,7 @@ public class yeni_uye extends JFrame{
 		JLabel uyeBilgileri_lbl = new JLabel("\u00DCye Bilgileri");
 		uyeBilgileri_lbl.setBounds(214, 15, 120, 30);
 		uyeBilgileri_lbl.setForeground(new java.awt.Color(139, 0, 0));
-		uyeBilgileri_lbl.setFont(new Font("Calibri", Font.BOLD, 24));
-		
+		uyeBilgileri_lbl.setFont(new Font("Calibri", Font.BOLD, 24));	
 		panel.add(uyeBilgileri_lbl);
 		
 		JPanel panel_in = new JPanel();
@@ -98,7 +108,6 @@ public class yeni_uye extends JFrame{
 		uyeNo_lbl.setBounds(10, 7, 56, 17);
 		uyeNo_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeNo_lbl);
-		
 		
 		JLabel kimlikNo_lbl = new JLabel("T.C. Kimlik No:");
 		kimlikNo_lbl.setForeground(new Color(128, 0, 0));
@@ -173,6 +182,7 @@ public class yeni_uye extends JFrame{
 		panel_in.add(uyeDurumu_lbl);
 		
 		JButton new_btn = new JButton("Yeni Üye Ekle");
+		if(is_new) {new_btn.setText("Güncelle");};
 		new_btn.setForeground(new java.awt.Color(128, 0, 0));
 		new_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -183,13 +193,13 @@ public class yeni_uye extends JFrame{
 				String Work=yeni_calısma.getText();
 				String Mail=yeni_mail.getText();
 				long TC=Long.parseLong(txtTc.getText());
-				String Graduation=yeni_mezun.getText();
+				String Graduation=yeni_mezun_day.getText()+"-"+yeni_mezun_month.getText()+"-"+yeni_mezun_year.getText();
 				String Department=yeni_bolum.getText();
 				long Phone=Long.parseLong(yeni_tel.getText());
 				String Address=yeni_adres.getText();
 				String City=yeni_il.getText();
 				String Mood=yeni_durum.getText();
-				String Enter=yeni_uye_tarih.getText();
+				String Enter=yeni_uye_day.getText()+"-"+yeni_uye_month.getText()+"-"+yeni_uye_year.getText();
 				if(is_new) {
 					Database_methods dbmethods3 = new Database_methods();
 					dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
@@ -197,10 +207,11 @@ public class yeni_uye extends JFrame{
 					dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				}else {
 					Database_methods dbmethods3 = new Database_methods();
+					
 					dbmethods3.updateClient(ID, Gender, Name,  Surname, Work, Mail, TC,
 							Graduation, Department, Phone, Address, City, Mood, Enter);
 				}
-				setVisible(false);
+				dispose();
 			}
 		});
 		new_btn.setFont(new Font("Calibri", Font.BOLD, 14));
@@ -274,20 +285,23 @@ public class yeni_uye extends JFrame{
 		yeni_il.setBounds(108, 293, 253, 20);
 		panel_in.add(yeni_il);
 		
-		yeni_mezun = new JTextField();
-		yeni_mezun.setFont(new Font("Calibri", Font.PLAIN, 10));
-		yeni_mezun.setColumns(10);
-		yeni_mezun.setBounds(150, 339, 163, 20);
-		panel_in.add(yeni_mezun);
+		yeni_mezun_day = new JTextField();
+		yeni_mezun_day.setText("GG");
+		yeni_mezun_day.setFont(new Font("Calibri", Font.PLAIN, 11));
+		yeni_mezun_day.setColumns(10);
+		yeni_mezun_day.setBounds(150, 339, 25, 20);
+		panel_in.add(yeni_mezun_day);
 		
-		yeni_uye_tarih = new JTextField();
-		yeni_uye_tarih.setFont(new Font("Calibri", Font.PLAIN, 10));
-		yeni_uye_tarih.setColumns(10);
-		yeni_uye_tarih.setBounds(150, 369, 163, 20);
-		panel_in.add(yeni_uye_tarih);
+		yeni_uye_day = new JTextField();
+		yeni_uye_day.setText(String.format("%02d", day));
+		yeni_uye_day.setFont(new Font("Calibri", Font.PLAIN, 11));
+		yeni_uye_day.setColumns(10);
+		yeni_uye_day.setBounds(150, 369, 25, 20);
+		panel_in.add(yeni_uye_day);
 		
 		yeni_durum = new JTextField();
-		yeni_durum.setFont(new Font("Calibri", Font.PLAIN, 10));
+		yeni_durum.setText("AKTİF");
+		yeni_durum.setFont(new Font("Calibri", Font.PLAIN, 11));
 		yeni_durum.setColumns(10);
 		yeni_durum.setBounds(150, 399, 163, 20);
 		panel_in.add(yeni_durum);
@@ -304,11 +318,38 @@ public class yeni_uye extends JFrame{
 		geri_btn.setBounds(430, 450, 79, 25);
 		geri_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
-				setVisible(false);
+				dispose();
 			}
         });
 		panel_in.add(geri_btn);
 		
+		yeni_mezun_month = new JTextField();
+		yeni_mezun_month.setFont(new Font("Calibri", Font.PLAIN, 11));
+		yeni_mezun_month.setText("MM");
+		yeni_mezun_month.setBounds(178, 339, 32, 20);
+		panel_in.add(yeni_mezun_month);
+		yeni_mezun_month.setColumns(10);
+		
+		yeni_mezun_year = new JTextField();
+		yeni_mezun_year.setFont(new Font("Calibri", Font.PLAIN, 11));
+		yeni_mezun_year.setText("YYYY");
+		yeni_mezun_year.setBounds(214, 339, 45, 20);
+		panel_in.add(yeni_mezun_year);
+		yeni_mezun_year.setColumns(10);
+		
+		yeni_uye_month = new JTextField();
+		yeni_uye_month.setFont(new Font("Calibri", Font.PLAIN, 11));
+		yeni_uye_month.setBounds(178, 369, 32, 20);
+		yeni_uye_month.setText(String.format("%02d", month));
+		panel_in.add(yeni_uye_month);
+		yeni_uye_month.setColumns(10);
+		
+		yeni_uye_year = new JTextField();
+		yeni_uye_year.setFont(new Font("Calibri", Font.PLAIN, 11));
+		yeni_uye_year.setBounds(214, 369, 45, 20);
+		yeni_uye_year.setText(String.format("%04d", year));
+		panel_in.add(yeni_uye_year);
+		yeni_uye_year.setColumns(10);
 		
 		JButton minimize_btn = new JButton("_");
         minimize_btn.addActionListener(new ActionListener() {

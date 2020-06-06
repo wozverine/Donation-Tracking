@@ -65,7 +65,7 @@ public class stats_general extends JFrame{
 		getContentPane().add(btnGeri);
 		btnGeri.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {		
-        		setVisible(false);
+        		dispose();
 			}
         });
 		panel.setBackground(Color.white);
