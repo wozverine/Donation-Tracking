@@ -84,8 +84,10 @@ public class main extends javax.swing.JFrame {
         			int sum=0;
         			for(int x=0;x<list.size();x++) {
         				bolum[x]=list.get(x).getBolum_lbl();
-        				giris_yıl[x]=list.get(x).getGirisTarihi_lbl().split("-")[2];
-        				mezun_yıl[x]=list.get(x).getMezTarihi_lbl().split("-")[2];
+        				String []giris=list.get(x).getGirisTarihi_lbl().split("-");
+        				giris_yıl[x]=giris[giris.length-1];
+        				String []mezun=list.get(x).getMezTarihi_lbl().split("-");
+        				mezun_yıl[x]=mezun[mezun.length-1];
         				calısma[x]=list.get(x).getCalismayer_lbl();
         				il[x]=list.get(x).getIl_lbl();
         			}

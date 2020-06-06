@@ -38,24 +38,24 @@ import java.awt.Color;
 public class yeni_uye extends JFrame{
 	
 	JLayeredPane layeredPane;
-	private JTextField uye_no;
-	private JTextField yeni_ad;
-	private JTextField yeni_soyad;
-	private JTextField yeni_cinsiyet;
-	private JTextField yeni_bölüm;
-	private JTextField yeni_çalısma;
-	private JTextField yeni_mail;
-	private JTextField yeni_tel;
-	private JTextField yeni_adres;
-	private JTextField yeni_il;
-	private JTextField yeni_mezun;
-	private JTextField yeni_uye_tarih;
-	private JTextField yeni_durum;
+	JTextField uye_no;
+	JTextField yeni_ad;
+	JTextField yeni_soyad;
+	JTextField yeni_cinsiyet;
+	JTextField yeni_bolum;
+	JTextField yeni_calısma;
+	JTextField yeni_mail;
+	JTextField yeni_tel;
+	JTextField yeni_adres;
+	JTextField yeni_il;
+	JTextField yeni_mezun;
+	JTextField yeni_uye_tarih;
+	JTextField yeni_durum;
 	JTextField txtTc;
 	int posX;
 	int posY;
 	
-	public yeni_uye() {
+	public yeni_uye(boolean is_new) {
 		this.addMouseListener(new MouseAdapter()
         {
            public void mousePressed(MouseEvent e)
@@ -180,23 +180,27 @@ public class yeni_uye extends JFrame{
 				String Gender=yeni_cinsiyet.getText();
 				String Name=yeni_ad.getText();
 				String Surname=yeni_soyad.getText();
-				String Work=yeni_çalısma.getText();
+				String Work=yeni_calısma.getText();
 				String Mail=yeni_mail.getText();
 				long TC=Long.parseLong(txtTc.getText());
 				String Graduation=yeni_mezun.getText();
-				String Department=yeni_bölüm.getText();
+				String Department=yeni_bolum.getText();
 				long Phone=Long.parseLong(yeni_tel.getText());
 				String Address=yeni_adres.getText();
 				String City=yeni_il.getText();
 				String Mood=yeni_durum.getText();
 				String Enter=yeni_uye_tarih.getText();
-				Database_methods dbmethods3 = new Database_methods();
-				dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
-						Graduation, Department, Phone, Address, City, Mood, Enter);
-				dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				
+				if(is_new) {
+					Database_methods dbmethods3 = new Database_methods();
+					dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
+							Graduation, Department, Phone, Address, City, Mood, Enter);
+					dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				}else {
+					Database_methods dbmethods3 = new Database_methods();
+					dbmethods3.updateClient(ID, Gender, Name,  Surname, Work, Mail, TC,
+							Graduation, Department, Phone, Address, City, Mood, Enter);
+				}
 				setVisible(false);
-				
 			}
 		});
 		new_btn.setFont(new Font("Calibri", Font.BOLD, 14));
@@ -234,17 +238,17 @@ public class yeni_uye extends JFrame{
 		yeni_cinsiyet.setBounds(108, 93, 253, 20);
 		panel_in.add(yeni_cinsiyet);
 		
-		yeni_bölüm = new JTextField();
-		yeni_bölüm.setFont(new Font("Calibri", Font.PLAIN, 10));
-		yeni_bölüm.setColumns(10);
-		yeni_bölüm.setBounds(109, 123, 252, 20);
-		panel_in.add(yeni_bölüm);
+		yeni_bolum = new JTextField();
+		yeni_bolum.setFont(new Font("Calibri", Font.PLAIN, 10));
+		yeni_bolum.setColumns(10);
+		yeni_bolum.setBounds(109, 123, 252, 20);
+		panel_in.add(yeni_bolum);
 		
-		yeni_çalısma = new JTextField();
-		yeni_çalısma.setFont(new Font("Calibri", Font.PLAIN, 10));
-		yeni_çalısma.setColumns(10);
-		yeni_çalısma.setBounds(108, 153, 253, 20);
-		panel_in.add(yeni_çalısma);
+		yeni_calısma = new JTextField();
+		yeni_calısma.setFont(new Font("Calibri", Font.PLAIN, 10));
+		yeni_calısma.setColumns(10);
+		yeni_calısma.setBounds(108, 153, 253, 20);
+		panel_in.add(yeni_calısma);
 		
 		yeni_mail = new JTextField();
 		yeni_mail.setFont(new Font("Calibri", Font.PLAIN, 10));

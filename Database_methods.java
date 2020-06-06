@@ -112,6 +112,51 @@ public class Database_methods {
 		return pArr;
 	};
 	
+	public void updateClient(int ID, String Gender, String Name, String Surname, String Work, String Mail, long TC,
+			String Graduation, String Department, long Phone, String Address, String City, String Mood, String Enter) {
+		try {
+			String phoneString = String.valueOf(Phone);
+			String tcString = String.valueOf(TC);
+			String query = "UPDATE client "+
+			"set gender='"+Gender+"'"+
+			", name='"+Name+"'"+
+			", surname='"+Surname+"'"+
+			", work='"+Surname+"'"+
+			", mail='"+Mail+"'"+
+			", tc='"+TC+"'"+
+			", graduation='"+Graduation+"'"+
+			", department='"+Department+"'"+
+			", phone='"+Phone+"'"+
+			", address='"+Address+"'"+
+			", city='"+City+"'"+
+			", mood='"+Mood+"'"+
+			", enter='"+Enter+"'"+
+			" WHERE client_id= "+ID;
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			//preparedStmt.setString(1, Gender);
+			/*preparedStmt.setInt(1, ID);
+			preparedStmt.setString(2, Gender);
+			preparedStmt.setString(3, Name);
+			preparedStmt.setString(4, Surname);
+			preparedStmt.setString(5, Work);
+			preparedStmt.setString(6, Mail);
+			preparedStmt.setString(7, tcString);
+			preparedStmt.setString(8, Graduation);
+			preparedStmt.setString(9, Department);
+			preparedStmt.setString(10, phoneString);
+			preparedStmt.setString(11, Address);
+			preparedStmt.setString(12, City);
+			preparedStmt.setString(13, Mood);
+			preparedStmt.setString(14, Enter);*/
+			preparedStmt.execute(query);
+			//con.close();
+			System.out.println("Update the client table is successful!");
+		} catch (Exception e) {
+			System.out.println("error: ");
+			e.printStackTrace();
+		}
+	}
+	
 	public void AddClient(int ID, String Gender, String Name, String Surname, String Work, String Mail, long TC,
 			String Graduation, String Department, long Phone, String Address, String City, String Mood, String Enter) {
 		try {
@@ -144,7 +189,7 @@ public class Database_methods {
 
 	// AddAB Method: the method which adds aidat and borc to the ABtable in the
 	// donation database.
-
+	
 	public void AddAB(int ID, int A2010, int B2010, int A2011, int B2011, int A2012, int B2012, int A2013, int B2013,
 			int A2014, int B2014, int A2015, int B2015, int A2016, int B2016, int A2017, int B2017, int A2018,
 			int B2018, int A2019, int B2019, int A2020, int B2020) {
