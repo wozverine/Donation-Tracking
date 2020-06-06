@@ -57,145 +57,145 @@ public class Login  extends javax.swing.JFrame{
 		layeredPane.add(hatırla_lbl);
 		JCheckBox hatırla_cb = new JCheckBox();
 		
-		        hatırla_cb.setBorder(null);
-		        hatırla_cb.setBounds(460, 400, 20, 20);
-		        layeredPane.add(hatırla_cb);
-		        password_pf.addMouseListener(new MouseAdapter() {
-		        	@Override
-		        	public void mouseClicked(MouseEvent e) {
-		        		password_pf.setText("");
-		        	}
-		        });
-		     
-		        password_pf.setEchoChar('*');
-		        password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		        password_pf.setForeground(new java.awt.Color(204, 204, 204));
-		        password_pf.setText("Password");
-		        password_pf.setBorder(null);
-		        password_pf.setOpaque(false);
-		        password_pf.setBounds(460, 320, 308, 40);
-		        layeredPane.add(password_pf);
-		        login_btn.addMouseListener(new MouseAdapter() {
-		        	@Override
-		        	public void mouseClicked(MouseEvent e) {		   
-		        		 try {
-		        		        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-		        		            if ("Nimbus".equals(info.getName())) {
-		        		                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-		        		                break;
-		        		            }
-		        		        }
-		        		    } catch (ClassNotFoundException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    } catch (InstantiationException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    } catch (IllegalAccessException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    }
-		        		    //</editor-fold>
-
-		        		    /* Create and display the form */
-		        		    java.awt.EventQueue.invokeLater(new Runnable() {
-		        		        public void run() {		        		 
-		        		            setVisible(false);		        		       
-		        		            main m=new main(pArr);	
-		        		            m.setVisible(false);
-		        		            m.dispose();
-		        		            m.setUndecorated(true);
-		        		            m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
-		        		            m.setVisible(true);
-		        		            centreWindow(m);
-		        		        	//new main().setVisible(true);
-		        		        }
-		        		    });
-		        	}
-		        });
-		        
-		        login_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
-		        login_btn.setBorder(null);
-		        login_btn.setBorderPainted(false);
-		        login_btn.setContentAreaFilled(false);
-		        login_btn.setBounds(392, 431, 232, 46);
-		        layeredPane.add(login_btn);
-		        
-		        exit_btn.addMouseListener(new MouseAdapter() {
-		        	@Override
-		        	public void mouseClicked(MouseEvent e) {
-		        		 try {
-		        		        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-		        		            if ("Nimbus".equals(info.getName())) {
-		        		                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-		        		                break;
-		        		            }
-		        		        }
-		        		    } catch (ClassNotFoundException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    } catch (InstantiationException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    } catch (IllegalAccessException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-		        		        java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		        		    }
-		        		    //</editor-fold>
-
-		        		    /* Create and display the form */
-		        		    java.awt.EventQueue.invokeLater(new Runnable() {
-		        		        public void run() {
-		        		        	System.exit(0);
-		        		            //setVisible(false);
-		        		        }
-		        		    });
-		        	}
-		        });
-		        
-		        exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_exit.png"))); // NOI18N
-		        exit_btn.setBorder(null);
-		        exit_btn.setBorderPainted(false);
-		        exit_btn.setContentAreaFilled(false);
-		        exit_btn.setBounds(600, 431, 232, 46);
-		        layeredPane.add(exit_btn);
-		        
-		        username_txtf.addMouseListener(new MouseAdapter() {
-		        	@Override
-		        	public void mouseClicked(MouseEvent e) {
-		        		username_txtf.setText("");
-		        	}
-		        });
-
-		        username_txtf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		        username_txtf.setForeground(new java.awt.Color(204, 204, 204));
-		        username_txtf.setText("Kullanıcı adını giriniz");
-		        username_txtf.setBorder(null);
-		        username_txtf.setOpaque(false);
-		        username_txtf.setBounds(460, 180, 308, 40);
-		        layeredPane.add(username_txtf);
-		        
-		        sifre_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-		        sifre_btn.setForeground(new java.awt.Color(255, 255, 255));
-		        sifre_btn.setHorizontalAlignment(SwingConstants.LEFT);
-		        sifre_btn.setText("Şifre");
-		        sifre_btn.setBounds(460, 280, 330, 30);
-		        layeredPane.add(sifre_btn);
-
-		        username_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-		        username_lbl.setForeground(new java.awt.Color(255, 255, 255));
-		        username_lbl.setHorizontalAlignment(SwingConstants.LEFT);
-		        username_lbl.setText("Kullanıcı Adı");
-		        username_lbl.setBounds(460, 140, 264, 30);
-		        layeredPane.add(username_lbl);
-		        
-				JLabel loginLeft_lbl = new JLabel("");
-				loginLeft_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_left.png")));
-				loginLeft_lbl.setBounds(0, 0, 400, 500);
-				layeredPane.add(loginLeft_lbl);
+		hatırla_cb.setBorder(null);
+		hatırla_cb.setBounds(460, 400, 20, 20);
+		layeredPane.add(hatırla_cb);
+		password_pf.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				password_pf.setText("");
+			}
+		});
+		
+		password_pf.setEchoChar('*');
+		password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+		password_pf.setForeground(new java.awt.Color(204, 204, 204));
+		password_pf.setText("Password");
+		password_pf.setBorder(null);
+		password_pf.setOpaque(false);
+		password_pf.setBounds(460, 320, 308, 40);
+		layeredPane.add(password_pf);
+		
+		login_btn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {		   
+				try {
+					for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+						if ("Nimbus".equals(info.getName())) {
+							javax.swing.UIManager.setLookAndFeel(info.getClassName());
+							break;
+						}
+					}
+				} catch (ClassNotFoundException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				} catch (InstantiationException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				} catch (IllegalAccessException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				}
+				//</editor-fold>
 				
-				JLabel loginRight_lbl = new JLabel("");
-				loginRight_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_right.png")));
-				loginRight_lbl.setBounds(395, 0, 400, 500);
-				layeredPane.add(loginRight_lbl);	
+				/* Create and display the form */
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					public void run() {		        		 
+						dispose();      		       
+						main m=new main(pArr);	
+						m.setVisible(false);
+						m.dispose();
+						m.setUndecorated(true);
+						m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+						m.setVisible(true);
+						centreWindow(m);
+						//new main().setVisible(true);
+					}
+				});
+			}
+		});
+		        
+		login_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
+		login_btn.setBorder(null);
+		login_btn.setBorderPainted(false);
+		login_btn.setContentAreaFilled(false);
+		login_btn.setBounds(392, 431, 232, 46);
+		layeredPane.add(login_btn);
+	
+		exit_btn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+						if ("Nimbus".equals(info.getName())) {
+							javax.swing.UIManager.setLookAndFeel(info.getClassName());
+							break;
+						}
+					}
+				} catch (ClassNotFoundException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				} catch (InstantiationException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				} catch (IllegalAccessException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+				}
+				//</editor-fold>
+		
+				/* Create and display the form */
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						System.exit(0);
+					}
+				});
+			}
+		});
+		        
+		exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_exit.png"))); // NOI18N
+		exit_btn.setBorder(null);
+		exit_btn.setBorderPainted(false);
+		exit_btn.setContentAreaFilled(false);
+		exit_btn.setBounds(600, 431, 232, 46);
+		layeredPane.add(exit_btn);
+		        
+		username_txtf.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				username_txtf.setText("");
+			}
+		});
+
+		username_txtf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+		username_txtf.setForeground(new java.awt.Color(204, 204, 204));
+		username_txtf.setText("Kullanıcı adını giriniz");
+		username_txtf.setBorder(null);
+		username_txtf.setOpaque(false);
+		username_txtf.setBounds(460, 180, 308, 40);
+		layeredPane.add(username_txtf);
+		        
+		sifre_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+		sifre_btn.setForeground(new java.awt.Color(255, 255, 255));
+		sifre_btn.setHorizontalAlignment(SwingConstants.LEFT);
+		sifre_btn.setText("Şifre");
+		sifre_btn.setBounds(460, 280, 330, 30);
+		layeredPane.add(sifre_btn);
+		
+		username_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+		username_lbl.setForeground(new java.awt.Color(255, 255, 255));
+		username_lbl.setHorizontalAlignment(SwingConstants.LEFT);
+		username_lbl.setText("Kullanıcı Adı");
+		username_lbl.setBounds(460, 140, 264, 30);
+		layeredPane.add(username_lbl);
+		        
+		JLabel loginLeft_lbl = new JLabel("");
+		loginLeft_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_left.png")));
+		loginLeft_lbl.setBounds(0, 0, 400, 500);
+		layeredPane.add(loginLeft_lbl);
+				
+		JLabel loginRight_lbl = new JLabel("");
+		loginRight_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_right.png")));
+		loginRight_lbl.setBounds(395, 0, 400, 500);
+		layeredPane.add(loginRight_lbl);	
 	}
 	
 	public static void centreWindow(JFrame frame) {
@@ -238,6 +238,4 @@ public class Login  extends javax.swing.JFrame{
             }
         });
     }
-	
-	
 }
