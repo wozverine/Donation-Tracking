@@ -209,8 +209,12 @@ public class personal extends JFrame{
 				y.yeni_tel.setText(telDB_lbl.getText());
 				y.yeni_adres.setText(adres_txtp.getText());
 				y.yeni_il.setText(ilDB_lbl.getText());
-				y.yeni_mezun.setText(mezTarihiDB_lbl.getText());
-				y.yeni_uye_tarih.setText(girisTarihiDB_lbl.getText());
+				y.yeni_mezun_day.setText(mezTarihiDB_lbl.getText().split("-")[0]);
+				y.yeni_mezun_month.setText(mezTarihiDB_lbl.getText().split("-")[1]);
+				y.yeni_mezun_year.setText(mezTarihiDB_lbl.getText().split("-")[2]);
+				y.yeni_uye_day.setText(girisTarihiDB_lbl.getText().split("-")[0]);
+				y.yeni_uye_month.setText(girisTarihiDB_lbl.getText().split("-")[1]);
+				y.yeni_uye_year.setText(girisTarihiDB_lbl.getText().split("-")[2]);
 				y.yeni_durum.setText(uyeDurumuDB_lbl.getText());
 				y.setVisible(false);
 				y.setSize(575, 600);

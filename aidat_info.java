@@ -58,9 +58,7 @@ public class aidat_info extends javax.swing.JFrame{
 		btnGeri.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				setVisible(false);
-				
+				dispose();
 			}
 		});
 		btnGeri.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -70,7 +68,6 @@ public class aidat_info extends javax.swing.JFrame{
 		update.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
 				bilgi.setEditable(true);
 				update.setVisible(false);
 				
@@ -83,15 +80,12 @@ public class aidat_info extends javax.swing.JFrame{
 				save.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-					
 						save.setVisible(false);
 						update.setVisible(true);
 						bilgi.setEditable(false);
-						
 					}
 				});
 			}
 		});
-		
 	}
 }

@@ -195,7 +195,7 @@ public class stats_choose extends JFrame{
 		geri_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 		getContentPane().add(geri_btn,gbc_geri_btn );

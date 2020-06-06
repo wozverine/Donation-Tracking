@@ -59,7 +59,8 @@ public class Excel_Form extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				changed=1;
-				setVisible(false);
+				//setVisible(false);
+				dispose();
 				File excelFile;
 				FileInputStream excelFIS = null;
 				BufferedInputStream excelBIS = null;
@@ -181,7 +182,8 @@ public class Excel_Form extends javax.swing.JFrame {
 		liste_ekle_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				//setVisible(false);
+				dispose();
 				changed=1;
 
 				File excelFile;
@@ -272,7 +274,7 @@ public class Excel_Form extends javax.swing.JFrame {
 		geri_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				dispose();
 				if(changed==0) {
 					main m = new main(pArr);
 					m.setVisible(false);

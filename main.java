@@ -122,8 +122,7 @@ public class main extends javax.swing.JFrame {
         borc_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        	
-        		setVisible(false);
+        		//setVisible(false);
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
@@ -146,8 +145,7 @@ public class main extends javax.swing.JFrame {
         aidat_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        	
-        		setVisible(false);
+        		//setVisible(false);
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
@@ -169,7 +167,8 @@ public class main extends javax.swing.JFrame {
         dosya_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
-        		setVisible(false);
+        		//setVisible(false);
+        		dispose();
         		Excel_Form exc = new Excel_Form(list);
         		exc.setVisible(false);
         		exc.dispose();
@@ -299,7 +298,6 @@ public class main extends javax.swing.JFrame {
         });
         aidat_bilgi_btn.setBounds(523, 356, 123, 23);
         getContentPane().add(aidat_bilgi_btn);
-        
         pack();
     }                                                    
 
