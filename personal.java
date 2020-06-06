@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
 
 
 /*personal p = new personal();
@@ -191,13 +192,34 @@ public class personal extends JFrame{
 		update_btn.setForeground(new java.awt.Color(128, 0, 0));
 		update_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {	
-				yeni_uye y = new yeni_uye();
+				yeni_uye y = new yeni_uye(false);
 				y.txtTc.setText(kimlikNoDB_lbl.getText());
+				y.uye_no.setText(uyeNoDB_lbl.getText());
+				String[] ad_array = adDB_lbl.getText().split(" ");
+				String ad=ad_array[0];
+				if(ad_array.length>2) {
+					ad=ad_array[0]+" "+ad_array[1]; 
+				}
+				y.yeni_ad.setText(ad);
+				y.yeni_soyad.setText(ad_array[ad_array.length-1]);
+				y.yeni_cinsiyet.setText(cinsiyetDB_lbl.getText());
+				y.yeni_bolum.setText(bolumDB_lbl.getText());
+				y.yeni_calısma.setText(calısmayerDB_lbl.getText());
+				y.yeni_mail.setText(mailDB_lbl.getText());
+				y.yeni_tel.setText(telDB_lbl.getText());
+				y.yeni_adres.setText(adres_txtp.getText());
+				y.yeni_il.setText(ilDB_lbl.getText());
+				y.yeni_mezun.setText(mezTarihiDB_lbl.getText());
+				y.yeni_uye_tarih.setText(girisTarihiDB_lbl.getText());
+				y.yeni_durum.setText(uyeDurumuDB_lbl.getText());
+				y.setVisible(false);
+				y.setSize(575, 600);
+				y.dispose();
+				y.setUndecorated(true);
+				y.setShape(new RoundRectangle2D.Double(0, 0, y.getWidth(), y.getHeight(), 20, 20));
 				y.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				y.setSize(585,600);
 				y.setVisible(true);
 				centreWindow(y);
-				
 			}
 		});
 		update_btn.setFont(new Font("Calibri", Font.BOLD, 14));

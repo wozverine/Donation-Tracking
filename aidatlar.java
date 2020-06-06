@@ -91,7 +91,7 @@ public class aidatlar extends javax.swing.JFrame {
         	o[count][2]=list.get(count).getSoy_lbl();
         	int giriş = Integer.parseInt(list.get(count).getGirisTarihi_lbl().substring(6));
         	for(int d=giriş-2010;d<(year-2010+1);d++) {
-        		o[count][d+3]=list.get(count).getAidatcarray()[d];        		
+        		o[count][d+3]=list.get(count).getAidatarray()[d];        		
         	}
         }
         String rows[]=new String[year-2010+4];
