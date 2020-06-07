@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.*;
 
 public class main extends javax.swing.JFrame {	
@@ -45,6 +47,24 @@ public class main extends javax.swing.JFrame {
     		}
     	});
     	//move window
+    	//Create folder and log
+    	try {
+    		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+    		File file = new File(documentpath);
+    		file.mkdir();
+    
+            File file_2 = new File(documentpath+"\\logs.txt");
+            
+            
+            File file3=new File(documentpath+"\\Belgeler");
+            file3.mkdir();
+    		//System.out.println("Directory created successfully");
+    		
+    	}catch(Exception e){
+    		System.out.println("Sorry couldn’t create specified directory "+e);
+    	}
+    	
+    	//Create folder and log
     	
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();

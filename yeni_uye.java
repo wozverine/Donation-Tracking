@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileSystemView;
 
 public class yeni_uye extends javax.swing.JFrame {
 	JLayeredPane layeredPane;
@@ -186,7 +190,9 @@ public class yeni_uye extends javax.swing.JFrame {
 				dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
 							Graduation, Department, Phone, Address, City, Mood, Enter);
 				dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				
+				person new_person=new person(ID, Gender, Name,  Surname, Work, Mail, TC,
+						Graduation, Department, Phone, Address, City,null,null, Mood, Enter);
+				DBlog(addObject(new_person));
 				dispose();
 			}
 		});
@@ -342,5 +348,37 @@ public class yeni_uye extends javax.swing.JFrame {
 	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 	    frame.setLocation(x, y);
 	}
+	public String addObject(person new_person) {
+		String log="Tarih: "+day+"/"+month+"/"+year+" Kişi eklendi.\n"+
+				"İsim:"+new_person.getAd_lbl()+"\n"+
+				"Soyisim:"+new_person.getSoy_lbl()+"\n"+
+				"Kimlik numarası:"+new_person.getKimlikNo_lbl()+"\n"+
+				"Üye numarası:"+new_person.getUyeNo_lbl()+"\n"+
+				"Cinsiyet:"+new_person.getCinsiyet_lbl()+"\n"+
+				"Bölüm:"+new_person.getBolum_lbl()+"\n"+
+				"Çalışma yeri:"+new_person.getCalismayer_lbl()+"\n"+
+				"Mail:"+new_person.getMail_lbl()+"\n"+
+				"Telefon numarası:"+new_person.getTel_lbl()+"\n"+
+				"Adres:"+new_person.getAdres_lbl()+"\n"+
+				"İl:"+new_person.getIl_lbl()+"\n"+
+				"Mezuniyet Tarihi:"+new_person.getMezTarihi_lbl()+"\n"+
+				"Üyelik tarihi:"+new_person.getGirisTarihi_lbl()+"\n"+
+				"Üye durumu:"+new_person.getUyeDurumu_lbl()+"\n";
+		return log;
+	}
+	
+	public void DBlog(String x) {
+        try{
+        	String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+        	File file = new File(documentpath+"\\logs.txt");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(x);
+            bw.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
 }
 
