@@ -1,10 +1,29 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+
+
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
+import javax.swing.JSeparator;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.JButton;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -12,16 +31,15 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.awt.Color;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 
-public class yeni_uye extends javax.swing.JFrame {
+/*personal p = new personal();
+		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		p.setSize(700, 600);
+		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    p.setVisible(true);	*/
+public class update_uye extends JFrame{
 	JLayeredPane layeredPane;
 	JTextField uye_no;
 	JTextField yeni_ad;
@@ -48,7 +66,7 @@ public class yeni_uye extends javax.swing.JFrame {
 	JTextField yeni_mezun_year;
 	JTextField yeni_uye_month;
 	JTextField yeni_uye_year;
-	public yeni_uye(ArrayList<person> list) {
+	public update_uye(person person) {
 		//move window
 		this.addMouseListener(new MouseAdapter()
         {
@@ -164,7 +182,7 @@ public class yeni_uye extends javax.swing.JFrame {
 		uyeDurumu_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeDurumu_lbl);
 		
-		JButton new_btn = new JButton("Yeni Üye Ekle");
+		JButton new_btn = new JButton("Güncelle");
 		new_btn.setForeground(new java.awt.Color(128, 0, 0));
 		new_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -183,10 +201,20 @@ public class yeni_uye extends javax.swing.JFrame {
 				String Mood=yeni_durum.getText();
 				String Enter=yeni_uye_day.getText()+"-"+yeni_uye_month.getText()+"-"+yeni_uye_year.getText();
 				Database_methods dbmethods3 = new Database_methods();
-				dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
+				dbmethods3.updateClient(ID, Gender, Name,  Surname, Work, Mail, TC,
 							Graduation, Department, Phone, Address, City, Mood, Enter);
-				dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				
+				Database_methods dbmethods4 = new Database_methods();
+				ArrayList<person> pArr = dbmethods4.GetPerson();
+				personal p = new personal(pArr,person,true);
+        		p.setVisible(false);
+        		p.dispose();
+        		p.setUndecorated(true);
+        		p.setSize(700, 562);
+		        p.setShape(new RoundRectangle2D.Double(0, 0, p.getWidth(), p.getHeight(), 20, 20));
+        		centreWindow(p);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
 				dispose();
 			}
 		});
@@ -295,6 +323,17 @@ public class yeni_uye extends javax.swing.JFrame {
 		geri_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
 				dispose();
+				Database_methods dbmethods3 = new Database_methods();
+				ArrayList<person>list_2=dbmethods3.GetPerson();
+        		personal p = new personal(list_2,person,false);
+        		p.setVisible(false);
+        		p.dispose();
+        		p.setUndecorated(true);
+        		p.setSize(700, 562);
+		        p.setShape(new RoundRectangle2D.Double(0, 0, p.getWidth(), p.getHeight(), 20, 20));
+        		centreWindow(p);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
 			}
         });
 		panel_in.add(geri_btn);
@@ -343,4 +382,3 @@ public class yeni_uye extends javax.swing.JFrame {
 	    frame.setLocation(x, y);
 	}
 }
-

@@ -306,7 +306,7 @@ public class aidatlar extends javax.swing.JFrame {
 			public void mouseClicked(MouseEvent e) {
 				//frmAidatlar.setVisible(false);
 				int rowSelected =jTable1.getSelectedRow(); 
-				personal p = new personal(list, rowSelected);
+				personal p = new personal(list,list.get(rowSelected),false);
         		p.setVisible(false);
         		p.dispose();
         		p.setUndecorated(true);

@@ -314,7 +314,7 @@ public class Excel_Form extends javax.swing.JFrame {
 		yeni_uye.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				changed=1;
-				yeni_uye y = new yeni_uye(true);
+				yeni_uye y = new yeni_uye(list);
 				y.setVisible(false);
 				y.setSize(575, 600);
 				y.dispose();

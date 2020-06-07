@@ -52,8 +52,11 @@ public class main extends javax.swing.JFrame {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
         		//setVisible(false);
+        		dispose();
         		int rowSelected =jTable1.getSelectedRow();
-        		personal p = new personal(list, rowSelected);
+        		//list.get(rowSelected);
+        		//personal p = new personal(list, rowSelected,false);
+        		personal p = new personal(list,list.get(rowSelected),false);
         		p.setVisible(false);
         		p.dispose();
         		p.setUndecorated(true);

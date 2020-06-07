@@ -305,7 +305,7 @@ public class borclar extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int rowSelected =jTable1.getSelectedRow(); 
-        		personal p = new personal(list, rowSelected);
+        		personal p = new personal(list, list.get(rowSelected),false);
         		p.setVisible(false);
         		p.dispose();
         		p.setUndecorated(true);
