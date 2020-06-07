@@ -206,13 +206,15 @@ public class update_uye extends JFrame{
 				
 				Database_methods dbmethods4 = new Database_methods();
 				ArrayList<person> pArr = dbmethods4.GetPerson();
-				main m=new main(pArr);	
-				m.setVisible(false);
-				m.dispose();
-				m.setUndecorated(true);
-				m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
-				m.setVisible(true);
-				centreWindow(m);
+				personal p = new personal(pArr,person,true);
+        		p.setVisible(false);
+        		p.dispose();
+        		p.setUndecorated(true);
+        		p.setSize(700, 562);
+		        p.setShape(new RoundRectangle2D.Double(0, 0, p.getWidth(), p.getHeight(), 20, 20));
+        		centreWindow(p);
+        		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	    p.setVisible(true);
 				dispose();
 			}
 		});
