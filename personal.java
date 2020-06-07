@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;	
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileSystemView;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -18,8 +20,7 @@ import java.awt.geom.RoundRectangle2D;
 public class personal extends JFrame{	
 	JLayeredPane layeredPane;
 	
-	public personal(ArrayList<person> list,person person,boolean changed) {	
-		//person person = list.get(rowSelected);
+	public personal(ArrayList<person> list,person person,boolean changed) {
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -50,7 +51,7 @@ public class personal extends JFrame{
 		uyeNo_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeNo_lbl);
 		
-		JLabel uyeNoDB_lbl = new JLabel(Integer.toString(person.getUyeNo_lbl()));  //Üye no database'den çekilecek
+		JLabel uyeNoDB_lbl = new JLabel(Integer.toString(person.getUyeNo_lbl())); 
 		uyeNoDB_lbl.setBounds(125, 7, 48, 17);
 		uyeNoDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uyeNoDB_lbl);
@@ -60,7 +61,7 @@ public class personal extends JFrame{
 		kimlikNo_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(kimlikNo_lbl);
 		
-		JLabel kimlikNoDB_lbl = new JLabel(Long.toString(person.getKimlikNo_lbl()));  //Tc no database'den çekilecek
+		JLabel kimlikNoDB_lbl = new JLabel(Long.toString(person.getKimlikNo_lbl())); 
 		kimlikNoDB_lbl.setBounds(361, 7, 109, 17);
 		kimlikNoDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(kimlikNoDB_lbl);
@@ -71,7 +72,7 @@ public class personal extends JFrame{
 		ad_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(ad_lbl);
 		
-		JLabel adDB_lbl = new JLabel(person.getAd_lbl() + " " + person.getSoy_lbl()); //ad soyad database'den çekilecek
+		JLabel adDB_lbl = new JLabel(person.getAd_lbl() + " " + person.getSoy_lbl());
 		adDB_lbl.setBounds(125, 37, 345, 17);
 		adDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(adDB_lbl);
@@ -82,7 +83,7 @@ public class personal extends JFrame{
 		cinsiyet_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(cinsiyet_lbl);
 		
-		JLabel cinsiyetDB_lbl = new JLabel(person.getCinsiyet_lbl()); //cinsiyet database'den çekilecek
+		JLabel cinsiyetDB_lbl = new JLabel(person.getCinsiyet_lbl()); 
 		cinsiyetDB_lbl.setBounds(125, 67, 86, 17);
 		cinsiyetDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(cinsiyetDB_lbl);
@@ -93,7 +94,7 @@ public class personal extends JFrame{
 		bolum_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(bolum_lbl);
 		
-		JLabel bolumDB_lbl = new JLabel(person.getBolum_lbl()); //bölümü database'den çekilecek
+		JLabel bolumDB_lbl = new JLabel(person.getBolum_lbl());
 		bolumDB_lbl.setBounds(125, 97, 345, 17);
 		bolumDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(bolumDB_lbl);
@@ -104,7 +105,7 @@ public class personal extends JFrame{
 		calismayer_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(calismayer_lbl);
 		
-		JLabel calısmayerDB_lbl = new JLabel(person.getCalismayer_lbl()); //çalıştığı yer database'den çekilecek
+		JLabel calısmayerDB_lbl = new JLabel(person.getCalismayer_lbl());
 		calısmayerDB_lbl.setBounds(125, 127, 345, 17);
 		calısmayerDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(calısmayerDB_lbl);
@@ -115,7 +116,7 @@ public class personal extends JFrame{
 		mail_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(mail_lbl);
 		
-		JLabel mailDB_lbl = new JLabel(person.getMail_lbl()); //mail adresi database'den çekilecek
+		JLabel mailDB_lbl = new JLabel(person.getMail_lbl()); 
 		mailDB_lbl.setBounds(125, 157, 345, 17);
 		mailDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(mailDB_lbl);
@@ -126,7 +127,7 @@ public class personal extends JFrame{
 		tel_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(tel_lbl);
 		
-		JLabel telDB_lbl = new JLabel(Long.toString(person.getTel_lbl())); //Tel no database'den çekilecek
+		JLabel telDB_lbl = new JLabel(Long.toString(person.getTel_lbl())); 
 		telDB_lbl.setBounds(125, 187, 251, 17);
 		telDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(telDB_lbl);
@@ -151,7 +152,7 @@ public class personal extends JFrame{
 		il_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(il_lbl);
 		
-		JLabel ilDB_lbl = new JLabel(person.getIl_lbl()); //il database'den çekilecek
+		JLabel ilDB_lbl = new JLabel(person.getIl_lbl()); 
 		ilDB_lbl.setBounds(125, 267, 167, 17);
 		ilDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(ilDB_lbl);
@@ -162,7 +163,7 @@ public class personal extends JFrame{
 		mezTarihi_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(mezTarihi_lbl);
 		
-		JLabel mezTarihiDB_lbl = new JLabel(person.getMezTarihi_lbl()); //mezuniyet tarihi database'den çekilecek
+		JLabel mezTarihiDB_lbl = new JLabel(person.getMezTarihi_lbl()); 
 		mezTarihiDB_lbl.setBounds(135, 297, 167, 17);
 		mezTarihiDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(mezTarihiDB_lbl);
@@ -173,7 +174,7 @@ public class personal extends JFrame{
 		girisTarihi_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(girisTarihi_lbl);
 		
-		JLabel girisTarihiDB_lbl = new JLabel(person.getGirisTarihi_lbl()); //Üye giriş tarihi database'den çekilecek
+		JLabel girisTarihiDB_lbl = new JLabel(person.getGirisTarihi_lbl()); 
 		girisTarihiDB_lbl.setBounds(125, 327, 140, 17);
 		girisTarihiDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(girisTarihiDB_lbl);
@@ -184,7 +185,7 @@ public class personal extends JFrame{
 		uyeDurumu_lbl.setFont(new Font("Calibri", Font.BOLD, 16));
 		panel_in.add(uyeDurumu_lbl);
 		
-		JLabel uyeDurumuDB_lbl = new JLabel(person.getUyeDurumu_lbl()); //üyelik durumu database'den çekilecek
+		JLabel uyeDurumuDB_lbl = new JLabel(person.getUyeDurumu_lbl()); 
 		uyeDurumuDB_lbl.setBounds(125, 357, 140, 17);
 		uyeDurumuDB_lbl.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel_in.add(uyeDurumuDB_lbl);
@@ -214,6 +215,7 @@ public class personal extends JFrame{
 				y.yeni_mezun_day.setText(mezTarihiDB_lbl.getText().split("-")[0]);
 				y.yeni_mezun_month.setText(mezTarihiDB_lbl.getText().split("-")[1]);
 				y.yeni_mezun_year.setText(mezTarihiDB_lbl.getText().split("-")[2]);
+				
 				y.yeni_uye_day.setText(girisTarihiDB_lbl.getText().split("-")[0]);
 				y.yeni_uye_month.setText(girisTarihiDB_lbl.getText().split("-")[1]);
 				y.yeni_uye_year.setText(girisTarihiDB_lbl.getText().split("-")[2]);
@@ -237,10 +239,11 @@ public class personal extends JFrame{
 		uye_file.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
 				if (Desktop.isDesktopSupported()) {
 				    try {
-				        File myFile = new File("C:/Users/serra/Desktop/"+kimlikNoDB_lbl.getText()+".pdf");
+				    	String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+
+				    			"\\Donation Tracking"+"\\Belgeler\\";
+				        File myFile = new File(documentpath+kimlikNoDB_lbl.getText()+".pdf");
 				        Desktop.getDesktop().open(myFile);
 				    } catch (IOException ex) {
 				        // no application registered for PDFs

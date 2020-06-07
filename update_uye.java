@@ -20,6 +20,7 @@ import javax.swing.JSeparator;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
@@ -27,6 +28,9 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -54,6 +58,10 @@ public class update_uye extends JFrame{
 	JTextField yeni_mezun_day;
 	JTextField yeni_uye_day;
 	JTextField yeni_durum;
+	JTextField yeni_mezun_month;
+	JTextField yeni_mezun_year;
+	JTextField yeni_uye_month;
+	JTextField yeni_uye_year;
 	JTextField txtTc;
 	int posX;
 	int posY;
@@ -62,11 +70,8 @@ public class update_uye extends JFrame{
 	int year  = localDate.getYear();
 	int month=localDate.getMonthValue();
 	int day=localDate.getDayOfMonth();
-	JTextField yeni_mezun_month;
-	JTextField yeni_mezun_year;
-	JTextField yeni_uye_month;
-	JTextField yeni_uye_year;
 	public update_uye(person person) {
+		
 		//move window
 		this.addMouseListener(new MouseAdapter()
         {
@@ -200,13 +205,15 @@ public class update_uye extends JFrame{
 				String City=yeni_il.getText();
 				String Mood=yeni_durum.getText();
 				String Enter=yeni_uye_day.getText()+"-"+yeni_uye_month.getText()+"-"+yeni_uye_year.getText();
+				person new_person=new person(ID, Gender, Name,  Surname, Work, Mail, TC,
+						Graduation, Department, Phone, Address, City,person.getAidatarray(),person.getBorcarray(), Mood, Enter);
 				Database_methods dbmethods3 = new Database_methods();
 				dbmethods3.updateClient(ID, Gender, Name,  Surname, Work, Mail, TC,
 							Graduation, Department, Phone, Address, City, Mood, Enter);
 				
 				Database_methods dbmethods4 = new Database_methods();
 				ArrayList<person> pArr = dbmethods4.GetPerson();
-				personal p = new personal(pArr,person,true);
+				personal p = new personal(pArr,new_person,true);
         		p.setVisible(false);
         		p.dispose();
         		p.setUndecorated(true);
@@ -215,6 +222,8 @@ public class update_uye extends JFrame{
         		centreWindow(p);
         		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         	    p.setVisible(true);
+        	    String log=compareObjects(person,new_person);
+        	    DBlog(log);
 				dispose();
 			}
 		});
@@ -381,4 +390,91 @@ public class update_uye extends JFrame{
 	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 	    frame.setLocation(x, y);
 	}
+	public String compareObjects(person old_person,person new_person) {
+		boolean changed=false;
+		String log="";
+		if(old_person.getUyeNo_lbl()!=(new_person.getUyeNo_lbl())) {
+			changed=true;
+			log=log+"Üye numarası değiştirildi. Eski üye numarası : "+old_person.getUyeNo_lbl()+" Yeni üye numarası: "+
+					new_person.getUyeNo_lbl()+"\n";
+		}
+		if(!old_person.getAd_lbl().equals(new_person.getAd_lbl())){
+			changed=true;
+			log=log+"İsim değiştirildi. Eski isim: "+old_person.getAd_lbl()+" Yeni isim:" + 
+					new_person.getAd_lbl()+"\n";
+		}
+		if(!old_person.getSoy_lbl().equals(new_person.getSoy_lbl())){
+			changed=true;
+			log=log+"Soyisim değiştirildi. Eski soyisim: "+old_person.getSoy_lbl()+" Yeni soyisim:" + 
+					new_person.getSoy_lbl()+"\n";
+		}
+		if(!old_person.getCinsiyet_lbl().equals(new_person.getCinsiyet_lbl())){
+			changed=true;
+			log=log+"Cinsiyet değiştirildi. Eski cinsiyet: "+old_person.getCinsiyet_lbl()+" Yeni cinsiyet:" + 
+					new_person.getCinsiyet_lbl()+"\n";
+		}
+		if(!old_person.getBolum_lbl().equals(new_person.getBolum_lbl())){
+			changed=true;
+			log=log+"Bölüm değiştirildi. Eski bölüm: "+old_person.getBolum_lbl()+" Yeni bölüm:" + 
+					new_person.getBolum_lbl()+"\n";
+		}
+		if(!old_person.getCalismayer_lbl().equals(new_person.getCalismayer_lbl())){
+			changed=true;
+			log=log+"Çalışma yeri değiştirildi. Eski çalışma yeri: "+old_person.getCalismayer_lbl()+" Yeni çalışma yeri:" + 
+					new_person.getCalismayer_lbl()+"\n";
+		}
+		if(!old_person.getMail_lbl().equals(new_person.getMail_lbl())){
+			changed=true;
+			log=log+"Mail değiştirildi. Eski mail: "+old_person.getMail_lbl()+" Yeni mail:" + 
+					new_person.getMail_lbl()+"\n";
+		}
+		if(old_person.getTel_lbl()!=new_person.getTel_lbl()){
+			changed=true;
+			log=log+"Telefon numarası değiştirildi. Eski telefon numarası: "+old_person.getTel_lbl()+" Yeni telefon numarası:" + 
+					new_person.getTel_lbl()+"\n";
+		}
+		if(!old_person.getAdres_lbl().equals(new_person.getAdres_lbl())){
+			changed=true;
+			log=log+"Adres değiştirildi. Eski adres: "+old_person.getAdres_lbl()+" Yeni adres:" + 
+					new_person.getAdres_lbl()+"\n";
+		}
+		if(!old_person.getIl_lbl().equals(new_person.getIl_lbl())){
+			changed=true;
+			log=log+"İl değiştirildi. Eski il: "+old_person.getIl_lbl()+" Yeni il:" + 
+					new_person.getIl_lbl()+"\n";
+		}
+		if(!old_person.getMezTarihi_lbl().equals(new_person.getMezTarihi_lbl())){
+			changed=true;
+			log=log+"Mezuniyet tarihi değiştirildi. Eski mezuniyet tarihi: "+old_person.getMezTarihi_lbl()+" Yeni mezuniyet tarihi:" + 
+					new_person.getMezTarihi_lbl()+"\n";
+		}
+		if(!old_person.getUyeDurumu_lbl().equals(new_person.getUyeDurumu_lbl())){
+			changed=true;
+			log=log+"Üye durumu değiştirildi. Eski üye durumu: "+old_person.getUyeDurumu_lbl()+" Yeni üye durumu:" + 
+					new_person.getUyeDurumu_lbl()+"\n";
+		}
+		if(old_person.getKimlikNo_lbl()!=new_person.getKimlikNo_lbl()){
+			changed=true;
+			log=log+"Kimlik numarası değiştirildi. Eski kimlik numarası: "+old_person.getKimlikNo_lbl()+" Yeni kimlik numarası:" + 
+					new_person.getKimlikNo_lbl()+"\n";
+		}
+		if(changed) {
+			log="Tarih: "+day+"/"+month+"/"+year+" Kişi güncellendi. İsim:"+old_person.getAd_lbl()+" Soyisim:"+old_person.getSoy_lbl()+
+					" Kimlik numarası:"+old_person.getKimlikNo_lbl()+"\n"+log+"\n";
+		}		
+		return log;
+	}
+	public void DBlog(String x) {
+        try{
+        	String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+        	File file = new File(documentpath+"\\logs.txt");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(x);
+            bw.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
 }
