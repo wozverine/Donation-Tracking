@@ -248,8 +248,7 @@ public class Excel_Form extends javax.swing.JFrame {
 									City, Mood, Enter);
 							// AddAB method.
 							Database_methods dbmethods2 = new Database_methods();
-							dbmethods2.AddAB(ID, A[0], B[0], A[1], B[1], A[2], B[2], A[3], B[3], A[4], B[4], A[5], B[5], A[6], B[6],
-									A[7], B[7], A[8], B[8], A[9], B[9], A[10], B[10]);
+							dbmethods2.AddAB(ID,A,B);
 							
 						}
 						

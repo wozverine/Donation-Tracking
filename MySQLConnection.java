@@ -23,7 +23,7 @@ public class MySQLConnection {
 		}
 		try {
 			con = (Connection) DriverManager.getConnection(url, "root", null);
-			System.out.println("connection is successful");
+			//System.out.println("connection is successful");
 
 
 		} catch (SQLException ex) {
