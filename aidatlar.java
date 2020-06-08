@@ -57,6 +57,7 @@ public class aidatlar extends javax.swing.JFrame {
 	}
 
 	private void initialize(ArrayList<person> list) {
+		setContentPane(new JLabel(new ImageIcon(getClass().getResource("back.jpg"))));
 		pArr=list;
 		Color maroon=Color.decode("#800000");
 		frmAidatlar = new JFrame();
@@ -103,11 +104,15 @@ public class aidatlar extends javax.swing.JFrame {
         }
         //String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
-		borclar_btn = new JButton("Borçlar");
-		borclar_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
-		borclar_btn.setForeground(Color.BLACK);
-		borclar_btn.setBackground(new Color(169, 169, 169));
-		borclar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
+		borclar_btn = new JButton();
+		//borclar_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
+		borclar_btn.setIcon(new ImageIcon(getClass().getResource("bbroc.jpg")));
+		borclar_btn.setBorder(null);
+		borclar_btn.setBorderPainted(false);
+		borclar_btn.setContentAreaFilled(false);
+		//borclar_btn.setForeground(Color.BLACK);
+		//borclar_btn.setBackground(new Color(169, 169, 169));
+		//borclar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
 		borclar_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -130,11 +135,15 @@ public class aidatlar extends javax.swing.JFrame {
         	}
         });
 		
-		geri_btn = new JButton("Geri");
-		geri_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
-		geri_btn.setForeground(Color.BLACK);
-		geri_btn.setBackground(new Color(169, 169, 169));
-		geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
+		geri_btn = new JButton();
+		geri_btn.setIcon(new ImageIcon(getClass().getResource("bgeri.png")));
+		geri_btn.setBorder(null);
+		geri_btn.setBorderPainted(false);
+		geri_btn.setContentAreaFilled(false);
+		//geri_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
+		//geri_btn.setForeground(Color.BLACK);
+		//geri_btn.setBackground(new Color(169, 169, 169));
+		//geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
 		geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -159,10 +168,14 @@ public class aidatlar extends javax.swing.JFrame {
         	}
         });
 		
-		ara_btn = new JButton("ARA");
+		ara_btn = new JButton();
 		ara_btn.setHorizontalAlignment(SwingConstants.CENTER);
-		ara_btn.setForeground(Color.BLACK);
-		ara_btn.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		ara_btn.setIcon(new ImageIcon(getClass().getResource("bara.jpg")));
+		ara_btn.setBorder(null);
+		ara_btn.setBorderPainted(false);
+		ara_btn.setContentAreaFilled(false);
+		//ara_btn.setForeground(Color.BLACK);
+		//ara_btn.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		ara_btn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
