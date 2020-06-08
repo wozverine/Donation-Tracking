@@ -7,21 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Scanner;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileSystemView;
 
@@ -41,6 +38,10 @@ public class yeni_uye extends javax.swing.JFrame {
 	JTextField yeni_uye_day;
 	JTextField yeni_durum;
 	JTextField txtTc;
+	JTextField yeni_mezun_month;
+	JTextField yeni_mezun_year;
+	JTextField yeni_uye_month;
+	JTextField yeni_uye_year;
 	int posX;
 	int posY;
 	Date date = new Date();
@@ -48,10 +49,7 @@ public class yeni_uye extends javax.swing.JFrame {
 	int year  = localDate.getYear();
 	int month=localDate.getMonthValue();
 	int day=localDate.getDayOfMonth();
-	JTextField yeni_mezun_month;
-	JTextField yeni_mezun_year;
-	JTextField yeni_uye_month;
-	JTextField yeni_uye_year;
+	
 	public yeni_uye(ArrayList<person> list) {
 		//move window
 		this.addMouseListener(new MouseAdapter()
@@ -71,6 +69,11 @@ public class yeni_uye extends javax.swing.JFrame {
              }
         });
         //move window
+        int[] aidat_arr=new int[year-2010+1];
+        Arrays.fill(aidat_arr, 0);
+        int[] borc_arr=new int[year-2010+1];
+        Arrays.fill(borc_arr, 0);
+        borc_arr[borc_arr.length-1]=Integer.valueOf(AidatRead());
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new java.awt.Color(211, 211, 211));
@@ -189,7 +192,7 @@ public class yeni_uye extends javax.swing.JFrame {
 				Database_methods dbmethods3 = new Database_methods();
 				dbmethods3.AddClient(ID, Gender, Name,  Surname, Work, Mail, TC,
 							Graduation, Department, Phone, Address, City, Mood, Enter);
-				dbmethods3.AddAB(ID, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				dbmethods3.AddAB(ID,aidat_arr,borc_arr);
 				person new_person=new person(ID, Gender, Name,  Surname, Work, Mail, TC,
 						Graduation, Department, Phone, Address, City,null,null, Mood, Enter);
 				DBlog(addObject(new_person));
@@ -380,5 +383,17 @@ public class yeni_uye extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+	public String AidatRead() {
+		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+    	File file = new File(documentpath+"\\aidatlar.txt");
+    	String new_borc="";
+		try(Scanner fileReader = new Scanner(file)) {
+			 new_borc=fileReader.nextLine();
+			 System.out.println(new_borc);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		return new_borc;
+	}
 }
 

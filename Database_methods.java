@@ -20,6 +20,7 @@ public class Database_methods {
 
 	// AddClient Method: the method which adds client to the client table in the
 	// donation database.
+	@SuppressWarnings("finally")
 	public ArrayList<person> GetPerson() {
 		ArrayList<person> pArr= new ArrayList<person>();
 		int uyeNo_lbl;
@@ -77,16 +78,14 @@ public class Database_methods {
 				
 				person per=new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
 						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,
-						il_lbl,borcarr, aidatarr, uyeDurumu_lbl, girisTarihi_lbl);
+						il_lbl, aidatarr,borcarr, uyeDurumu_lbl, girisTarihi_lbl);
 				//per.setBorcarray(borcarr);
 				//per.setAidatarray(aidatarr);
-				//System.out.println(count+" tc "+per.getKimlikNo_lbl());
-				//System.out.println(count+" aidat 1 "+Arrays.toString(per.getAidatarray()));
-				//System.out.println(count+" borc 1 "+Arrays.toString(per.getBorcarray()));
 				
 				/*pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
 						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,il_lbl,borcarr, aidatarr, uyeDurumu_lbl, girisTarihi_lbl));*/
 				pArr.add(per);
+				System.out.println(pArr.size());
 				System.out.println(count+" aidat 1 "+Arrays.toString(per.getAidatarray()));
 				System.out.println(count+" borc 1 "+Arrays.toString(per.getBorcarray()));
 				/*pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
@@ -101,22 +100,23 @@ public class Database_methods {
 		}catch (Exception e) {
 			System.out.println("error: ");
 			e.printStackTrace();
+		}finally {
+			System.out.println(pArr.size());
+			System.out.println("kk0 "+Arrays.toString(pArr.get(0).getAidatarray()));
+			System.out.println("kk0 "+pArr.get(0).getAd_lbl());
+			System.out.println("kk1 "+Arrays.toString(pArr.get(1).getAidatarray()));
+			System.out.println("kk1 "+pArr.get(1).getAd_lbl());
+			System.out.println("kk2 "+Arrays.toString(pArr.get(2).getAidatarray()));
+			System.out.println("kk2 "+pArr.get(2).getAd_lbl());
+			return pArr;
 		}
-		/*System.out.println(pArr.size());
-		System.out.println("kk0 "+Arrays.toString(pArr.get(0).getAidatarray()));
-		System.out.println("kk0 "+pArr.get(0).getAd_lbl());
-		System.out.println("kk1 "+Arrays.toString(pArr.get(1).getAidatarray()));
-		System.out.println("kk1 "+pArr.get(1).getAd_lbl());
-		System.out.println("kk2 "+Arrays.toString(pArr.get(2).getAidatarray()));
-		System.out.println("kk2 "+pArr.get(2).getAd_lbl());*/
-		return pArr;
+		
+		//return pArr;
 	};
 	
 	public void updateClient(int ID, String Gender, String Name, String Surname, String Work, String Mail, long TC,
 			String Graduation, String Department, long Phone, String Address, String City, String Mood, String Enter) {
 		try {
-			String phoneString = String.valueOf(Phone);
-			String tcString = String.valueOf(TC);
 			String query = "UPDATE client "+
 			"set gender='"+Gender+"'"+
 			", name='"+Name+"'"+
@@ -133,21 +133,6 @@ public class Database_methods {
 			", enter='"+Enter+"'"+
 			" WHERE client_id= "+ID;
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			//preparedStmt.setString(1, Gender);
-			/*preparedStmt.setInt(1, ID);
-			preparedStmt.setString(2, Gender);
-			preparedStmt.setString(3, Name);
-			preparedStmt.setString(4, Surname);
-			preparedStmt.setString(5, Work);
-			preparedStmt.setString(6, Mail);
-			preparedStmt.setString(7, tcString);
-			preparedStmt.setString(8, Graduation);
-			preparedStmt.setString(9, Department);
-			preparedStmt.setString(10, phoneString);
-			preparedStmt.setString(11, Address);
-			preparedStmt.setString(12, City);
-			preparedStmt.setString(13, Mood);
-			preparedStmt.setString(14, Enter);*/
 			preparedStmt.execute(query);
 			//con.close();
 			System.out.println("Update the client table is successful!");
@@ -186,45 +171,34 @@ public class Database_methods {
 			e.printStackTrace();
 		}
 	}
-
-	// AddAB Method: the method which adds aidat and borc to the ABtable in the
-	// donation database.
 	
-	public void AddAB(int ID, int A2010, int B2010, int A2011, int B2011, int A2012, int B2012, int A2013, int B2013,
-			int A2014, int B2014, int A2015, int B2015, int A2016, int B2016, int A2017, int B2017, int A2018,
-			int B2018, int A2019, int B2019, int A2020, int B2020) {
+	public void AddAB(int ID, int[]A,int[]B) {
 		try {
-			String query = "INSERT INTO abtable(ab_id, A2010,B2010,A2011,B2011,A2012,B2012,A2013,B2013,A2014,B2014,A2015,B2015,A2016,B2016,A2017,B2017,A2018,B2018,A2019,B2019,A2020,B2020) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query="INSERT INTO abtable(ab_id";
+			String query_1="";
+			for(int year_count=2010;year_count<year+1;year_count++) {
+				query_1=query_1+","+"A"+String.valueOf(year_count)+","+"B"+String.valueOf(year_count);
+				System.out.println(year_count);
+			}
+			String query_2="?,?,?";
+			for(int year_count=2011;year_count<year+1;year_count++) {
+				query_2=query_2+",?,?";
+			}
+			query=query+query_1+") VALUES ("+query_2+")";
+			System.out.println(query);
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setInt(1, ID);
-			preparedStmt.setInt(2, A2010);
-			preparedStmt.setInt(3, B2010);
-			preparedStmt.setInt(4, A2011);
-			preparedStmt.setInt(5, B2011);
-			preparedStmt.setInt(6, A2012);
-			preparedStmt.setInt(7, B2012);
-			preparedStmt.setInt(8, A2013);
-			preparedStmt.setInt(9, B2013);
-			preparedStmt.setInt(10, A2014);
-			preparedStmt.setInt(11, B2014);
-			preparedStmt.setInt(12, A2015);
-			preparedStmt.setInt(13, B2015);
-			preparedStmt.setInt(14, A2016);
-			preparedStmt.setInt(15, B2016);
-			preparedStmt.setInt(16, A2017);
-			preparedStmt.setInt(17, B2017);
-			preparedStmt.setInt(18, A2018);
-			preparedStmt.setInt(19, B2018);
-			preparedStmt.setInt(20, A2019);
-			preparedStmt.setInt(21, B2019);
-			preparedStmt.setInt(22, A2020);
-			preparedStmt.setInt(23, B2020);
+			int cd=2;
+			for(int year_count=2010;year_count<year+1;year_count++) {
+				preparedStmt.setInt(cd, A[year_count-2010]);
+				preparedStmt.setInt(cd+1, B[year_count-2010]);
+				cd=cd+2;
+			}
 			preparedStmt.execute();
 			con.close();
 			System.out.println("Insertion to the abtable is successful!");
 		} catch (Exception e) {
-			System.out.println("error: ");
+			System.out.println("error: "+e);
 			e.printStackTrace();
 		}
 	}

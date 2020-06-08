@@ -1,12 +1,25 @@
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileSystemView;
+
 import java.awt.*;
 import javax.swing.JLabel;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Scanner;
 
 public class aidat_info extends javax.swing.JFrame{
 	private JTextField textField;
 	public aidat_info() {
+		Date date = new Date();
+		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		int year = localDate.getYear();
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -22,7 +35,8 @@ public class aidat_info extends javax.swing.JFrame{
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Calibri", Font.PLAIN, 14));
-		textField.setText("100");
+		textField.setText(AidatRead());
+		textField.setEditable(false);
 		textField.setBounds(127, 420, 57, 30);
 		panel.add(textField);
 		textField.setColumns(10);
@@ -39,13 +53,11 @@ public class aidat_info extends javax.swing.JFrame{
 		aidat_tutar_label.setBounds(126, 11, 200, 40);
 		panel.add(aidat_tutar_label);
 		
-		
 		JButton update = new JButton("Bilgileri Güncelle");
 		update.setForeground(new Color(0, 0, 0));
 		update.setFont(new Font("Calibri", Font.PLAIN, 12));
 		update.setBounds(346, 427, 129, 23);
 		panel.add(update);
-		
 
 		JTextPane bilgi = new JTextPane();
 		bilgi.setEditable(false);
@@ -70,6 +82,7 @@ public class aidat_info extends javax.swing.JFrame{
 			public void mouseClicked(MouseEvent e) {
 				bilgi.setEditable(true);
 				update.setVisible(false);
+				textField.setEditable(true);
 				
 				JButton save = new JButton("Kaydet");
 				save.setForeground(new Color(0, 0, 0));
@@ -83,9 +96,37 @@ public class aidat_info extends javax.swing.JFrame{
 						save.setVisible(false);
 						update.setVisible(true);
 						bilgi.setEditable(false);
+						textField.setEditable(false);
+						String x=textField.getText();
+						AidatLog(x);
 					}
 				});
 			}
 		});
 	}
+	public String AidatRead() {
+		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+    	File file = new File(documentpath+"\\aidatlar.txt");
+    	String new_borc="";
+		try(Scanner fileReader = new Scanner(file)) {
+			 new_borc=fileReader.nextLine();
+			 System.out.println(new_borc);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		return new_borc;
+	}
+	public void AidatLog(String x) {
+        try{
+        	String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+        	File file = new File(documentpath+"\\aidatlar.txt");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(),false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(x);
+            bw.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
 }

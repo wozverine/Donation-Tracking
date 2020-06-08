@@ -1,27 +1,26 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
-import java.sql.*;
+import javax.swing.filechooser.FileSystemView;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.ResultSetMetaData;
+
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.awt.BorderLayout;
-import javax.swing.*;
-import javax.swing.border.AbstractBorder;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class Login  extends javax.swing.JFrame{
 	
@@ -32,12 +31,48 @@ public class Login  extends javax.swing.JFrame{
 	JButton login_btn = new JButton();
 	JButton exit_btn = new JButton();
 	ArrayList<person> pArr= new ArrayList<person>();
+	Date date = new Date();
+	LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	int year = localDate.getYear();
 
 	public Login() {
+		//new year
+		if(getYear(year)){
+			String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+	    	File file = new File(documentpath+"\\aidatlar.txt");
+	    	int new_borc=0;
+			try(Scanner fileReader = new Scanner(file)) {
+				 new_borc=Integer.valueOf(fileReader.nextLine());
+				 System.out.println(new_borc);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			String aidat = "A"+year;
+			String borc = "B"+year;
+			MySQLConnection db = new MySQLConnection();
+	    	Connection conn = db.getmysql_connection();
+			String updateTableSQL = ("ALTER TABLE abtable ADD COLUMN "+aidat+" INT NOT NULL,"
+					+ "ADD COLUMN "+borc+" INT NOT NULL DEFAULT("+new_borc+");");
+			try {
+				PreparedStatement preparedStatement = conn.prepareStatement(updateTableSQL);
+				preparedStatement.executeUpdate(updateTableSQL);
+				System.out.println("Done");
+				preparedStatement.close();
+				conn.close();
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+		}
+		//new year
 		Database_methods dbmethods3 = new Database_methods();
 		pArr=dbmethods3.GetPerson();
+		System.out.println("login "+Arrays.toString(pArr.get(1).getAidatarray()));
+		System.out.println("login "+Arrays.toString(pArr.get(1).getBorcarray()));
+		System.out.println("login "+pArr.get(1).getAd_lbl());
 		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
-		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
+		System.out.println("login "+pArr.get(10).getAd_lbl());
+		System.out.println("login "+Arrays.toString(pArr.get(15).getAidatarray()));
+		System.out.println("login "+pArr.get(15).getAd_lbl());
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         		
@@ -97,7 +132,6 @@ public class Login  extends javax.swing.JFrame{
 				}
 				//</editor-fold>
 				
-				/* Create and display the form */
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					public void run() {		        		 
 						dispose();      		       
@@ -108,7 +142,6 @@ public class Login  extends javax.swing.JFrame{
 						m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
 						m.setVisible(true);
 						centreWindow(m);
-						//new main().setVisible(true);
 					}
 				});
 			}
@@ -237,5 +270,50 @@ public class Login  extends javax.swing.JFrame{
                 l.setVisible(true);
             }
         });
+    }
+	public boolean getYear(int year){
+    	MySQLConnection db = new MySQLConnection();
+    	Connection con = db.getmysql_connection();
+    	String query = "SELECT * FROM abtable";
+    	PreparedStatement preparedStmt = null;
+		try {
+			preparedStmt = con.prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ResultSet results = null;
+		try {
+			results = preparedStmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 
+    	ResultSetMetaData metadata = null;
+		try {
+			metadata = (ResultSetMetaData) results.getMetaData();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	 
+    	int columnCount = 0;
+		try {
+			columnCount = metadata.getColumnCount();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	String old_year="";
+    	 
+    	try {
+    		old_year=metadata.getColumnName(columnCount);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	int old=Integer. parseInt(old_year.split("B")[1]);
+    	return !(old==year);
     }
 }

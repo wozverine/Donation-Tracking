@@ -11,12 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 
-
-/*personal p = new personal();
-		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		p.setSize(700, 600);
-		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    p.setVisible(true);	*/
 public class personal extends JFrame{	
 	JLayeredPane layeredPane;
 	
