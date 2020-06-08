@@ -34,7 +34,8 @@ public class main extends javax.swing.JFrame {
     }
 
     private void initComponents(ArrayList<person> list) {
-    	//move window
+    	setContentPane(new JLabel(new ImageIcon(getClass().getResource("back.jpg"))));
+	//move window
     	this.addMouseListener(new MouseAdapter(){
   			public void mousePressed(MouseEvent e){
   				posX=e.getX();
@@ -89,7 +90,11 @@ public class main extends javax.swing.JFrame {
         });
         
         
-        stats_btn = new JButton("İstatistikler");
+        //stats_btn = new JButton("İstatistikler");
+	stats_btn.setIcon(new ImageIcon(getClass().getResource("bstat.jpg")));
+	stats_btn.setBorder(null);
+	stats_btn.setBorderPainted(false);
+	stats_btn.setContentAreaFilled(false);
         stats_btn.setFont(new Font("Arial", Font.PLAIN, 12));
         stats_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         stats_btn.addActionListener(new ActionListener() {
@@ -253,20 +258,31 @@ public class main extends javax.swing.JFrame {
         kisiler_btn.setText("Kişiler");
         
         borc_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        borc_btn.setText("Borcu olanları görüntüle");
-        borc_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        //borc_btn.setText("Borcu olanları görüntüle");
+	borc_btn.setIcon(new ImageIcon(getClass().getResource("bbroc.jpg")));
+        borc_btn.setBorder(null);
+	borc_btn.setBorderPainted(false);
+	borc_btn.setContentAreaFilled(false);
         borc_btn.setPreferredSize(new java.awt.Dimension(161, 23));
         borc_btn.setBounds(10, 356, 161, 23);
         getContentPane().add(borc_btn);
 
         aidat_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        aidat_btn.setText("Ödenen aidatları görüntüle");
+        //aidat_btn.setText("Ödenen aidatları görüntüle");
+	aidat_btn.setIcon(new ImageIcon(getClass().getResource("bais.jpg")));
+	aidat_btn.setBorder(null);
+	aidat_btn.setBorderPainted(false);
+	aidat_btn.setContentAreaFilled(false);
         aidat_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         aidat_btn.setBounds(204, 357, 160, 21);
         getContentPane().add(aidat_btn);
 
         dosya_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        dosya_btn.setText("Dosya ekle");
+        //dosya_btn.setText("Dosya ekle");
+	dosya_btn.setIcon(new ImageIcon(getClass().getResource("bdos.jpg")));
+	dosya_btn.setBorder(null);
+	dosya_btn.setBorderPainted(false);
+	dosya_btn.setContentAreaFilled(false);
         dosya_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         dosya_btn.setMinimumSize(new java.awt.Dimension(161, 23));
         dosya_btn.setPreferredSize(new java.awt.Dimension(161, 23));
@@ -275,7 +291,11 @@ public class main extends javax.swing.JFrame {
         
         ara_btn = new javax.swing.JButton();
         ara_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        ara_btn.setText("Ara");
+        //ara_btn.setText("Ara");
+	ara_btn.setIcon(new ImageIcon(getClass().getResource("bara.jpg")));
+	ara_btn.setBorder(null);
+	ara_btn.setBorderPainted(false);
+	ara_btn.setContentAreaFilled(false);
         ara_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         ara_btn.setBounds(730, 40, 43, 25);
         ara_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -304,7 +324,11 @@ public class main extends javax.swing.JFrame {
         });
         getContentPane().add(minimize_btn);
         
-        aidat_bilgi_btn = new JButton("Aidat Bilgileri");
+        //aidat_bilgi_btn = new JButton("Aidat Bilgileri");
+	aidat_bilgi_btn.setIcon(new ImageIcon(getClass().getResource("bbilg.jpg")));
+	aidat_bilgi_btn.setBorder(null);
+	aidat_bilgi_btn.setBorderPainted(false);
+	aidat_bilgi_btn.setContentAreaFilled(false);
         aidat_bilgi_btn.setFont(new Font("Arial", Font.PLAIN, 12));
         aidat_bilgi_btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         aidat_bilgi_btn.addMouseListener(new MouseAdapter() {
