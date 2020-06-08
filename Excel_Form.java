@@ -140,17 +140,31 @@ public class Excel_Form extends javax.swing.JFrame {
 													int money = tutar.get(tutarC); //kişinin yatırdığı tutar 
 													for(int p = giriş-2010; p<countColumnA; p++) { //BORÇ ARRAY
                          								 if(dbmethods3.getBorc(d,p) > 0) {
-                         								if(money >= dbmethods3.getBorc(d,p) && money>0) {
+                         								if(money == dbmethods3.getBorc(d,p) && money>0) {
                          									dbmethods3.updateAidat(d, p, dbmethods3.getBorc(d,p));
                          									money -= dbmethods3.getBorc(d,p);
                          									dbmethods3.updateBorc(d,p,0); 
                          								}
-                         								else if(money < dbmethods3.getBorc(d,p) && money>0) {
+                         								 }
+													}
+                         								for(int p = giriş-2010; p<countColumnA; p++) { //BORÇ ARRAY
+                         									if(dbmethods3.getBorc(d,p) > 0) {
+                         									if(money > dbmethods3.getBorc(d,p) && money>0 ) {
+                         									dbmethods3.updateAidat(d, p, dbmethods3.getBorc(d,p));
+                         									money -= dbmethods3.getBorc(d,p);
+                         									dbmethods3.updateBorc(d,p,0); 
+                         									}
+                         									
+                         								}
+                         								}
+                         								for(int p = giriş-2010; p<countColumnA; p++) { //BORÇ ARRAY
+                         									if(dbmethods3.getBorc(d,p) > 0) {
+                         										if(money < dbmethods3.getBorc(d,p) && money>0) {
                          									dbmethods3.updateAidat(d, p, money);
-                     
                          									dbmethods3.updateBorc(d,p,dbmethods3.getBorc(d,p)-money);
                          									money = 0;
                          								}
+                         								
              
                          								}
                          							} 
@@ -167,6 +181,8 @@ public class Excel_Form extends javax.swing.JFrame {
 						JOptionPane.showMessageDialog(null, ex.getMessage());
 					}
 				}
+				Database_methods dbmethods3 = new Database_methods();
+				pArr=dbmethods3.GetPerson();
 				main m = new main(pArr);
 				m.setVisible(false);
 				m.dispose();
