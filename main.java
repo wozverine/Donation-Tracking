@@ -244,7 +244,8 @@ public class main extends javax.swing.JFrame {
         getContentPane().add(ara_txtf);
         
         kisiler_lbl = new javax.swing.JLabel();
-        kisiler_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        kisiler_lbl.setForeground(new Color(128, 0, 0));
+        kisiler_lbl.setFont(new Font("Calibri", Font.PLAIN, 32)); // NOI18N
         kisiler_lbl.setText("Kişiler");
         kisiler_lbl.setBounds(39, 37, 145, 29);
         getContentPane().add(kisiler_lbl);
