@@ -69,6 +69,7 @@ public class borclar extends javax.swing.JFrame {
 		frmBorclar.setBounds(0, 0,screen.width,screen.height);
 		frmBorclar.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmBorclar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmBorclar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("back_middle.jpeg"))));
 		
 		borclar_lbl = new JLabel("Borclar");
 		//borclar_lbl.setEditable(false);
@@ -306,6 +307,7 @@ public class borclar extends javax.swing.JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int rowSelected =jTable1.getSelectedRow(); 
         		personal p = new personal(list, list.get(rowSelected),false);
+        		frmBorclar.dispose();
         		p.setVisible(false);
         		p.dispose();
         		p.setUndecorated(true);
