@@ -34,6 +34,7 @@ public class main extends javax.swing.JFrame {
     }
 
     private void initComponents(ArrayList<person> list) {
+    	setContentPane(new JLabel(new ImageIcon(getClass().getResource("back.jpg"))));
     	//move window
     	this.addMouseListener(new MouseAdapter(){
   			public void mousePressed(MouseEvent e){
@@ -145,6 +146,7 @@ public class main extends javax.swing.JFrame {
         borc_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
+        		dispose();
         		//setVisible(false);
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
@@ -168,6 +170,7 @@ public class main extends javax.swing.JFrame {
         aidat_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
+        		dispose();
         		//setVisible(false);
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {

@@ -66,6 +66,7 @@ public class aidatlar extends javax.swing.JFrame {
 		//frmAidatlar.setMinimumSize(new Dimension(720, 600));
 		frmAidatlar.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAidatlar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("back_middle.jpeg"))));
 		
 		aidatlar_lbl = new JLabel("Aidatlar");
 	    aidatlar_lbl.setBackground(new Color(220, 220, 220));
@@ -305,6 +306,7 @@ public class aidatlar extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//frmAidatlar.setVisible(false);
+				frmAidatlar.dispose();
 				int rowSelected =jTable1.getSelectedRow(); 
 				personal p = new personal(list,list.get(rowSelected),false);
         		p.setVisible(false);
