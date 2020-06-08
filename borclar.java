@@ -61,6 +61,7 @@ public class borclar extends javax.swing.JFrame {
 	}
 
 	private void initialize(ArrayList<person> list) {
+		setContentPane(new JLabel(new ImageIcon(getClass().getResource("back.jpg"))));
 		pArr=list;
 		Color maroon=Color.decode("#800000");
 		frmBorclar = new JFrame();
@@ -107,11 +108,11 @@ public class borclar extends javax.swing.JFrame {
         }
         //String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
-		aidatlar_btn = new JButton("Aidatlar");
-		aidatlar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		aidatlar_btn.setForeground(Color.BLACK);
-		aidatlar_btn.setBackground(new Color(169, 169, 169));
-		aidatlar_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
+		aidatlar_btn = new JButton();
+		aidatlar_btn.setIcon(new ImageIcon(getClass().getResource("bais.jpg")));
+		aidatlar_btn.setBorder(null);
+		aidatlar_btn.setBorderPainted(false);
+		aidatlar_btn.setContentAreaFilled(false);
 		aidatlar_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -134,11 +135,11 @@ public class borclar extends javax.swing.JFrame {
         	}
         });
 		
-		geri_btn = new JButton("Geri");
-		geri_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		geri_btn.setForeground(Color.BLACK);
-		geri_btn.setBackground(new Color(169, 169, 169));
-		geri_btn.setBorder(new LineBorder(new Color(128, 0, 0), 2, true));
+		geri_btn = new JButton();
+		geri_btn.setIcon(new ImageIcon(getClass().getResource("bgeri.png")));
+		geri_btn.setBorder(null);
+		geri_btn.setBorderPainted(false);
+		geri_btn.setContentAreaFilled(false);
 		geri_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -165,8 +166,10 @@ public class borclar extends javax.swing.JFrame {
 		
 		ara_btn = new JButton("ARA");
 		ara_btn.setHorizontalAlignment(SwingConstants.CENTER);
-		ara_btn.setForeground(Color.BLACK);
-		ara_btn.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		ara_btn.setIcon(new ImageIcon(getClass().getResource("bara.jpg")));
+		ara_btn.setBorder(null);
+		ara_btn.setBorderPainted(false);
+		ara_btn.setContentAreaFilled(false);
 		ara_btn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
