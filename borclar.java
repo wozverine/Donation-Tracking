@@ -72,10 +72,10 @@ public class borclar extends javax.swing.JFrame {
 		frmBorclar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("back_middle.jpeg"))));
 		
 		borclar_lbl = new JLabel("Borclar");
-		//borclar_lbl.setEditable(false);
+		borclar_lbl.setForeground(new Color(128, 0, 0));
 	    borclar_lbl.setBackground(new Color(220, 220, 220));
 		borclar_lbl.setHorizontalAlignment(SwingConstants.LEFT);
-		borclar_lbl.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
+		borclar_lbl.setFont(new java.awt.Font("Times New Roman", 0, 32)); // NOI18N
         borclar_lbl.setText("BORÇLAR");
         
         ara_txtf = new JTextField();

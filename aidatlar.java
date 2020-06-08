@@ -69,9 +69,10 @@ public class aidatlar extends javax.swing.JFrame {
 		frmAidatlar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("back_middle.jpeg"))));
 		
 		aidatlar_lbl = new JLabel("Aidatlar");
+		aidatlar_lbl.setForeground(new Color(128, 0, 0));
 	    aidatlar_lbl.setBackground(new Color(220, 220, 220));
 		aidatlar_lbl.setHorizontalAlignment(SwingConstants.LEFT);
-		aidatlar_lbl.setFont(new java.awt.Font("Times New Roman", 0, 25)); // NOI18N
+		aidatlar_lbl.setFont(new Font("Times New Roman", Font.PLAIN, 32)); // NOI18N
         aidatlar_lbl.setText("AİDATLAR");
         
         ara_txtf = new JTextField();
