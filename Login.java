@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Login  extends javax.swing.JFrame{
-	
 	JPasswordField password_pf = new JPasswordField();  
 	JTextField username_txtf = new JTextField();
 	JLabel sifre_btn = new JLabel();
@@ -66,13 +65,6 @@ public class Login  extends javax.swing.JFrame{
 		//new year
 		Database_methods dbmethods3 = new Database_methods();
 		pArr=dbmethods3.GetPerson();
-		System.out.println("login "+Arrays.toString(pArr.get(1).getAidatarray()));
-		System.out.println("login "+Arrays.toString(pArr.get(1).getBorcarray()));
-		System.out.println("login "+pArr.get(1).getAd_lbl());
-		System.out.println("login "+Arrays.toString(pArr.get(10).getAidatarray()));
-		System.out.println("login "+pArr.get(10).getAd_lbl());
-		System.out.println("login "+Arrays.toString(pArr.get(15).getAidatarray()));
-		System.out.println("login "+pArr.get(15).getAd_lbl());
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         		
@@ -81,20 +73,6 @@ public class Login  extends javax.swing.JFrame{
 		layeredPane.setBounds(0, 0, 500, 500);
 		getContentPane().add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(null);
-		
-		JLabel hatırla_lbl = new JLabel();
-		
-		hatırla_lbl.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-		hatırla_lbl.setForeground(new java.awt.Color(255, 255, 255));
-		hatırla_lbl.setHorizontalAlignment(SwingConstants.LEFT);
-		hatırla_lbl.setText("Giriş bilgilerini kaydet");
-		hatırla_lbl.setBounds(482, 395, 206, 30);
-		layeredPane.add(hatırla_lbl);
-		JCheckBox hatırla_cb = new JCheckBox();
-		
-		hatırla_cb.setBorder(null);
-		hatırla_cb.setBounds(460, 400, 20, 20);
-		layeredPane.add(hatırla_cb);
 		password_pf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -104,8 +82,8 @@ public class Login  extends javax.swing.JFrame{
 		
 		password_pf.setEchoChar('*');
 		password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		password_pf.setForeground(new java.awt.Color(204, 204, 204));
-		password_pf.setText("Password");
+		password_pf.setForeground(Color.BLACK);
+		//password_pf.setText("Password");
 		password_pf.setBorder(null);
 		password_pf.setOpaque(false);
 		password_pf.setBounds(460, 320, 308, 40);
@@ -133,15 +111,20 @@ public class Login  extends javax.swing.JFrame{
 				//</editor-fold>
 				
 				java.awt.EventQueue.invokeLater(new Runnable() {
-					public void run() {		        		 
-						dispose();      		       
-						main m=new main(pArr);	
-						m.setVisible(false);
-						m.dispose();
-						m.setUndecorated(true);
-						m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
-						m.setVisible(true);
-						centreWindow(m);
+					public void run() {		        	
+						System.out.println(username_txtf.getText().equals("tobb"));
+						if(isPasswordCorrect(password_pf.getPassword())&&username_txtf.getText().equals("tobb")) {
+							dispose();      		       
+							main m=new main(pArr);	
+							m.setVisible(false);
+							m.dispose();
+							m.setUndecorated(true);
+							m.setShape(new RoundRectangle2D.Double(0, 0, m.getWidth(), m.getHeight(), 20, 20));
+							m.setVisible(true);
+							centreWindow(m);
+						}else {
+							JOptionPane.showMessageDialog(getParent(),"Password or username is wrong");
+						}
 					}
 				});
 			}
@@ -199,8 +182,7 @@ public class Login  extends javax.swing.JFrame{
 		});
 
 		username_txtf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		username_txtf.setForeground(new java.awt.Color(204, 204, 204));
-		username_txtf.setText("Kullanıcı adını giriniz");
+		username_txtf.setForeground(Color.BLACK);
 		username_txtf.setBorder(null);
 		username_txtf.setOpaque(false);
 		username_txtf.setBounds(460, 180, 308, 40);
@@ -316,4 +298,19 @@ public class Login  extends javax.swing.JFrame{
     	int old=Integer. parseInt(old_year.split("B")[1]);
     	return !(old==year);
     }
+	private static boolean isPasswordCorrect(char[] input) {
+	    boolean isCorrect = true;
+	    char[] correctPassword = { 't', 'o', 'b', 'b' };
+
+	    if (input.length != correctPassword.length) {
+	        isCorrect = false;
+	    } else {
+	        isCorrect = Arrays.equals (input, correctPassword);
+	    }
+
+	    //Zero out the password.
+	    Arrays.fill(correctPassword,'0');
+
+	    return isCorrect;
+	}
 }

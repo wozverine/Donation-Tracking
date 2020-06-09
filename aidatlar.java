@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
@@ -144,7 +143,6 @@ public class aidatlar extends javax.swing.JFrame {
         			public void run() {
         				try {
         					frmAidatlar.dispose();
-        					//frmAidatlar.setVisible(false);
         					main m=new main(pArr);	
         					m.setVisible(false);
 	        		        m.dispose();
