@@ -11,13 +11,29 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 public class Database_methods {
+	
+	public int num(){
+		int r=0;
+		 try {
+			 	MySQLConnection db = new MySQLConnection();
+				Connection connect = db.getmysql_connection();
+				String query="SELECT count(*) FROM `abtable` WHERE `ab_id`>-1";
+				Statement stmt = (Statement) connect.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				while (rs.next()) {
+				r=  rs.getInt(1);
+		 }
+		} catch (Exception e) {
+		}
+		 return r;
+	}
+	
 	Date date = new Date();
 	LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	int year  = localDate.getYear();
 	MySQLConnection db = new MySQLConnection();
 	Connection con = db.getmysql_connection();
 	Connection con2 = db.getmysql_connection();
-
 	// AddClient Method: the method which adds client to the client table in the
 	// donation database.
 	@SuppressWarnings("finally")
@@ -37,8 +53,8 @@ public class Database_methods {
 		String il_lbl= null;
 		String uyeDurumu_lbl= null;
 		String girisTarihi_lbl= null;
-		int []aidatarr=new int[year-2010+1];
-		int []borcarr=new int[year-2010+1];
+		int [][] aidatarr = new int[num()][year-2010+1];
+		int [][] borcarr=new int[num()][year-2010+1];
 		int count=0;
 		try {
 			String query="SELECT * FROM `abtable` WHERE `ab_id`>-1";
@@ -48,7 +64,6 @@ public class Database_methods {
 			
 			while (rs.next()) {
 				uyeNo_lbl=(int) rs.getObject(1);
-				System.out.println("no "+uyeNo_lbl);
 				String query2="SELECT * FROM `client` WHERE `client_id`="+rs.getObject(1);
 				Statement stmt2 = (Statement) con2.createStatement();
 				rs2 = stmt2.executeQuery(query2);
@@ -67,47 +82,26 @@ public class Database_methods {
 					uyeDurumu_lbl=(String) rs2.getObject(13);
 					girisTarihi_lbl=(String) rs2.getObject(14);
 				}
-				//System.out.println("done");
 				
-				for(int arrx=0;arrx<aidatarr.length;arrx++) {
-					aidatarr[arrx]=(int) rs.getObject(2*arrx+2);
-					borcarr[arrx]=(int) rs.getObject(2*arrx+3);
+				for(int arrx=0;arrx<aidatarr[count].length;arrx++) {
+					aidatarr[count][arrx] = (int) rs.getObject(2*arrx+2);
+					borcarr[count][arrx]=(int) rs.getObject(2*arrx+3);
 				}
-				//System.out.println(count+" aidat 0 "+Arrays.toString(aidatarr));
-				//System.out.println(count+" borc 0 "+Arrays.toString(borcarr));
 				
-				person per=new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
-						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,
-						il_lbl, aidatarr,borcarr, uyeDurumu_lbl, girisTarihi_lbl);
-				//per.setBorcarray(borcarr);
-				//per.setAidatarray(aidatarr);
 				
-				/*pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
-						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,il_lbl,borcarr, aidatarr, uyeDurumu_lbl, girisTarihi_lbl));*/
-				pArr.add(per);
-				System.out.println(pArr.size());
-				System.out.println(count+" aidat 1 "+Arrays.toString(per.getAidatarray()));
-				System.out.println(count+" borc 1 "+Arrays.toString(per.getBorcarray()));
-				/*pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
+				
+				pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
 						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,
-						il_lbl,aidatarr, borcarr, uyeDurumu_lbl, girisTarihi_lbl));*/
+						il_lbl,aidatarr[count], borcarr[count], uyeDurumu_lbl, girisTarihi_lbl));
 			
 				count++;
             }
-			System.out.println("f");
 			rs.close();
 			rs2.close();
 		}catch (Exception e) {
 			System.out.println("error: ");
 			e.printStackTrace();
 		}finally {
-			System.out.println(pArr.size());
-			System.out.println("kk0 "+Arrays.toString(pArr.get(0).getAidatarray()));
-			System.out.println("kk0 "+pArr.get(0).getAd_lbl());
-			System.out.println("kk1 "+Arrays.toString(pArr.get(1).getAidatarray()));
-			System.out.println("kk1 "+pArr.get(1).getAd_lbl());
-			System.out.println("kk2 "+Arrays.toString(pArr.get(2).getAidatarray()));
-			System.out.println("kk2 "+pArr.get(2).getAd_lbl());
 			return pArr;
 		}
 		
