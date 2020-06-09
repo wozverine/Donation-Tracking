@@ -1,29 +1,13 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import java.awt.*;
 
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.BoxLayout;
-import javax.swing.JSeparator;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,14 +19,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.awt.Color;
 
-
-/*personal p = new personal();
-		//p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		p.setSize(700, 600);
-		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    p.setVisible(true);	*/
 public class update_uye extends JFrame{
 	JLayeredPane layeredPane;
 	JTextField uye_no;
