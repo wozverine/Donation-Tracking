@@ -69,7 +69,7 @@ public class borclar extends javax.swing.JFrame {
 		frmBorclar.setBounds(0, 0,screen.width,screen.height);
 		frmBorclar.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmBorclar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmBorclar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("back_middle.jpeg"))));
+		frmBorclar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("tobb.jpg"))));
 		
 		borclar_lbl = new JLabel("Borclar");
 		borclar_lbl.setForeground(new Color(128, 0, 0));
@@ -106,7 +106,6 @@ public class borclar extends javax.swing.JFrame {
         for (int x=2010;x<year+1;x++) {
         	rows[x-2007]=""+x;
         }
-        //String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
 		aidatlar_btn = new JButton("Aidatlar");
 		aidatlar_btn.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -120,7 +119,6 @@ public class borclar extends javax.swing.JFrame {
         			public void run() {
         				try {
         					frmBorclar.dispose();
-        					//frmBorclar.setVisible(false);
         					aidatlar window = new aidatlar(list);
         					window.frmAidatlar.setVisible(false);
         					window.frmAidatlar.dispose();
@@ -147,7 +145,6 @@ public class borclar extends javax.swing.JFrame {
         			public void run() {
         				try {
         					frmBorclar.dispose();
-        					//frmBorclar.setVisible(false);
         					main m=new main(pArr);	
 	        		        m.setVisible(false);
 	        		        m.dispose();

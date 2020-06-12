@@ -4,9 +4,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import org.apache.poi.xssf.usermodel.*;
-import java.sql.*;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
@@ -18,7 +15,6 @@ import java.util.*;
 import java.util.Date;
 
 public class Excel_Form extends javax.swing.JFrame {
-
 	private javax.swing.JButton liste_ekle_btn;
 	private javax.swing.JPanel jPanel1;
 	Date date = new Date();
@@ -33,7 +29,6 @@ public class Excel_Form extends javax.swing.JFrame {
 	}
 
 	private void initComponents(ArrayList<person> list) {
-		//ArrayList<person> pArr = new ArrayList<person>();
 		pArr=list;
 		jPanel1 = new javax.swing.JPanel();
 		liste_ekle_btn = new javax.swing.JButton();
@@ -59,7 +54,6 @@ public class Excel_Form extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				changed=1;
-				//setVisible(false);
 				dispose();
 				File excelFile;
 				FileInputStream excelFIS = null;
@@ -78,8 +72,7 @@ public class Excel_Form extends javax.swing.JFrame {
 						ArrayList<Integer> tutar = new ArrayList<Integer>();
 						Database_methods dbmethods3 = new Database_methods();
 						int sizeOfClient = dbmethods3.getSize();
-						int countColumnA = 11; //TO-DO : HER YILDA ARTIRILACAK METHOD VE DATABASE E COLUMN EKLEYECEK METHOD YAZILACAK.
-						System.out.println("size sizeOfClient: " + sizeOfClient);
+						int countColumnA = year-2010+1;
 						
 						for (int rowX = 1; rowX <= excelSheetX.getLastRowNum(); rowX++) {
 							XSSFRow excelRowX = excelSheetX.getRow(rowX);
@@ -257,15 +250,12 @@ public class Excel_Form extends javax.swing.JFrame {
 							pArr.add(new person(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department,
 									Phone, Address, City, A, B, Mood, Enter));
 							
-							//System.out.println(Name);
-							// Adding Client into the client table in the donation database.
 							Database_methods dbmethods = new Database_methods();					
 							dbmethods.AddClient(ID, Gender, Name, Surname, Work, Mail, TC, Graduation, Department, Phone, Address,
 									City, Mood, Enter);
-							// AddAB method.
+							
 							Database_methods dbmethods2 = new Database_methods();
 							dbmethods2.AddAB(ID,A,B);
-							
 						}
 						
 					} catch (FileNotFoundException ex) {
@@ -407,7 +397,7 @@ public class Excel_Form extends javax.swing.JFrame {
 		getContentPane().setLayout(layout);
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
 	public static void centreWindow(JFrame frame) {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
