@@ -34,7 +34,7 @@ public class main extends javax.swing.JFrame {
     }
 
     private void initComponents(ArrayList<person> list) {
-    	setContentPane(new JLabel(new ImageIcon(getClass().getResource("back.jpg"))));
+    	setContentPane(new JLabel(new ImageIcon(getClass().getResource("tobb_main.jpg"))));
     	//move window
     	this.addMouseListener(new MouseAdapter(){
   			public void mousePressed(MouseEvent e){
@@ -59,12 +59,9 @@ public class main extends javax.swing.JFrame {
             
             File file3=new File(documentpath+"\\Belgeler");
             file3.mkdir();
-    		//System.out.println("Directory created successfully");
-    		
     	}catch(Exception e){
-    		System.out.println("Sorry couldn’t create specified directory "+e);
+    		System.out.println(e);
     	}
-    	
     	//Create folder and log
     	
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,11 +69,8 @@ public class main extends javax.swing.JFrame {
         jTable1.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
-        		//setVisible(false);
         		dispose();
         		int rowSelected =jTable1.getSelectedRow();
-        		//list.get(rowSelected);
-        		//personal p = new personal(list, rowSelected,false);
         		personal p = new personal(list,list.get(rowSelected),false);
         		p.setVisible(false);
         		p.dispose();
@@ -88,7 +82,6 @@ public class main extends javax.swing.JFrame {
         	    p.setVisible(true);
         	}
         });
-        
         
         stats_btn = new JButton("İstatistikler");
         stats_btn.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -147,12 +140,10 @@ public class main extends javax.swing.JFrame {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		dispose();
-        		//setVisible(false);
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
         					borclar window = new borclar(list);
-        					//window.frmBorclar.setVisible(true);
         					window.frmBorclar.setVisible(false);
         					window.frmBorclar.dispose();
         					window.frmBorclar.setUndecorated(true);
@@ -171,7 +162,6 @@ public class main extends javax.swing.JFrame {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		dispose();
-        		//setVisible(false);
         		EventQueue.invokeLater(new Runnable() {
         			public void run() {
         				try {
@@ -193,7 +183,6 @@ public class main extends javax.swing.JFrame {
         dosya_btn.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
-        		//setVisible(false);
         		dispose();
         		Excel_Form exc = new Excel_Form(list);
         		exc.setVisible(false);
@@ -234,7 +223,6 @@ public class main extends javax.swing.JFrame {
         
         ara_txtf = new javax.swing.JTextField();
         ara_txtf.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        //kimlik_txtf.setText("T.C Kimlik No");
         ara_txtf.setBounds(500, 40, 220, 25);
         ara_txtf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -249,12 +237,6 @@ public class main extends javax.swing.JFrame {
         kisiler_lbl.setText("Kişiler");
         kisiler_lbl.setBounds(39, 37, 145, 29);
         getContentPane().add(kisiler_lbl);
-        
-        kisiler_btn = new javax.swing.JButton();
-        kisiler_btn.setBackground(javax.swing.UIManager.getDefaults().getColor("EditorPane.foreground"));
-        kisiler_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        kisiler_btn.setForeground(new java.awt.Color(0, 0, 255));
-        kisiler_btn.setText("Kişiler");
         
         borc_btn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         borc_btn.setText("Borcu olanları görüntüle");
@@ -368,5 +350,4 @@ public class main extends javax.swing.JFrame {
     	}
     	return sum_arr;
     }
-    
 }

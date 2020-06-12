@@ -62,10 +62,10 @@ public class aidatlar extends javax.swing.JFrame {
 		frmAidatlar.setTitle("Aidatlar");
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frmAidatlar.setBounds(0, 0,screen.width,screen.height);
-		//frmAidatlar.setMinimumSize(new Dimension(720, 600));
+		System.out.println(screen.width+","+screen.height);
 		frmAidatlar.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAidatlar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAidatlar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("back_middle.jpeg"))));
+		frmAidatlar.setContentPane(new JLabel(new ImageIcon(getClass().getResource("tobb.jpg"))));
 		
 		aidatlar_lbl = new JLabel("Aidatlar");
 		aidatlar_lbl.setForeground(new Color(128, 0, 0));
@@ -102,7 +102,6 @@ public class aidatlar extends javax.swing.JFrame {
         for (int x=2010;x<year+1;x++) {
         	rows[x-2007]=""+x;
         }
-        //String [] rows= {"TC","İsim","Soyisim","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020"};
         
 		borclar_btn = new JButton("Borçlar");
 		borclar_btn.setFont(new Font("Calibri", Font.PLAIN, 15));
@@ -116,7 +115,6 @@ public class aidatlar extends javax.swing.JFrame {
         			public void run() {
         				try {
         					frmAidatlar.dispose();
-        					//frmAidatlar.setVisible(false);
         					borclar window = new borclar(list);
         					window.frmBorclar.setVisible(false);
         					window.frmBorclar.dispose();
@@ -304,7 +302,6 @@ public class aidatlar extends javax.swing.JFrame {
         jTable1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//frmAidatlar.setVisible(false);
 				frmAidatlar.dispose();
 				int rowSelected =jTable1.getSelectedRow(); 
 				personal p = new personal(list,list.get(rowSelected),false);
@@ -361,7 +358,7 @@ public class aidatlar extends javax.swing.JFrame {
         	 toplamx = toplamx +(int) yearsum[i];
          }
          borclar_txta.setText(show +  "TOPLAM: " +toplamx+".00 TL ödeme yapılmıştır");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }
 	
 	private void kisilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 		double toplam = 0;
@@ -387,7 +384,6 @@ public class aidatlar extends javax.swing.JFrame {
         }    
         kisiler_txta.setText(show + "TOPLAM: " +toplamx + " kişi ödeme yapmıştır");                                  
 	}
-	
 	
 	public void toExcel(java.awt.event.ActionEvent evt){
 	    try{

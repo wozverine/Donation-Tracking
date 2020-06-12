@@ -52,17 +52,11 @@ public class aidat_info extends javax.swing.JFrame{
 		aidat_tutar_label.setFont(new Font("Calibri", Font.BOLD, 20));
 		aidat_tutar_label.setBounds(126, 11, 200, 40);
 		panel.add(aidat_tutar_label);
-		
-		JButton update = new JButton("Bilgileri Güncelle");
-		update.setForeground(new Color(0, 0, 0));
-		update.setFont(new Font("Calibri", Font.PLAIN, 12));
-		update.setBounds(346, 427, 129, 23);
-		panel.add(update);
 
 		JTextPane bilgi = new JTextPane();
 		bilgi.setEditable(false);
 		bilgi.setFont(new Font("Calibri", Font.PLAIN, 12));
-		bilgi.setText("- 2010 yılında 2016 yılına kadar aidat bedeli 50 TL olarak alınmıştır.\r\n- 2017 ve sonrası için aidat bedeli 60 TL olarak güncellenmiştir.\r\n- 23.02.2016 tarihi itibariyle alınan karar sebebi ile  üye olmak isteyen mezunlarımıza mezuniyetinin ilk yılında derneğimize üye olursa aidat bedeli alınmayacaktır. Ücretsizdir.\r\n- Karar 01.04.2019 tarihinde kaldırılmış ve 1 NİSAN 2019 tarihi ile gelenler için normal 2019 aidat bedeli olan 60 TL alınacaktır. \r\n- 2020 yılı için tekrar güncelleme alınmıştır ve 2020 güncel aidat bedeli 100 TL olmuştur. Bu kararın alındığı 20.01.2020 tarihi itibariyle ise mezun kişi mezuniyetinin ilk 1 yıl içerisinde gelirse 60 TL ile giriş yapabilecektir. Tüm diğer eski üyeler için 2020 aidatı 100 TL olarak alınacaktır. \r\n- Şehit çocuklarından dernek yıllık aidat bedeli alınmamaktadır.\r\n- Çalışan dernek personellerimiz çalışmaya başladığı dönem boyunca aidat tutarından muaftır. \r\n");
+		bilgi.setText(AidatBilgisiRead());
 		bilgi.setBounds(10, 49, 465, 360);
 		panel.add(bilgi);
 		
@@ -77,6 +71,10 @@ public class aidat_info extends javax.swing.JFrame{
 		btnGeri.setBounds(418, 11, 57, 23);
 		panel.add(btnGeri);
 		
+		JButton update = new JButton("Bilgileri Güncelle");
+		update.setForeground(new Color(0, 0, 0));
+		update.setFont(new Font("Calibri", Font.PLAIN, 12));
+		update.setBounds(346, 427, 129, 23);
 		update.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -99,20 +97,23 @@ public class aidat_info extends javax.swing.JFrame{
 						textField.setEditable(false);
 						String x=textField.getText();
 						AidatLog(x);
+						x=bilgi.getText();
+						AidatBilgisiLog(x);
 					}
 				});
 			}
 		});
+		panel.add(update);
 	}
 	public String AidatRead() {
 		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
     	File file = new File(documentpath+"\\aidatlar.txt");
     	String new_borc="";
 		try(Scanner fileReader = new Scanner(file)) {
-			 new_borc=fileReader.nextLine();
-			 System.out.println(new_borc);
+			new_borc=fileReader.nextLine();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
+			new_borc="100";
 		}
 		return new_borc;
 	}
@@ -129,4 +130,30 @@ public class aidat_info extends javax.swing.JFrame{
             System.out.println(e);
         }
     }
+	public String AidatBilgisiRead() {
+		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+    	File file = new File(documentpath+"\\aidat_bilgisi.txt");
+    	String bilgi="";
+		try(Scanner fileReader = new Scanner(file)) {
+			bilgi = fileReader.useDelimiter("\\A").next();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			bilgi="- 2010 yılında 2016 yılına kadar aidat bedeli 50 TL olarak alınmıştır.\r\n- 2017 ve sonrası için aidat bedeli 60 TL olarak güncellenmiştir.\r\n- 23.02.2016 tarihi itibariyle alınan karar sebebi ile  üye olmak isteyen mezunlarımıza mezuniyetinin ilk yılında derneğimize üye olursa aidat bedeli alınmayacaktır. Ücretsizdir.\r\n- Karar 01.04.2019 tarihinde kaldırılmış ve 1 NİSAN 2019 tarihi ile gelenler için normal 2019 aidat bedeli olan 60 TL alınacaktır. \r\n- 2020 yılı için tekrar güncelleme alınmıştır ve 2020 güncel aidat bedeli 100 TL olmuştur. Bu kararın alındığı 20.01.2020 tarihi itibariyle ise mezun kişi mezuniyetinin ilk 1 yıl içerisinde gelirse 60 TL ile giriş yapabilecektir. Tüm diğer eski üyeler için 2020 aidatı 100 TL olarak alınacaktır. \r\n- Şehit çocuklarından dernek yıllık aidat bedeli alınmamaktadır.\r\n- Çalışan dernek personellerimiz çalışmaya başladığı dönem boyunca aidat tutarından muaftır. \r\n";
+		}
+		return bilgi;
+	}
+	public void AidatBilgisiLog(String x) {
+        try{
+        	String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
+        	File file = new File(documentpath+"\\aidat_bilgisi.txt");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(),false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(x);
+            bw.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+	
 }

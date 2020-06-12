@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
 import javax.swing.filechooser.FileSystemView;
 
 import com.mysql.jdbc.Connection;
@@ -25,7 +24,7 @@ import java.util.Scanner;
 public class Login  extends javax.swing.JFrame{
 	JPasswordField password_pf = new JPasswordField();  
 	JTextField username_txtf = new JTextField();
-	JLabel sifre_btn = new JLabel();
+	JLabel sifre_lbl = new JLabel();
 	JLabel username_lbl = new JLabel();
 	JButton login_btn = new JButton();
 	JButton exit_btn = new JButton();
@@ -42,7 +41,6 @@ public class Login  extends javax.swing.JFrame{
 	    	int new_borc=0;
 			try(Scanner fileReader = new Scanner(file)) {
 				 new_borc=Integer.valueOf(fileReader.nextLine());
-				 System.out.println(new_borc);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -55,7 +53,6 @@ public class Login  extends javax.swing.JFrame{
 			try {
 				PreparedStatement preparedStatement = conn.prepareStatement(updateTableSQL);
 				preparedStatement.executeUpdate(updateTableSQL);
-				System.out.println("Done");
 				preparedStatement.close();
 				conn.close();
 			}catch(Exception e) {
@@ -63,6 +60,7 @@ public class Login  extends javax.swing.JFrame{
 			}
 		}
 		//new year
+		
 		Database_methods dbmethods3 = new Database_methods();
 		pArr=dbmethods3.GetPerson();
 		
@@ -73,22 +71,26 @@ public class Login  extends javax.swing.JFrame{
 		layeredPane.setBounds(0, 0, 500, 500);
 		getContentPane().add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(null);
+		
+		password_pf.setEchoChar('*');
+		password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+		password_pf.setForeground(Color.BLACK);
+		password_pf.setBorder(null);
+		password_pf.setOpaque(false);
+		password_pf.setBounds(460, 320, 308, 40);
 		password_pf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				password_pf.setText("");
 			}
 		});
-		
-		password_pf.setEchoChar('*');
-		password_pf.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-		password_pf.setForeground(Color.BLACK);
-		//password_pf.setText("Password");
-		password_pf.setBorder(null);
-		password_pf.setOpaque(false);
-		password_pf.setBounds(460, 320, 308, 40);
 		layeredPane.add(password_pf);
 		
+		login_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
+		login_btn.setBorder(null);
+		login_btn.setBorderPainted(false);
+		login_btn.setContentAreaFilled(false);
+		login_btn.setBounds(392, 431, 232, 46);
 		login_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {		   
@@ -108,7 +110,6 @@ public class Login  extends javax.swing.JFrame{
 				} catch (javax.swing.UnsupportedLookAndFeelException ex) {
 					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 				}
-				//</editor-fold>
 				
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					public void run() {		        	
@@ -123,20 +124,19 @@ public class Login  extends javax.swing.JFrame{
 							m.setVisible(true);
 							centreWindow(m);
 						}else {
-							JOptionPane.showMessageDialog(getParent(),"Password or username is wrong");
+							JOptionPane.showMessageDialog(getParent(),"Kullanıcı ismi ya da şifre yanlış");
 						}
 					}
 				});
 			}
 		});
-		        
-		login_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_button.png"))); // NOI18N
-		login_btn.setBorder(null);
-		login_btn.setBorderPainted(false);
-		login_btn.setContentAreaFilled(false);
-		login_btn.setBounds(392, 431, 232, 46);
 		layeredPane.add(login_btn);
-	
+	     
+		exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_exit.png"))); // NOI18N
+		exit_btn.setBorder(null);
+		exit_btn.setBorderPainted(false);
+		exit_btn.setContentAreaFilled(false);
+		exit_btn.setBounds(600, 431, 232, 46);
 		exit_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -156,9 +156,7 @@ public class Login  extends javax.swing.JFrame{
 				} catch (javax.swing.UnsupportedLookAndFeelException ex) {
 					java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 				}
-				//</editor-fold>
-		
-				/* Create and display the form */
+				
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						System.exit(0);
@@ -166,12 +164,6 @@ public class Login  extends javax.swing.JFrame{
 				});
 			}
 		});
-		        
-		exit_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("login_exit.png"))); // NOI18N
-		exit_btn.setBorder(null);
-		exit_btn.setBorderPainted(false);
-		exit_btn.setContentAreaFilled(false);
-		exit_btn.setBounds(600, 431, 232, 46);
 		layeredPane.add(exit_btn);
 		        
 		username_txtf.addMouseListener(new MouseAdapter() {
@@ -188,12 +180,12 @@ public class Login  extends javax.swing.JFrame{
 		username_txtf.setBounds(460, 180, 308, 40);
 		layeredPane.add(username_txtf);
 		        
-		sifre_btn.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-		sifre_btn.setForeground(new java.awt.Color(255, 255, 255));
-		sifre_btn.setHorizontalAlignment(SwingConstants.LEFT);
-		sifre_btn.setText("Şifre");
-		sifre_btn.setBounds(460, 280, 330, 30);
-		layeredPane.add(sifre_btn);
+		sifre_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+		sifre_lbl.setForeground(new java.awt.Color(255, 255, 255));
+		sifre_lbl.setHorizontalAlignment(SwingConstants.LEFT);
+		sifre_lbl.setText("Şifre");
+		sifre_lbl.setBounds(460, 280, 330, 30);
+		layeredPane.add(sifre_lbl);
 		
 		username_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
 		username_lbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,7 +212,6 @@ public class Login  extends javax.swing.JFrame{
 	    frame.setLocation(x, y);
 	}
 	public static void main(String args[]) {
-		
 		MySQLConnection db = new MySQLConnection();
 		db.getmysql_connection();
 		
@@ -240,7 +231,6 @@ public class Login  extends javax.swing.JFrame{
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -253,6 +243,7 @@ public class Login  extends javax.swing.JFrame{
             }
         });
     }
+	
 	public boolean getYear(int year){
     	MySQLConnection db = new MySQLConnection();
     	Connection con = db.getmysql_connection();
@@ -261,14 +252,12 @@ public class Login  extends javax.swing.JFrame{
 		try {
 			preparedStmt = con.prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	ResultSet results = null;
 		try {
 			results = preparedStmt.executeQuery(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	 
@@ -276,7 +265,6 @@ public class Login  extends javax.swing.JFrame{
 		try {
 			metadata = (ResultSetMetaData) results.getMetaData();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     	 
@@ -284,7 +272,6 @@ public class Login  extends javax.swing.JFrame{
 		try {
 			columnCount = metadata.getColumnCount();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	String old_year="";
@@ -292,12 +279,12 @@ public class Login  extends javax.swing.JFrame{
     	try {
     		old_year=metadata.getColumnName(columnCount);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	int old=Integer. parseInt(old_year.split("B")[1]);
     	return !(old==year);
     }
+	
 	private static boolean isPasswordCorrect(char[] input) {
 	    boolean isCorrect = true;
 	    char[] correctPassword = { 't', 'o', 'b', 'b' };
@@ -307,8 +294,6 @@ public class Login  extends javax.swing.JFrame{
 	    } else {
 	        isCorrect = Arrays.equals (input, correctPassword);
 	    }
-
-	    //Zero out the password.
 	    Arrays.fill(correctPassword,'0');
 
 	    return isCorrect;

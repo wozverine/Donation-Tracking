@@ -12,18 +12,19 @@ public class Database_methods {
 	
 	public int num(){
 		int r=0;
-		 try {
-			 	MySQLConnection db = new MySQLConnection();
-				Connection connect = db.getmysql_connection();
-				String query="SELECT count(*) FROM `abtable` WHERE `ab_id`>-1";
-				Statement stmt = (Statement) connect.createStatement();
-				ResultSet rs = stmt.executeQuery(query);
-				while (rs.next()) {
+		try {
+			MySQLConnection db = new MySQLConnection();
+			Connection connect = db.getmysql_connection();
+			String query="SELECT count(*) FROM `abtable` WHERE `ab_id`>-1";
+			Statement stmt = (Statement) connect.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
 				r=  rs.getInt(1);
-		 }
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		 return r;
+		return r;
 	}
 	
 	Date date = new Date();
@@ -32,8 +33,6 @@ public class Database_methods {
 	MySQLConnection db = new MySQLConnection();
 	Connection con = db.getmysql_connection();
 	Connection con2 = db.getmysql_connection();
-	// AddClient Method: the method which adds client to the client table in the
-	// donation database.
 	@SuppressWarnings("finally")
 	public ArrayList<person> GetPerson() {
 		ArrayList<person> pArr= new ArrayList<person>();
@@ -86,8 +85,6 @@ public class Database_methods {
 					borcarr[count][arrx]=(int) rs.getObject(2*arrx+3);
 				}
 				
-				
-				
 				pArr.add(new person(uyeNo_lbl, cinsiyet_lbl,ad_lbl, soyad_lbl,calismayer_lbl, mail_lbl, kimlikNo_lbl
 						,mezTarihi_lbl,bolum_lbl,tel_lbl,adres_lbl,
 						il_lbl,aidatarr[count], borcarr[count], uyeDurumu_lbl, girisTarihi_lbl));
@@ -102,8 +99,6 @@ public class Database_methods {
 		}finally {
 			return pArr;
 		}
-		
-		//return pArr;
 	};
 	
 	public void updateClient(int ID, String Gender, String Name, String Surname, String Work, String Mail, long TC,
@@ -156,7 +151,6 @@ public class Database_methods {
 			preparedStmt.setString(13, Mood);
 			preparedStmt.setString(14, Enter);
 			preparedStmt.execute();
-			//con.close();
 			System.out.println("Insertion to the client table is successful!");
 		} catch (Exception e) {
 			System.out.println("error: ");

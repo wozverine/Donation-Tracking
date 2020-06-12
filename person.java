@@ -22,8 +22,6 @@ public class person {
 	public void setBorcarray(int[] borcarray) {
 		this.borcarray = borcarray;
 	}
-	
-	
 	public int[] getAidatarray() {
 		return aidatarray;
 	}
@@ -115,7 +113,6 @@ public class person {
 		this.uyeDurumu_lbl = uyeDurumu_lbl;
 	}
 	
-	
 	person() {
 		this.uyeNo_lbl = 0;
 		this.kimlikNo_lbl = 0;
@@ -134,6 +131,7 @@ public class person {
 		this.aidatarray = null;
 		this.borcarray= null;
 	}
+	
 	person(int uyeNo, String cinsiyet,String ad, String soyad,String calismayer, String mail, long kimlikNo,
 			String mezTarihi,String bolum, long tel,String adres,String il,int[] aidatarr, int[] borcarr, 
 			String uyeDurumu, String girisTarihi) {
@@ -153,6 +151,5 @@ public class person {
 		this.uyeDurumu_lbl = uyeDurumu;
 		this.aidatarray = aidatarr;
 		this.borcarray= borcarr;
-		
 	}
 }

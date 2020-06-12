@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Arrays;
-import java.util.Calendar;
 
 public class stats_choose extends JFrame{
 	int posX;

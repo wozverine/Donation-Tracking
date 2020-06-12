@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 public class MySQLConnection {
 	private String kullanıcı_adı = "root";
 	private String db_name = "donation";
@@ -23,11 +25,10 @@ public class MySQLConnection {
 		}
 		try {
 			con = (Connection) DriverManager.getConnection(url, "root", null);
-			//System.out.println("connection is successful");
-
-
 		} catch (SQLException ex) {
 			Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+			JOptionPane.showMessageDialog(null,"Database bağlantısı kurulamadı");
+			System.exit(0);
 		}
 		return con;
 	}
