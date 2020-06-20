@@ -352,7 +352,7 @@ public class yeni_uye extends javax.swing.JFrame {
 	    frame.setLocation(x, y);
 	}
 	public String addObject(person new_person) {
-		String log="Tarih: "+day+"/"+month+"/"+year+" Kişi eklendi.\n"+
+		String log="\nTarih: "+day+"/"+month+"/"+year+" Kişi eklendi.\n"+
 				"İsim:"+new_person.getAd_lbl()+"\n"+
 				"Soyisim:"+new_person.getSoy_lbl()+"\n"+
 				"Kimlik numarası:"+new_person.getKimlikNo_lbl()+"\n"+
@@ -387,7 +387,7 @@ public class yeni_uye extends javax.swing.JFrame {
 		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
     	File file = new File(documentpath+"\\aidatlar.txt");
     	String new_borc="";
-		try(Scanner fileReader = new Scanner(file)) {
+		try(Scanner fileReader = new Scanner(file,"UTF-8")) {
 			 new_borc=fileReader.nextLine();
 			 System.out.println(new_borc);
 		} catch (FileNotFoundException e1) {

@@ -39,7 +39,7 @@ public class Login  extends javax.swing.JFrame{
 			String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
 	    	File file = new File(documentpath+"\\aidatlar.txt");
 	    	int new_borc=0;
-			try(Scanner fileReader = new Scanner(file)) {
+			try(Scanner fileReader = new Scanner(file,"UTF-8")) {
 				 new_borc=Integer.valueOf(fileReader.nextLine());
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();

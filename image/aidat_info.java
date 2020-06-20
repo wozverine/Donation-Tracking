@@ -109,7 +109,7 @@ public class aidat_info extends javax.swing.JFrame{
 		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
     	File file = new File(documentpath+"\\aidatlar.txt");
     	String new_borc="";
-		try(Scanner fileReader = new Scanner(file)) {
+		try(Scanner fileReader = new Scanner(file,"UTF-8")) {
 			new_borc=fileReader.nextLine();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -134,7 +134,7 @@ public class aidat_info extends javax.swing.JFrame{
 		String documentpath=FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\Donation Tracking";
     	File file = new File(documentpath+"\\aidat_bilgisi.txt");
     	String bilgi="";
-		try(Scanner fileReader = new Scanner(file)) {
+		try(Scanner fileReader = new Scanner(file,"UTF-8")) {
 			bilgi = fileReader.useDelimiter("\\A").next();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
